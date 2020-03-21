@@ -10,7 +10,7 @@ const timelineDiv = document.querySelector('#timeline')
 //function to return the current Date
 const returnDate = () => {
     let today = new Date()
-    let date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     return date
 }
 
