@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>CareShare</title>
+
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="handoff-header">
+      <img
+        src="https://www.meme-arsenal.com/memes/ff6dff4e3200923c96b2e8340d772bb3.jpg"
+        alt="handoff-header"
+      />
+      <h1 id="header-text">CareShare</h1>
+      <img id="right-image"
+      src="https://www.meme-arsenal.com/memes/ff6dff4e3200923c96b2e8340d772bb3.jpg"
+      alt="handoff-header"
+    />
+    </div>
+    <div class = "wrapper">
+    <div class="dropdown-container">
+        <form class="add-shift-form">
+          <input
+            type="text"
+            name="caregiver"
+            value=""
+            placeholder="Enter Your Name..."
+            class="input-text"
+          />
+
+          <br />
+          <input
+            type="submit"
+            name="submit"
+            value="Start Shift!"
+            class="submit"
+          />
+        </form>
+      </div>
+   
+   <div class = "action-container">
+        <div class="item">
+            <div id="wet-diaper-icon">
+            <button><img src = "https://www.svgrepo.com/show/115810/diaper.svg"
+                alt="wet-diaper-icon"
+                />
+            <p>Wet</p>
+            </button>
+            </div>
+            <div id="soiled-diaper-icon">
+            <button><img src = "https://www.svgrepo.com/show/115810/diaper.svg"
+            alt="soiled-diaper-icon"/>
+            <p>Soiled</p>
+            </button>
+            </div>
+            
+            <input id="diaper-time" type="time" name="diaper-time" value="09:30">
+            
+            <button id="diaper-done">Did That<br>DIAPER!</button>
+        </div>
+        <div class="item">
+            <div id="snack-closhe">
+                <button><img src = "https://www.shareicon.net/data/512x512/2016/01/08/699882_food_512x512.png"
+                    alt="snack-closhe-icon"
+                    />
+                <p>Snack</p>
+                </button>
+            </div>
+            <div id="breakfast-closhe">
+                <button><img src = "https://www.shareicon.net/data/512x512/2016/01/08/699882_food_512x512.png"
+                    alt="breakfast-closhe-icon"
+                    />
+                <p>Breakfast</p>
+                </button>
+            </div>
+            <div id="lunch-closhe">
+                <button><img src = "https://www.shareicon.net/data/512x512/2016/01/08/699882_food_512x512.png"
+                    alt="lunch-closhe-icon"
+                    />
+                <p>Lunch</p>
+                </button>
+            </div>
+            <div id="dinner-closhe">
+                <button><img src = "https://www.shareicon.net/data/512x512/2016/01/08/699882_food_512x512.png"
+                    alt="dinner-closhe-icon"
+                    />
+                <p>Dinner</p>
+                </button>
+            </div>
+            <input id="food-time" type="time" name="food-time" value="12:30">
+            <button id="food-done">Did That<br>FOOD!</button>
+        </div>
+        <div class="item">
+            <div id="nap-icon">
+                <button><img src = "https://i.ya-webdesign.com/images/zzz-transparent-tired-18.png"
+                    alt="nap-icon"
+                    />
+                <p>Nap</p>
+                </button>
+            </div>
+            <div id="bedtime-icon">
+                <button><img src = "https://i.ya-webdesign.com/images/zzz-transparent-tired-18.png"
+                    alt="bedtime-icon"
+                    />
+                <p>Bedtime</p>
+                </button>
+            </div>
+            <input id="sleep-time" type="time" name="sleep-time" value="12:45">
+            <input id="wake-time" type="time" name="wake-time" value="15:00">
+            <button id="food-done">Did That<br>SLEEP!</button>
+        </div>
+    </div>
+</div>
+    <div id="timeline">
+    </div>
+
+    <script type="text/javascript" src="src/index.js"></script>
+  </body>
+</html>
