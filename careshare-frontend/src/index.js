@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:3000'
+const BACKEND_URL = 'http://localhost:3000/shifts'
 const createShiftForm = document.querySelector('.add-shift-form')
 const actionPanel = document.querySelector(".action-container")
 const timelineDiv = document.querySelector('#timeline')
@@ -34,7 +34,7 @@ const addNewShift = e => {
   }
 
 const createShift = shift => {
-    fetch('http://localhost:3000/shifts', {
+    fetch(BACKEND_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const createShift = shift => {
       body: JSON.stringify(shift)
     })
       .then(resp => resp.json())
-      .then(shift => console.log(shift));
+      .then(shift => displayShift(shift.data.attributes));
   }
 
   const displayShift = shift => {
@@ -60,8 +60,16 @@ const createShift = shift => {
   }
 
   const deleteShift = (e, id) => {
-    e.target.parentNode.remove()
-    fetch(`http://localhost:3000/shifts/${id}`, {
+    e.target.parentNode.remove();
+    fetch(`${BACKEND_URL}/${id}`, {
       method: 'DELETE'
-    }).then(resp => resp.json())
-  }
+    })
+    .then(resp => resp.json()
+    .then(json => {
+        return json;
+    })
+    .catch(function(error) {
+        console.log(error.message);
+      })
+    );
+}
