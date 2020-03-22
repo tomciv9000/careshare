@@ -95,7 +95,8 @@ input {
 
 
 .action-container {
-    display: flex;
+    /* display: flex; */
+    display: none;
     justify-content: center;
     align-items: baseline;
     flex-wrap: wrap;
@@ -160,4 +161,8 @@ input {
   font-size: 15px;
   
   
+}
+
+.hidden {
+    display: none;
 }
