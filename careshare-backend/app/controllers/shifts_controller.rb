@@ -36,8 +36,14 @@ class ShiftsController < ApplicationController
   
     # DELETE /shifts/1
     def destroy
-      @shift.destroy
+      unless @shift.nil?
+        @shift.destroy
+        render json: @shift
+      else
+        render json: { error: "Shift not Found!" }, status: 404
+      end
     end
+
   
     private
       # Use callbacks to share common setup or constraints between actions.

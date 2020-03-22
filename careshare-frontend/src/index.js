@@ -64,12 +64,6 @@ const createShift = shift => {
     fetch(`${BACKEND_URL}/${id}`, {
       method: 'DELETE'
     })
-    .then(resp => resp.json()
-    .then(json => {
-        return json;
-    })
-    .catch(function(error) {
-        console.log(error.message);
-      })
-    );
-}
+    .then(response => response.json());
+  }
+   
