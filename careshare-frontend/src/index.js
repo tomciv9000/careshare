@@ -14,6 +14,11 @@ const returnDate = () => {
     return date
 }
 
+const displayDate = () => {
+    let date = new Date()
+    return date.toLocaleDateString()
+}
+
 createShiftForm.addEventListener('submit', e => {
     e.preventDefault()
     addNewShift(e)
@@ -38,23 +43,25 @@ const createShift = shift => {
       body: JSON.stringify(shift)
     })
       .then(resp => resp.json())
-      .then(displayShift(shift));
+      .then(shift => console.log(shift));
   }
 
   const displayShift = shift => {
-    //let thisShift = shift
+    let thisShift = shift
     let shiftHeader = document.createElement('h1')
     // add class to class list array
-    shiftHeader.innerText = `${shift.date} with ${shift.caregiver}`
-    //let deleteBtn = document.createElement('button')
+    shiftHeader.innerText = `${displayDate()} with ${shift.caregiver}`
+    let deleteBtn = document.createElement('button')
     //deleteBtn.class = 'like-btn'
-    //deleteBtn.innerText = 'Delete'
-    //deleteBtn.addEventListener('click', e => deleteToy(e, thisShift.id))
-    //let likeBtn = document.createElement('button')
-    //likeBtn.class = 'like-btn'
-    //likeBtn.innerText = 'Like <3'
-    //likeBtn.addEventListener('click', e => showLikes(e, thisShift))
-    //shiftHeader.append(likeBtn)
-    //shiftHeader.append(deleteBtn)
+    deleteBtn.innerText = 'Delete Shift'
+    deleteBtn.addEventListener('click', e => deleteShift(e, thisShift.id))
+    shiftHeader.append(deleteBtn)
     timelineDiv.append(shiftHeader)
+  }
+
+  const deleteShift = (e, id) => {
+    e.target.parentNode.remove()
+    fetch(`http://localhost:3000/shifts/${id}`, {
+      method: 'DELETE'
+    }).then(resp => resp.json())
   }

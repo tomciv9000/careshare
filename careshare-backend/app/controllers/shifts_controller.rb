@@ -5,12 +5,12 @@ class ShiftsController < ApplicationController
     def index
       @shifts = Shift.all
   
-      render json: @shifts
+      render json: ShiftSerializer.new(@shifts)
     end
   
     # GET /shifts/1
     def show
-      render json: @shift
+      render json: ShiftSerializer.new(@shift)
     end
   
     # POST /shifts
@@ -18,7 +18,8 @@ class ShiftsController < ApplicationController
       @shift = Shift.new(shift_params)
   
       if @shift.save
-        render json: @shift, status: :created, location: @shift
+        render json: ShiftSerializer.new(@shift)
+
       else
         render json: @shift.errors, status: :unprocessable_entity
       end
@@ -46,7 +47,7 @@ class ShiftsController < ApplicationController
   
       # Only allow a trusted parameter "white list" through.
       def shift_params
-        params.require(:shift).permit(:caregiver, :date)
+        params.require(:shift).permit(:id, :caregiver, :date)
       end
   end
   
