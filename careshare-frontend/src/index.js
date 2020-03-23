@@ -68,6 +68,7 @@ const displayShift = shift => {
 }
 
 const deleteShift = (e, id) => {
+    cleanDropDown(id)
     e.target.parentNode.remove();
     fetch(`${BACKEND_URL}/${id}`, {
       method: 'DELETE'
@@ -76,7 +77,6 @@ const deleteShift = (e, id) => {
     .catch((error) => {
         console.error('Error:', error);
       })
-      
 }
    
 function getShiftFromDropDown(shift_id) {
@@ -101,11 +101,12 @@ function clearShift(){
     timelineDiv.innerHTML = ""
 }
 
-function cleanDropDown(){
-    let options = document.getElementsByTagName('option')
-    for (var i = options.length -1; i > 0; --i) {
-        options[i].remove();
-      }
+function cleanDropDown(id){
+    var shiftsDropdown = document.getElementById("shifts-dropdown");
+    for (var i=0; i<shiftsDropdown.length; i++) {
+    if (shiftsDropdown.options[i].value == id)
+        shiftsDropdown.remove(i);
+    }
 }
 
 function getAndLoadShift(event) {
