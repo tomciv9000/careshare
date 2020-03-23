@@ -76,6 +76,7 @@ const deleteShift = (e, id) => {
     .catch((error) => {
         console.error('Error:', error);
       })
+      
 }
    
 function getShiftFromDropDown(shift_id) {
@@ -98,6 +99,13 @@ function fetchAndPopulateDropDown() {
 
 function clearShift(){
     timelineDiv.innerHTML = ""
+}
+
+function cleanDropDown(){
+    let options = document.getElementsByTagName('option')
+    for (var i = options.length -1; i > 0; --i) {
+        options[i].remove();
+      }
 }
 
 function getAndLoadShift(event) {
