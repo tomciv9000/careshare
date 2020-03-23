@@ -4,8 +4,23 @@ class ShiftsAdapter {
     }
   
     getShifts() {
-      return fetch(this.baseURL).then(response => response.json()).then(json => json.data)
+      return fetch(this.baseURL).then(response => response.json()).then(json => (json.data))
     }
+
+    populateShiftsDropDown(data) {
+        data.sort((a, b) => (a.attributes.date < b.attributes.date) ? 1 : -1)
+        for (let shift of data) {
+          let option = document.createElement("option")
+          option.value = shift.attributes.id
+          option.innerHTML = `${shift.attributes.caregiver}...${shift.attributes.date}` 
+          this.shiftDropDown.appendChild(option)
+        }
+      }
+    
+    fetchAndPopulateDropDown() {
+        this.adapter.getIngredients().then(json => this.populateIngredientDropDown(json))
+    }
+
   
     postShiftToApi(configurationObject) {
       return fetch(this.baseURL, configurationObject)

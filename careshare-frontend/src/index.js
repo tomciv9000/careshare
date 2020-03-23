@@ -2,7 +2,7 @@ const BACKEND_URL = 'http://localhost:3000/shifts'
 const createShiftForm = document.querySelector('.add-shift-form')
 const actionPanel = document.querySelector(".action-container")
 const timelineDiv = document.querySelector('#timeline')
-
+const shiftDropDown = document.getElementById("shifts-dropdown")
 
 //let addShift = false
 
@@ -70,3 +70,21 @@ const createShift = shift => {
       })
   }
    
+  function getShifts() {
+    return fetch(BACKEND_URL).then(response => response.json()).then(json => (json.data))
+  }
+
+  function populateShiftsDropDown(data) {
+    data.sort((a, b) => (a.attributes.date < b.attributes.date) ? 1 : -1)
+    for (let shift of data) {
+      let option = document.createElement("option")
+      option.value = shift.attributes.id
+      option.innerHTML = `${shift.attributes.caregiver}...${shift.attributes.date}` 
+      shiftDropDown.appendChild(option)
+    }
+}
+    
+function fetchAndPopulateDropDown() {
+    getShifts().then(json => populateShiftsDropDown(json))
+}
+
