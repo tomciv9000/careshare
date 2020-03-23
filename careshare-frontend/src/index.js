@@ -4,34 +4,42 @@ const actionPanel = document.querySelector(".action-container")
 const timelineDiv = document.querySelector('#timeline')
 const shiftDropDown = document.getElementById("shifts-dropdown")
 
+let dateDisplay = {}
 //let addShift = false
 
 
-//function to return the current Date
-const returnDate = () => {
+
+const getDates = () => {
     let today = new Date()
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    return date
+    dateDisplay.sql = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    dateDisplay.dom = today.toLocaleDateString()
 }
 
-const displayDate = () => {
-    let date = new Date()
-    return date.toLocaleDateString()
+
+function formatDate(date){
+    
+    let split = date.split('-')
+    return split[1] + "/" + split[2] + "/" + split[0] 
+}
+
+function getShifts() {
+    return fetch(BACKEND_URL).then(response => response.json()).then(json => (json.data))
 }
 
 createShiftForm.addEventListener('submit', e => {
     e.preventDefault()
+    getDates()
     addNewShift(e)
     createShiftForm.reset()
-  })
+})
 
 const addNewShift = e => {
     let shift = {
       caregiver: e.target.caregiver.value,
-      date: returnDate()
+      date: dateDisplay.sql
     }
     createShift(shift)
-  }
+}
 
 const createShift = shift => {
     fetch(BACKEND_URL, {
@@ -42,24 +50,24 @@ const createShift = shift => {
       },
       body: JSON.stringify(shift)
     })
-      .then(resp => resp.json())
-      .then(shift => displayShift(shift.data.attributes));
-  }
+    .then(resp => resp.json())
+    .then(shift => displayShift(shift.data.attributes));
+}
 
-  const displayShift = shift => {
+const displayShift = shift => {
     let thisShift = shift
     let shiftHeader = document.createElement('h1')
     // add class to class list array
-    shiftHeader.innerText = `${displayDate()} with ${shift.caregiver}`
+    shiftHeader.innerText = `${dateDisplay.dom} with ${shift.caregiver}`
     let deleteBtn = document.createElement('button')
     //deleteBtn.class = 'like-btn'
     deleteBtn.innerText = 'Delete Shift'
     deleteBtn.addEventListener('click', e => deleteShift(e, thisShift.id))
     shiftHeader.append(deleteBtn)
     timelineDiv.append(shiftHeader)
-  }
+}
 
-  const deleteShift = (e, id) => {
+const deleteShift = (e, id) => {
     e.target.parentNode.remove();
     fetch(`${BACKEND_URL}/${id}`, {
       method: 'DELETE'
@@ -68,18 +76,18 @@ const createShift = shift => {
     .catch((error) => {
         console.error('Error:', error);
       })
-  }
+}
    
-  function getShifts() {
-    return fetch(BACKEND_URL).then(response => response.json()).then(json => (json.data))
-  }
+function getShiftFromDropDown(shift_id) {
+    return fetch(BACKEND_URL + `/${shift_id}`).then(response => response.json())
+}  
 
-  function populateShiftsDropDown(data) {
+function populateShiftsDropDown(data) {
     data.sort((a, b) => (a.attributes.date < b.attributes.date) ? 1 : -1)
     for (let shift of data) {
       let option = document.createElement("option")
       option.value = shift.attributes.id
-      option.innerHTML = `${shift.attributes.caregiver}...${shift.attributes.date}` 
+      option.innerHTML = `${shift.attributes.caregiver} - ${dateDisplay.dom}` 
       shiftDropDown.appendChild(option)
     }
 }
@@ -87,4 +95,12 @@ const createShift = shift => {
 function fetchAndPopulateDropDown() {
     getShifts().then(json => populateShiftsDropDown(json))
 }
+
+function bindEventListener() {
+    
+}
+
+
+getDates()
+fetchAndPopulateDropDown()
 
