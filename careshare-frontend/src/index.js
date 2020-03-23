@@ -96,11 +96,21 @@ function fetchAndPopulateDropDown() {
     getShifts().then(json => populateShiftsDropDown(json))
 }
 
+function clearShift(){
+    timelineDiv.innerHTML = ""
+}
+
+function getAndLoadShift(event) {
+  clearShift();
+  const shift_id = event.target.value
+  getShiftFromDropDown(shift_id).then(json => displayShift(json.data.attributes))
+}
+
 function bindEventListener() {
-    
+    shiftDropDown.addEventListener("change", event => getAndLoadShift(event))
 }
 
 
 getDates()
 fetchAndPopulateDropDown()
-
+bindEventListener()
