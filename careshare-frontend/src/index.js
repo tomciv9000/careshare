@@ -5,9 +5,12 @@ const timelineDiv = document.querySelector('#timeline')
 const dropDownDiv = document.querySelector('#all-shifts-dropdown')
 const shiftDropDown = document.getElementById("shifts-dropdown")
 const newShiftButton = document.getElementById('new-shift')
+const previousShiftsButton = document.getElementById('select-shift')
 const formButtons = document.querySelector('.form-show-buttons')
+
+
 let dateDisplay = {}
-//let addShift = false
+
 
 
 
@@ -145,8 +148,8 @@ newShiftButton.addEventListener("click", function() {
     toggleButtons();
 }.bind(this))
 
-newShiftButton.addEventListener("click", function() {
-    toggleForm();
+previousShiftsButton.addEventListener("click", function() {
+    toggleDropDown();
     toggleButtons();
 }.bind(this))
 
