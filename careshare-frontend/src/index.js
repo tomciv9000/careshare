@@ -148,7 +148,7 @@ function fetchAndPopulateDropDown() {
     getShifts().then(json => populateShiftsDropDown(json))
 }
 
-function clearShift(){
+function Shift(){
     timelineDiv.innerHTML = ""
 }
 
@@ -161,7 +161,8 @@ function cleanDropDown(id){
 }
 
 function getAndLoadShift(event) {
-  clearShift();
+  toggleDropDown()
+  toggleGoBack()
   const shift_id = event.target.value
   getShiftFromDropDown(shift_id).then(json => displayShift(json.data.attributes))
 }
@@ -194,7 +195,6 @@ goBackButton.addEventListener("click", function() {
 
 function bindEventListeners() {
     shiftDropDown.addEventListener("change", event => getAndLoadShift(event))
-    ;
 }
 
 
