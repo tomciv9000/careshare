@@ -8,19 +8,16 @@
   </head>
   <body>
     <div id="handoff-header">
-      <img
-        src="https://www.meme-arsenal.com/memes/ff6dff4e3200923c96b2e8340d772bb3.jpg"
-        alt="handoff-header"
-      />
       <h1 id="header-text">CareShare</h1>
-      <img id="right-image"
-      src="https://www.meme-arsenal.com/memes/ff6dff4e3200923c96b2e8340d772bb3.jpg"
-      alt="handoff-header"
-    />
     </div>
     <div class = "wrapper">
-    <div class="dropdown-container">
-        <form class="add-shift-form">
+      <div class="form-show-buttons">
+        <button class="button" id="new-shift" type="button" name="button">Click here to start a new shift</button>
+        <span id="or"> or </span>
+        <button class="button" id="select-shift" type="button" name="button">View a previous shift</button>
+      </div>
+    <div id="dropdown-container">
+        <form id="add-shift-form" class = "hidden">
           <input
             type="text"
             name="caregiver"
@@ -37,7 +34,7 @@
             class="submit"
           />
         </form>
-        <div id="all-shifts-dropdown">
+        <div id="all-shifts-dropdown" class ="hidden">
             <h3>View Previous Shift:</h3>
             <select id="shifts-dropdown">
               <option value="" disabled selected>Select your shift...</option>

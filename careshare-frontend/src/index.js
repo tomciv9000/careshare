@@ -1,9 +1,11 @@
 const BACKEND_URL = 'http://localhost:3000/shifts'
-const createShiftForm = document.querySelector('.add-shift-form')
+const addShiftForm = document.querySelector('#add-shift-form')
 const actionPanel = document.querySelector(".action-container")
 const timelineDiv = document.querySelector('#timeline')
+const dropDownDiv = document.querySelector('#all-shifts-dropdown')
 const shiftDropDown = document.getElementById("shifts-dropdown")
-
+const newShiftButton = document.getElementById('new-shift')
+const formButtons = document.querySelector('.form-show-buttons')
 let dateDisplay = {}
 //let addShift = false
 
@@ -26,12 +28,27 @@ function getShifts() {
     return fetch(BACKEND_URL).then(response => response.json()).then(json => (json.data))
 }
 
-createShiftForm.addEventListener('submit', e => {
-    e.preventDefault()
-    getDates()
-    addNewShift(e)
-    createShiftForm.reset()
-})
+function hideOrShowElement(element) {
+    if (element.classList.contains("hidden")) {
+      element.classList.remove("hidden");
+    } else {
+      element.className += " hidden";
+    }
+  }
+
+function toggleForm() {
+  hideOrShowElement(addShiftForm);
+}
+
+function toggleButtons() {
+  hideOrShowElement(formButtons);
+}
+
+function toggleDropDown() {
+  hideOrShowElement(dropDownDiv);
+  //populates dropdown(); I think this would work
+}
+
 
 const addNewShift = e => {
     let shift = {
@@ -115,11 +132,30 @@ function getAndLoadShift(event) {
   getShiftFromDropDown(shift_id).then(json => displayShift(json.data.attributes))
 }
 
-function bindEventListener() {
+
+addShiftForm.addEventListener('submit', e => {
+    e.preventDefault()
+    getDates()
+    addNewShift(e)
+    addShiftForm.reset()
+})
+
+newShiftButton.addEventListener("click", function() {
+    toggleForm();
+    toggleButtons();
+}.bind(this))
+
+newShiftButton.addEventListener("click", function() {
+    toggleForm();
+    toggleButtons();
+}.bind(this))
+
+function bindEventListeners() {
     shiftDropDown.addEventListener("change", event => getAndLoadShift(event))
+    ;
 }
 
 
 getDates()
 fetchAndPopulateDropDown()
-bindEventListener()
+bindEventListeners()

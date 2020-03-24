@@ -2,9 +2,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#right-image{
-    transform: scaleX(-1);
-}
 
 #handoff-header {
     display: flex;
@@ -116,13 +113,18 @@ input {
       margin-top: 0px;
 }
 
-.dropdown-container{
-    text-align: center;
-    display: inline-block;
+.form-show-buttons{
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
 
-.dropdown-container{
-  display: flex;
+
+#dropdown-container{
+  /*display: flex;*/
+  text-align: center;
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
