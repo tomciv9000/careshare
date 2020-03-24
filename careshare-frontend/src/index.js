@@ -94,6 +94,8 @@ const displayShift = shift => {
 }
 
 const deleteShift = (e, id) => {
+    toggleButtons()
+    toggleDropDown()
     cleanDropDown(id)
     e.target.parentNode.remove();
     fetch(`${BACKEND_URL}/${id}`, {
