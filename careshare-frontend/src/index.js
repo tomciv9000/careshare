@@ -8,6 +8,7 @@ const shiftDropDown = document.getElementById("shifts-dropdown")
 const newShiftButton = document.getElementById('new-shift')
 const previousShiftsButton = document.getElementById('select-shift')
 const formButtons = document.querySelector('.form-show-buttons')
+const goBackButton = document.getElementById('go-back')
 
 
 let dateDisplay = {}
@@ -35,23 +36,40 @@ function getShifts() {
 function hideOrShowElement(element) {
     if (element.classList.contains("hidden")) {
       element.classList.remove("hidden");
-    } else {
+        } 
+    else {
       element.className += " hidden";
     }
-  }
+}
+
+function goBack(){
+    toggleGoBack()
+    if (!addShiftForm.classList.contains("hidden")) {
+        toggleForm()
+    }
+    else {
+        toggleDropDown()
+    }
+    toggleButtons()
+}
+
+function toggleGoBack(){
+    hideOrShowElement(goBackButton)
+}
 
 function toggleForm() {
-  hideOrShowElement(addShiftForm);
+    hideOrShowElement(addShiftForm);
 }
 
 function toggleButtons() {
-  hideOrShowElement(formButtons);
+    hideOrShowElement(formButtons);
 }
 
 function toggleDropDown() {
   hideOrShowElement(dropDownDiv);
   //populate dropdown(); I think this would work
 }
+
 
 
 const addNewShift = e => {
@@ -84,13 +102,18 @@ const displayShift = shift => {
     let deleteBtn = document.createElement('button')
     //deleteBtn.class = 'like-btn'
     endShiftBtn.innerText = 'Clock-Out'
-    endShiftBtn.addEventListener('click', e => deleteShift(e, thisShift.id))
+    endShiftBtn.addEventListener('click', e => endShift(e))
     deleteBtn.addEventListener('click', e => deleteShift(e, thisShift.id))
     deleteBtn.innerText = 'Delete Shift'
     timelineDiv.append(shiftHeader)
     shiftHeader.append(endShiftBtn)
     shiftHeader.append(deleteBtn)
     
+}
+
+const endShift = (e) => {
+    toggleButtons()
+    e.target.parentNode.remove();
 }
 
 const deleteShift = (e, id) => {
@@ -146,6 +169,8 @@ function getAndLoadShift(event) {
 
 addShiftForm.addEventListener('submit', e => {
     e.preventDefault()
+    toggleForm()
+    toggleGoBack()
     getDates()
     addNewShift(e)
     addShiftForm.reset()
@@ -154,11 +179,17 @@ addShiftForm.addEventListener('submit', e => {
 newShiftButton.addEventListener("click", function() {
     toggleForm();
     toggleButtons();
+    toggleGoBack();
 }.bind(this))
 
 previousShiftsButton.addEventListener("click", function() {
     toggleDropDown();
     toggleButtons();
+    toggleGoBack();
+}.bind(this))
+
+goBackButton.addEventListener("click", function() {
+    goBack()
 }.bind(this))
 
 function bindEventListeners() {
