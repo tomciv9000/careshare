@@ -2,6 +2,7 @@ const BACKEND_URL = 'http://localhost:3000/shifts'
 const addShiftForm = document.querySelector('#add-shift-form')
 const actionPanel = document.querySelector(".action-container")
 const timelineDiv = document.querySelector('#timeline')
+const timelineButtons = document.querySelector('#timeline-buttons')
 const dropDownDiv = document.querySelector('#all-shifts-dropdown')
 const shiftDropDown = document.getElementById("shifts-dropdown")
 const newShiftButton = document.getElementById('new-shift')
@@ -49,7 +50,7 @@ function toggleButtons() {
 
 function toggleDropDown() {
   hideOrShowElement(dropDownDiv);
-  //populates dropdown(); I think this would work
+  //populate dropdown(); I think this would work
 }
 
 
@@ -79,12 +80,17 @@ const displayShift = shift => {
     let shiftHeader = document.createElement('h1')
     // add class to class list array
     shiftHeader.innerText = `${dateDisplay.dom} with ${shift.caregiver}`
+    let endShiftBtn = document.createElement('button')
     let deleteBtn = document.createElement('button')
     //deleteBtn.class = 'like-btn'
-    deleteBtn.innerText = 'Delete Shift'
+    endShiftBtn.innerText = 'Clock-Out'
+    endShiftBtn.addEventListener('click', e => deleteShift(e, thisShift.id))
     deleteBtn.addEventListener('click', e => deleteShift(e, thisShift.id))
-    shiftHeader.append(deleteBtn)
+    deleteBtn.innerText = 'Delete Shift'
     timelineDiv.append(shiftHeader)
+    shiftHeader.append(endShiftBtn)
+    shiftHeader.append(deleteBtn)
+    
 }
 
 const deleteShift = (e, id) => {
