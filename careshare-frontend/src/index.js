@@ -151,10 +151,12 @@ const closeShift = (e) => {
 const deleteShift = (e, id) => {
     shiftDropDown.selectedIndex = 0
     toggleButtons()
-    toggleActionPanel()
+    if (!actionWrapper.classList.contains("hidden")) {
+        toggleActionPanel()
+          } 
     //toggleDropDown()
     cleanDropDown(id)
-    e.target.parentNode.remove();
+    clearShift()
     fetch(`${BACKEND_URL}/${id}`, {
       method: 'DELETE'
     })
