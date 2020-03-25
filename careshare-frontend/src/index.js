@@ -2,7 +2,7 @@ const BACKEND_URL = 'http://localhost:3000/shifts'
 const addShiftForm = document.querySelector('#add-shift-form')
 const actionPanel = document.querySelector(".action-container")
 const timelineDiv = document.querySelector('#timeline')
-const timelineButtons = document.querySelector('#timeline-buttons')
+
 const dropDownDiv = document.querySelector('#all-shifts-dropdown')
 const shiftDropDown = document.getElementById("shifts-dropdown")
 const newShiftButton = document.getElementById('new-shift')
@@ -98,7 +98,7 @@ const createShift = shift => {
     
 }
 
-function dropDownHasValue(id){
+function shiftFound(id){
     let option = shiftDropDown.querySelector('[value="' + id + '"]');
     return !!option
 }
@@ -109,30 +109,49 @@ const displayShift = shift => {
     let shiftHeader = document.createElement('h1')
     // add class to class list array
     shiftHeader.innerText = `${dateDisplay.dom} with ${shift.caregiver}`
-    let endShiftBtn = document.createElement('button')
-    let deleteBtn = document.createElement('button')
-    //deleteBtn.class = 'like-btn'
-    endShiftBtn.innerText = 'Clock-Out'
-    endShiftBtn.addEventListener('click', e => endShift(e))
-    deleteBtn.addEventListener('click', e => deleteShift(e, shift.id))
-    deleteBtn.innerText = 'Delete Shift'
+    //let endShiftBtn = document.createElement('button')
+    //let deleteBtn = document.createElement('button')
+    ////deleteBtn.class = 'like-btn'
+    //endShiftBtn.innerText = 'Clock-Out'
+    //endShiftBtn.addEventListener('click', e => closeShift(e))
+    //deleteBtn.addEventListener('click', e => deleteShift(e, shift.id))
+    //deleteBtn.innerText = 'Delete Shift'
     timelineDiv.append(shiftHeader)
-    shiftHeader.append(endShiftBtn)
-    shiftHeader.append(deleteBtn)
-    if (!dropDownHasValue(shift.id)) {
-        addShiftToDropDown(shift)
-    }
+    buildShiftEvents(shift)
 }
 
-const endShift = (e) => {
+//There should be an initialize function for Shifts that build all the neccesary elements
+
+function buildShiftEvents(shift) {
+    let closeBtn = document.createElement('button')
+    let deleteBtn = document.createElement('button')
+    if (shiftFound(shift.id)) {
+        closeBtn.innerText = 'Review Complete'
+        deleteBtn.innerText = 'Delete Shift'
+    } else {
+        closeBtn.innerText = 'Shift Complete'
+        deleteBtn.innerText = 'Cancel Shift'
+        addShiftToDropDown(shift)
+    }
+    closeBtn.addEventListener('click', e => closeShift(e))
+    deleteBtn.addEventListener('click', e => deleteShift(e, shift.id))
+    timelineDiv.append(closeBtn)
+    timelineDiv.append(deleteBtn)
+}
+
+const closeShift = (e) => {
     shiftDropDown.selectedIndex = 0
     toggleButtons()
-    e.target.parentNode.remove();
+    if (!actionWrapper.classList.contains("hidden")) {
+        toggleActionPanel()
+          } 
+    clearShift()
 }
 
 const deleteShift = (e, id) => {
     shiftDropDown.selectedIndex = 0
     toggleButtons()
+    toggleActionPanel()
     //toggleDropDown()
     cleanDropDown(id)
     e.target.parentNode.remove();
@@ -163,7 +182,7 @@ function fetchAndPopulateDropDown() {
     getShifts().then(json => populateShiftsDropDown(json))
 }
 
-function Shift(){
+function clearShift(){
     timelineDiv.innerHTML = ""
 }
 
@@ -191,11 +210,13 @@ function getAndLoadShift(event) {
   getShiftFromDropDown(shift_id).then(json => displayShift(json.data.attributes))
 }
 
+//set the clock out and delete buttons to run toggleAtionPanel()
 
 addShiftForm.addEventListener('submit', e => {
     e.preventDefault()
     toggleForm()
     toggleGoBack()
+    toggleActionPanel()
     getDates()
     addNewShift(e)
     addShiftForm.reset()
