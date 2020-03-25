@@ -115,7 +115,9 @@ const displayShift = shift => {
     timelineDiv.append(shiftHeader)
     shiftHeader.append(endShiftBtn)
     shiftHeader.append(deleteBtn)
-    
+    if (!dropDownHasValue(shift.id)) {
+        addShiftToDropDown(shift)
+    }
 }
 
 const endShift = (e) => {
