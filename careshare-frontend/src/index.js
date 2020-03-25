@@ -4,7 +4,7 @@ const actionPanel = document.querySelector(".action-container")
 const timelineDiv = document.querySelector('#timeline')
 
 const dropDownDiv = document.querySelector('#all-shifts-dropdown')
-const shiftDropDown = document.getElementById("shifts-dropdown")
+const shiftsDropDown = document.getElementById("shifts-dropdown")
 const newShiftButton = document.getElementById('new-shift')
 const previousShiftsButton = document.getElementById('select-shift')
 const formButtons = document.querySelector('.form-show-buttons')
@@ -99,7 +99,7 @@ const createShift = shift => {
 }
 
 function shiftFound(id){
-    let option = shiftDropDown.querySelector('[value="' + id + '"]');
+    let option = shiftsDropDown.querySelector('[value="' + id + '"]');
     return !!option
 }
 
@@ -140,7 +140,7 @@ function buildShiftEvents(shift) {
 }
 
 const closeShift = (e) => {
-    shiftDropDown.selectedIndex = 0
+    shiftsDropDown.selectedIndex = 0
     toggleButtons()
     if (!actionWrapper.classList.contains("hidden")) {
         toggleActionPanel()
@@ -149,7 +149,7 @@ const closeShift = (e) => {
 }
 
 const deleteShift = (e, id) => {
-    shiftDropDown.selectedIndex = 0
+    shiftsDropDown.selectedIndex = 0
     toggleButtons()
     if (!actionWrapper.classList.contains("hidden")) {
         toggleActionPanel()
@@ -176,7 +176,7 @@ function populateShiftsDropDown(data) {
       let option = document.createElement("option")
       option.value = shift.attributes.id
       option.innerHTML = `${shift.attributes.caregiver} - ${formatDate(shift.attributes.date)}` 
-      shiftDropDown.appendChild(option)
+      shiftsDropDown.appendChild(option)
     }
 }
     
@@ -192,17 +192,17 @@ function addShiftToDropDown(shift){
     let option = document.createElement("option")
     option.value = shift.id
     option.innerHTML = `${shift.caregiver} - ${formatDate(shift.date)}` 
-    shiftDropDown.insertBefore(option, shiftDropDown.childNodes[2])
+    shiftsDropDown.insertBefore(option, shiftsDropDown.childNodes[2])
 
 }
 
 function cleanDropDown(id){
     //var shiftsDropdown = document.getElementById("shifts-dropdown");
-    for (var i=0; i<shiftDropDown.length; i++) {
-    if (shiftDropDown.options[i].value == id)
-    shiftDropDown.remove(i);
+    for (var i=0; i<shiftsDropDown.length; i++) {
+    if (shiftsDropDown.options[i].value == id)
+    shiftsDropDown.remove(i);
     }
-    shiftDropDown.selectedIndex = 0
+    shiftsDropDown.selectedIndex = 0
 }
 
 function getAndLoadShift(event) {
@@ -241,7 +241,7 @@ goBackButton.addEventListener("click", function() {
 }.bind(this))
 
 function bindEventListeners() {
-    shiftDropDown.addEventListener("change", event => getAndLoadShift(event))
+    shiftsDropDown.addEventListener("change", event => getAndLoadShift(event))
 }
 
 
