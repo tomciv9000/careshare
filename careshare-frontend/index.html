@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <title>CareShare</title>
-
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
@@ -18,32 +17,20 @@
       </div>
       <div id="dropdown-container">
         <form id="add-shift-form" class = "hidden">
-          <input
-            type="text"
-            name="caregiver"
-            value=""
-            placeholder="Enter Your Name..."
-            class="input-text"
-          />
-
-          <br />
-          <input
-            type="submit"
-            name="submit"
-            value="Start Shift!"
-            class="submit"
-          />
+          <input type="text" name="caregiver" value="" placeholder="Enter Your Name..." class="input-text"/>
+          <input type="submit" name="submit" value="Start Shift!" class="submit"/>
         </form>
         <div id="all-shifts-dropdown" class ="hidden">
             <h3>View Previous Shift:</h3>
             <select id="shifts-dropdown">
               <option value="" disabled selected>Select your shift...</option>
             </select>
-         </div>
+        </div>
          <button class="hidden" id="go-back" type="button" name="button">Go Back</button>
-  </div>
+     </div>
       
-   <div class = "action-container">
+  <div id = "action-wrapper" class = "hidden">
+   <div id = "action-container">
         <div class="item">
             <div id="wet-diaper-icon">
             <button><img src = "https://www.svgrepo.com/show/115810/diaper.svg"
@@ -115,6 +102,7 @@
             <button id="food-done">Did That<br>SLEEP!</button>
         </div>
     </div>
+  </div>
 </div>
     <div id="timeline">
     </div>

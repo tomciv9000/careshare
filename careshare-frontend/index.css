@@ -1,20 +1,20 @@
+/* || General styles */
+
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
 
 #handoff-header {
-    display: flex;
-    justify-content: center;
-    height: 7rem;
-    padding: 1rem;
+  display: flex;
+  text-align: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
   
-#handoff-header img {
-    height: 5rem;
-    width: auto;
-}
 
+/* || Action Panel styles */
 #wet-diaper-icon img, #soiled-diaper-icon img {
     height: 3rem;
     width: auto;
@@ -91,14 +91,13 @@ input {
 }
 
 
-.action-container {
-    /* display: flex; */
-    display: none;
+#action-container {
+    display: flex; 
     justify-content: center;
     align-items: baseline;
     flex-wrap: wrap;
 }
-  
+/* || Flex container styles */
 .item {
     
     margin-bottom: 2%; /* (100-32*3)/2 */

@@ -94,7 +94,8 @@ const createShift = shift => {
 }
 
 const displayShift = shift => {
-    let thisShift = shift
+    
+    //let thisShift = shift
     let shiftHeader = document.createElement('h1')
     // add class to class list array
     shiftHeader.innerText = `${dateDisplay.dom} with ${shift.caregiver}`
@@ -103,8 +104,9 @@ const displayShift = shift => {
     //deleteBtn.class = 'like-btn'
     endShiftBtn.innerText = 'Clock-Out'
     endShiftBtn.addEventListener('click', e => endShift(e))
-    deleteBtn.addEventListener('click', e => deleteShift(e, thisShift.id))
+    deleteBtn.addEventListener('click', e => deleteShift(e, shift.id))
     deleteBtn.innerText = 'Delete Shift'
+    addShiftToDropDown(shift)
     timelineDiv.append(shiftHeader)
     shiftHeader.append(endShiftBtn)
     shiftHeader.append(deleteBtn)
@@ -118,7 +120,7 @@ const endShift = (e) => {
 
 const deleteShift = (e, id) => {
     toggleButtons()
-    toggleDropDown()
+    //toggleDropDown()
     cleanDropDown(id)
     e.target.parentNode.remove();
     fetch(`${BACKEND_URL}/${id}`, {
@@ -139,7 +141,7 @@ function populateShiftsDropDown(data) {
     for (let shift of data) {
       let option = document.createElement("option")
       option.value = shift.attributes.id
-      option.innerHTML = `${shift.attributes.caregiver} - ${dateDisplay.dom}` 
+      option.innerHTML = `${shift.attributes.caregiver} - ${formatDate(shift.attributes.date)}` 
       shiftDropDown.appendChild(option)
     }
 }
@@ -152,8 +154,16 @@ function Shift(){
     timelineDiv.innerHTML = ""
 }
 
+function addShiftToDropDown(shift){
+    let option = document.createElement("option")
+    option.value = shift.id
+    option.innerHTML = `${shift.caregiver} - ${formatDate(shift.date)}` 
+    shiftDropDown.insertBefore(option, shiftDropDown.childNodes[2])
+
+}
+
 function cleanDropDown(id){
-    var shiftsDropdown = document.getElementById("shifts-dropdown");
+    //var shiftsDropdown = document.getElementById("shifts-dropdown");
     for (var i=0; i<shiftsDropdown.length; i++) {
     if (shiftsDropdown.options[i].value == id)
         shiftsDropdown.remove(i);
