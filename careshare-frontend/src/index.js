@@ -9,7 +9,7 @@ const newShiftButton = document.getElementById('new-shift')
 const previousShiftsButton = document.getElementById('select-shift')
 const formButtons = document.querySelector('.form-show-buttons')
 const goBackButton = document.getElementById('go-back')
-
+const actionWrapper = document.getElementById('action-wrapper')
 
 let dateDisplay = {}
 
@@ -68,6 +68,10 @@ function toggleButtons() {
 function toggleDropDown() {
   hideOrShowElement(dropDownDiv);
   //populate dropdown(); I think this would work
+}
+
+function toggleActionPanel(){
+    hideOrShowElement(actionWrapper)
 }
 
 
