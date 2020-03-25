@@ -91,6 +91,12 @@ const createShift = shift => {
     })
     .then(resp => resp.json())
     .then(shift => displayShift(shift.data.attributes));
+    
+}
+
+function dropDownHasValue(id){
+    let option = shiftDropDown.querySelector('[value="' + id + '"]');
+    return !!option
 }
 
 const displayShift = shift => {
@@ -106,7 +112,6 @@ const displayShift = shift => {
     endShiftBtn.addEventListener('click', e => endShift(e))
     deleteBtn.addEventListener('click', e => deleteShift(e, shift.id))
     deleteBtn.innerText = 'Delete Shift'
-    addShiftToDropDown(shift)
     timelineDiv.append(shiftHeader)
     shiftHeader.append(endShiftBtn)
     shiftHeader.append(deleteBtn)
@@ -114,11 +119,13 @@ const displayShift = shift => {
 }
 
 const endShift = (e) => {
+    shiftDropDown.selectedIndex = 0
     toggleButtons()
     e.target.parentNode.remove();
 }
 
 const deleteShift = (e, id) => {
+    shiftDropDown.selectedIndex = 0
     toggleButtons()
     //toggleDropDown()
     cleanDropDown(id)
@@ -164,10 +171,11 @@ function addShiftToDropDown(shift){
 
 function cleanDropDown(id){
     //var shiftsDropdown = document.getElementById("shifts-dropdown");
-    for (var i=0; i<shiftsDropdown.length; i++) {
-    if (shiftsDropdown.options[i].value == id)
-        shiftsDropdown.remove(i);
+    for (var i=0; i<shiftDropDown.length; i++) {
+    if (shiftDropDown.options[i].value == id)
+    shiftDropDown.remove(i);
     }
+    shiftDropDown.selectedIndex = 0
 }
 
 function getAndLoadShift(event) {
