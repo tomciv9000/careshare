@@ -46,6 +46,13 @@ class Shifts {
         this.toggle([this.dropDownDiv, this.formButtons, this.goBackButton])
     }
 
+    exitShiftToggles(){
+        this.toggle(this.formButtons)
+        if (!this.elementHidden(this.actionWrapper)) {
+            this.toggle(this.ActionPanel)
+        }
+    }
+
     goBackToggles(){
         this.toggle([this.goBackButton, this.formButtons])
         if (!this.elementHidden(this.addShiftForm)) {
@@ -122,6 +129,7 @@ class Shifts {
         this.adapter.postShiftToApi(configurationObject).then(function(json) {
             shift.createShiftTimeline(json.data.attributes);
             this.addShiftToDropDown()
+            this.addShiftEventListeners(json.data.attributes.id)
         }.bind(this)) 
     }
 
@@ -133,11 +141,49 @@ class Shifts {
         
     resetDropDown(){
 	    for(let i=shiftsDropDown.options.length-1;i>=1;i--){
-		shiftsDropDown.remove(i);
+		this.shiftsDropDown.remove(i);
 	}
-        shiftsDropDown.selectedIndex = 0
+        this.shiftsDropDown.selectedIndex = 0
     }
 
+    addShiftEventListeners(id){
+        let closeButton = document.getElementById('closeButton')
+        let deleteButton = document.getElementById('deleteButton')
+        closeButton.addEventListener('click', function() {
+            this.closeShift()
+        }.bind(this))
+        deleteButton.addEventListener('click', function() {
+            this.deleteShift(id)
+        }.bind(this))
+    }
+
+    closeShift() {
+        this.shiftsDropDown.selectedIndex = 0
+        this.exitShiftToggles()
+        this.clearTimeLine()
+    }
+    
+    deleteShift(id) {
+        shiftsDropDown.selectedIndex = 0
+        toggleButtons()
+        if (!actionWrapper.classList.contains("hidden")) {
+            toggleActionPanel()
+              } 
+        //toggleDropDown()
+        cleanDropDown(id)
+        clearTimeLine()
+        fetch(`${BACKEND_URL}/${id}`, {
+          method: 'DELETE'
+        })
+        .then(response => response.json())
+        .catch((error) => {
+            console.error('Error:', error);
+          })
+    }
+
+    clearTimeLine(){
+        timelineDiv.innerHTML = ""
+    }
     
    // this.createShift(shift)
 
