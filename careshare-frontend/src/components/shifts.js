@@ -1,7 +1,7 @@
 class Shifts {
     constructor() {
         this.shifts = []
-        this.dateDisplay = {}
+        this.today = new Date()
 
         this.adapter = new ShiftsAdapter();
         this.addShiftForm = document.querySelector('#add-shift-form');
@@ -69,7 +69,7 @@ class Shifts {
         this.addShiftForm.addEventListener('submit', function() {
             event.preventDefault();
             this.addShiftFormToggles()
-            this.formatDateForDisplay();
+            this.grabDate();
             this.addNewShift(e);
             this.addShiftForm.reset();
         }.bind(this));
@@ -82,26 +82,33 @@ class Shifts {
         this.adapter.getShifts().then(shifts => this.populateShiftsDropDown(shifts))
     }
     
-    populateShiftsDropDown(shifts) {
+    populateShiftsDropDown(shiftData) {
+        let shifts = [].concat(shiftData || [])
         shifts.sort((a, b) => (a.attributes.date < b.attributes.date) ? 1 : -1)
         for (let shift of shifts) {
           let option = document.createElement("option")
           option.value = shift.attributes.id
-          option.innerHTML = `${shift.attributes.caregiver} - ${this.formatDate(shift.attributes.date)}` 
+          option.innerHTML = `${shift.attributes.caregiver} - ${DateDisplay.formatDate(shift.attributes.date)}` 
           this.shiftsDropDown.appendChild(option)
         }
     }
 
-    formatDateForDisplay() {
-        let today = new Date()
-        this.dateDisplay.sql = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-        this.dateDisplay.dom = today.toLocaleDateString()
-    }
+
+    toggle(elements) {
+        let toBeToggled = [].concat(elements || []);  
+        for (var i = 0; i < toBeToggled.length; i++){
+            if (this.elementHidden(toBeToggled[i])) {
+                toBeToggled[i].classList.remove("hidden");
+            } else {
+                toBeToggled[i].className += " hidden";
+            }       
+        }        
+    }  
 
     addNewShift(event){
         let shiftInput = {
             caregiver: event.target.caregiver.value,
-            date: this.dateDisplay.sql
+            date: this.today.toISOString().split('T')[0]
           }
         const shift = new Shift(shiftInput.caregiver, shiftInput.date)
         const configurationObject = {
@@ -113,10 +120,23 @@ class Shifts {
               body: JSON.stringify(shiftInput)
         };
         this.adapter.postShiftToApi(configurationObject).then(function(json) {
-            shift.createShiftTimeline(json.data.attributes)
+            shift.createShiftTimeline(json.data.attributes);
+            this.addShiftToDropDown()
         }.bind(this)) 
     }
+
+    addShiftToDropDown(){
+        this.resetDropDown()
+        this.fetchAndPopulateDropDown()
+    
+    }
         
+    resetDropDown(){
+	    for(let i=shiftsDropDown.options.length-1;i>=1;i--){
+		shiftsDropDown.remove(i);
+	}
+        shiftsDropDown.selectedIndex = 0
+    }
 
     
    // this.createShift(shift)

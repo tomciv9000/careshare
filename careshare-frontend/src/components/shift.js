@@ -3,17 +3,9 @@ class Shift {
     constructor(caregiver, date) {
         this.caregiver = caregiver;
         this.date = date;
-        formatDateForDisplay() {
-            let today = new Date()
-            this.dateDisplay.sql = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            this.dateDisplay.dom = today.toLocaleDateString()
-        }
+        
     }
 
-    formatDateForDisplay(date){
-        let dateArray = date.split('-')
-        return dateArray[1] + "/" + dateArray[2] + "/" + dateArray[0]
-    }
     //previouslly displayShift(shift) {
     createShiftTimeline(shift){
         let shiftHeader = document.createElement('h1');
@@ -21,7 +13,7 @@ class Shift {
         let closeBtn = document.createElement('button');
         let deleteBtn = document.createElement('button');
         
-        shiftHeader.innerText = `${this.formatDateForDisplay(shift.date)} with ${shift.caregiver}`
+        shiftHeader.innerText = `${DateDisplay.formatDate(shift.date)} with ${shift.caregiver}`
         timelineDiv.append(shiftHeader)
         
        //left off here
@@ -40,4 +32,10 @@ class Shift {
         //buildShiftEvents(shift)
     }
     
+    shiftFound(id){
+        let option = shiftsDropDown.querySelector('[value="' + id + '"]');
+        return !!option
+    }
+
+
   }
