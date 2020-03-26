@@ -6,10 +6,6 @@ class ShiftsAdapter {
     getShifts() {
       return fetch(this.baseURL).then(response => response.json()).then(json => (json.data))
     }
-    
-    fetchAndPopulateDropDown() {
-        this.adapter.getIngredients().then(json => this.populateIngredientDropDown(json))
-    }
 
   
     postShiftToApi(configurationObject) {
