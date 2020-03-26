@@ -1,12 +1,9 @@
 class Shifts {
     constructor() {
-        this.shifts = []
         this.today = new Date()
-
         this.adapter = new ShiftsAdapter();
         this.addShiftForm = document.querySelector('#add-shift-form');
         this.actionPanel = document.querySelector(".action-container");
-        //this.timelineDiv = document.querySelector('#timeline');
         this.dropDownDiv = document.querySelector('#all-shifts-dropdown');
         this.shiftsDropDown = document.getElementById("shifts-dropdown");
         this.newShiftButton = document.getElementById('new-shift');
@@ -14,11 +11,10 @@ class Shifts {
         this.formButtons = document.querySelector('.form-show-buttons');
         this.goBackButton = document.getElementById('go-back');
         this.actionWrapper = document.getElementById('action-wrapper');
-        
         this.bindEventListeners();
         this.fetchAndPopulateDropDown();
     }
-//attempt to make toggle transition functions
+
     elementHidden(element){
         return !!element.classList.contains("hidden")
     }
@@ -66,7 +62,6 @@ class Shifts {
             this.toggle(this.dropDownDiv)
         }
     }
-//end attempt
 
     bindEventListeners(){
         this.newShiftButton.addEventListener("click", function() {
@@ -104,7 +99,6 @@ class Shifts {
           this.shiftsDropDown.appendChild(option)
         }
     }
-
 
     toggle(elements) {
         let toBeToggled = [].concat(elements || []);  
@@ -171,7 +165,7 @@ class Shifts {
     }
 
     clearTimeLine(){
-        timelineDiv.innerHTML = ""
+        this.timelineDiv.innerHTML = ""
     }
 
     getAndLoadShift(event) {

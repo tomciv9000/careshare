@@ -3,7 +3,6 @@ class Shift {
     constructor(caregiver, date) {
         this.caregiver = caregiver;
         this.date = date;
-
     }
 
     createShiftTimeline(shift){
@@ -31,7 +30,5 @@ class Shift {
         let option = shiftsDropDown.querySelector('[value="' + id + '"]');
         return !!option
     }
-    
-
 
   }
