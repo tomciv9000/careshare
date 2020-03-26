@@ -13,8 +13,14 @@ class ShiftsAdapter {
         .then(response => response.json())
         .catch(error => console.log("Error: " + error))
     }
+
+    deleteShiftFromApi(configurationObject,id) {
+      return fetch(this.baseURL + `/${id}`, configurationObject)
+        .then(response => response.json())
+        .catch(error => console.log("Error: " + error))
+    }
   
-    loadPreviousShift(shift) {
-      return fetch(this.baseURL + `/${shift.id}`).then(response => response.json())
+    loadPreviousShift(shiftID) {
+      return fetch(this.baseURL + `/${shiftID}`).then(response => response.json())
     }
   }

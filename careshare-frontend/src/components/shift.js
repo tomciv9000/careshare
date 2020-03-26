@@ -3,7 +3,7 @@ class Shift {
     constructor(caregiver, date) {
         this.caregiver = caregiver;
         this.date = date;
-        this.adapter = new ShiftsAdapter();
+
     }
 
     createShiftTimeline(shift){

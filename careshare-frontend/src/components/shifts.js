@@ -46,11 +46,16 @@ class Shifts {
         this.toggle([this.dropDownDiv, this.formButtons, this.goBackButton])
     }
 
+    selectShiftToggles(){
+        this.toggle([this.addShiftForm, this.goBackButton])
+    }
     exitShiftToggles(){
+        this.shiftsDropDown.selectedIndex = 0
         this.toggle(this.formButtons)
         if (!this.elementHidden(this.actionWrapper)) {
             this.toggle(this.ActionPanel)
         }
+        this.clearTimeLine()
     }
 
     goBackToggles(){
@@ -128,12 +133,12 @@ class Shifts {
         };
         this.adapter.postShiftToApi(configurationObject).then(function(json) {
             shift.createShiftTimeline(json.data.attributes);
-            this.addShiftToDropDown()
+            this.refreshDropDown()
             this.addShiftEventListeners(json.data.attributes.id)
         }.bind(this)) 
     }
 
-    addShiftToDropDown(){
+    refreshDropDown(){
         this.resetDropDown()
         this.fetchAndPopulateDropDown()
     
@@ -150,42 +155,35 @@ class Shifts {
         let closeButton = document.getElementById('closeButton')
         let deleteButton = document.getElementById('deleteButton')
         closeButton.addEventListener('click', function() {
-            this.closeShift()
+            this.exitShiftToggles()
         }.bind(this))
         deleteButton.addEventListener('click', function() {
             this.deleteShift(id)
         }.bind(this))
     }
-
-    closeShift() {
-        this.shiftsDropDown.selectedIndex = 0
-        this.exitShiftToggles()
-        this.clearTimeLine()
-    }
     
     deleteShift(id) {
-        shiftsDropDown.selectedIndex = 0
-        toggleButtons()
-        if (!actionWrapper.classList.contains("hidden")) {
-            toggleActionPanel()
-              } 
-        //toggleDropDown()
-        cleanDropDown(id)
-        clearTimeLine()
-        fetch(`${BACKEND_URL}/${id}`, {
-          method: 'DELETE'
-        })
-        .then(response => response.json())
-        .catch((error) => {
-            console.error('Error:', error);
-          })
+        this.exitShiftToggles() 
+        const configurationObject = {
+            method: 'DELETE',
+        };
+        this.adapter.deleteShiftFromApi(configurationObject, id).then(() => this.refreshDropDown())
     }
 
     clearTimeLine(){
         timelineDiv.innerHTML = ""
     }
+
+    getAndLoadShift(event) {
+        this.selectShiftToggles()
+        const shiftID = event.target.value
+        this.adapter.loadPreviousShift(shiftID).then(json => this.displayShift(json.data.attributes))
+    }
+
+    static formatDate(date){
+        let split = date.split('-')
+        return split[1] + "/" + split[2] + "/" + split[0] 
+    }
+      
     
-   // this.createShift(shift)
-
-
 }
