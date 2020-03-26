@@ -78,10 +78,10 @@ class Shifts {
         this.goBackButton.addEventListener("click", function() {
             this.goBackToggles();
         }.bind(this));
-        this.addShiftForm.addEventListener('submit', function() {
+        this.addShiftForm.addEventListener('submit', function(e) {
             event.preventDefault();
             this.addShiftFormToggles()
-            this.grabDate();
+            //this.grabDate();
             this.addNewShift(e);
             this.addShiftForm.reset();
         }.bind(this));
@@ -145,7 +145,7 @@ class Shifts {
     }
         
     resetDropDown(){
-	    for(let i=shiftsDropDown.options.length-1;i>=1;i--){
+	    for(let i=this.shiftsDropDown.options.length-1;i>=1;i--){
 		this.shiftsDropDown.remove(i);
 	}
         this.shiftsDropDown.selectedIndex = 0
@@ -177,13 +177,14 @@ class Shifts {
     getAndLoadShift(event) {
         this.selectShiftToggles()
         const shiftID = event.target.value
-        this.adapter.loadPreviousShift(shiftID).then(json => this.displayShift(json.data.attributes))
+        this.adapter.loadPreviousShift(shiftID).then(json => this.viewPreviousShift(json.data.attributes))
     }
 
-    static formatDate(date){
-        let split = date.split('-')
-        return split[1] + "/" + split[2] + "/" + split[0] 
-    }
+    viewPreviousShift(shift) {
+        const previous = new Shift(shift.caregiver, shift.date)
+        previous.createShiftTimeline(shift);
+        this.addShiftEventListeners(shift.id)
+      }
       
     
 }

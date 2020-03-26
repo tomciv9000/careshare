@@ -1,5 +1,5 @@
 class App {
     constructor(){
-        this.shifts = new ShiftsAdapter()
+        this.shifts = new Shifts()
     }
 }
