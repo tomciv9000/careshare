@@ -44,14 +44,19 @@ class Shifts {
     }
 
     selectShiftToggles(){
-        this.toggle([this.addShiftForm, this.goBackButton])
+        if (!this.elementHidden(this.goBackButton)) {
+            this.toggle(this.goBackButton)
+        }
+        this.clearTimeLine()
     }
     exitShiftToggles(){
         this.shiftsDropDown.selectedIndex = 0
         this.toggle(this.formButtons)
         if (!this.elementHidden(this.actionWrapper)) {
             this.toggle(this.actionWrapper)
-        }
+        } else {
+            this.toggle(this.dropDownDiv)
+        } 
         this.clearTimeLine()
     }
 

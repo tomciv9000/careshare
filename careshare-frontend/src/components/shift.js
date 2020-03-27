@@ -6,14 +6,17 @@ class Shift {
     }
 
     createShiftTimeline(shift){
-        let shiftHeader = document.createElement('h1');
+        let shiftHeader = document.createElement('h4');
+        //let subHeader = document.createElement('h5')
         let timelineDiv = document.querySelector('#timeline');
         let closeBtn = document.createElement('button');
         closeBtn.setAttribute('id', 'closeButton')
         let deleteBtn = document.createElement('button');
         deleteBtn.setAttribute('id', 'deleteButton')
-        shiftHeader.innerText = `${DateDisplay.formatDate(shift.date)} with ${shift.caregiver}`
-        timelineDiv.append(shiftHeader)
+        shiftHeader.innerHTML = `Caregiver: ${shift.caregiver}` + "<br />" + `Date: ${DateDisplay.formatDate(shift.date)}`
+        //subHeader.innerText = `Caregiver: ${shift.caregiver}`
+        timelineDiv.append(shiftHeader);
+        //timelineDiv.append(subHeader);
         if (this.shiftFound(shift.id)) {
             closeBtn.innerText = 'Review Complete'
             deleteBtn.innerText = 'Delete Shift'
