@@ -54,5 +54,5 @@ class ShiftsController < ApplicationController
       def shift_params
         params.require(:shift).permit(:caregiver, :date)
       end
-  end
+end
   
