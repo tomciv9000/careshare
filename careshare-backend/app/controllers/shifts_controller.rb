@@ -4,7 +4,6 @@ class ShiftsController < ApplicationController
     # GET /shifts
     def index
       @shifts = Shift.all
-  
       render json: ShiftSerializer.new(@shifts)
     end
   
