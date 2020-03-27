@@ -3,7 +3,7 @@ class DiapersAdapter {
       this.baseURL = "http://localhost:3000/diapers"
     }
   
-    getShifts() {
+    getDiapers() {
       return fetch(this.baseURL).then(response => response.json()).then(json => (json.data))
     }
 
