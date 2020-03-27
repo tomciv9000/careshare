@@ -11,6 +11,7 @@ class Shifts {
         this.formButtons = document.querySelector('.form-show-buttons');
         this.goBackButton = document.getElementById('go-back');
         this.actionWrapper = document.getElementById('action-wrapper');
+        this.timelineDiv = document.getElementById('timeline')
         this.bindEventListeners();
         this.fetchAndPopulateDropDown();
     }
@@ -22,7 +23,7 @@ class Shifts {
     toggle(elements) {
         let toBeToggled = [].concat(elements || []);  
         for (var i = 0; i < toBeToggled.length; i++){
-            if (this.elementHidden(toBeToggled[i])) {
+            if (this.elementHidden(this.toBeToggled[i])) {
                 toBeToggled[i].classList.remove("hidden");
             } else {
                 toBeToggled[i].className += " hidden";
@@ -49,7 +50,7 @@ class Shifts {
         this.shiftsDropDown.selectedIndex = 0
         this.toggle(this.formButtons)
         if (!this.elementHidden(this.actionWrapper)) {
-            this.toggle(this.ActionPanel)
+            this.toggle(this.actionWrapper)
         }
         this.clearTimeLine()
     }
