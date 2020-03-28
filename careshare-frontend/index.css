@@ -200,3 +200,7 @@ input {
     background: salmon;
     padding: 20px;
   }
+
+  textarea {
+    resize: none;
+  }
