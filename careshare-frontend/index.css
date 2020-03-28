@@ -25,14 +25,14 @@ body {
 }
   
   /* IMAGE STYLES */
-.icons label img{
+.icons label img, .food-radio-icons img, .sleep-radio-icons img {
   background-color: "";
   height: 3rem;
   width: auto;
   padding: 3px;
   margin: 5px;
 }
-.icons p{
+.icons p, .food-radio-icons p, .sleep-radio-icons p{
     font-size: small;
     color: #656167;
 }
@@ -43,37 +43,7 @@ body {
 
 
 /* CHECKED STYLES */
-label#snack-icon:focus-within {
-  background-color: #00a6ffc8;
-}
 
-
-label#breakfast-icon:focus-within {
-    background-color: #ff9900fa;
-}
-
-label#lunch-icon:focus-within {
-    background-color: #00ff91db;
-}
-
-label#dinner-icon:focus-within {
-    background-color: #6200ffb8;
-}
-
-label#nap-icon:focus-within {
-    background-color: #f55cd1cf;
-}
-
-label#bedtime-icon:focus-within {
-    background-color: #5c87f5cf;
-}
-
-label:focus-within p{
-  color: #ffffff;
-}
-label:focus-within img{
-  filter: invert(100%)
-}
 
 
 #wet-diaper-icon img, #soiled-diaper-icon img {
@@ -82,7 +52,7 @@ label:focus-within img{
     padding: 3px;
 }
 
-.icons img{
+.icons img, .food-radio-icons img, .sleep-radio-icons img{
     background-color: "";
     margin: 5px;
     height: 3rem;
