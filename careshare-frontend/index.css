@@ -24,8 +24,8 @@ body {
     padding: 3px;
 }
 
-#wet-diaper-icon button {
-    background-color: rgba(255, 255, 0, 0.568);
+#wet-diaper-icon {
+    background-color: white;
     
     margin: 5px;
 }

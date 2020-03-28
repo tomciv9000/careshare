@@ -36,7 +36,7 @@ class Shift {
 
     bindEventListeners(){
         this.wetDiaperButton.addEventListener("click", function() {
-            this.newShiftToggles()
+            this.wetDiaperSelect()
         }.bind(this));
         //this.soiledDiaperButton.addEventListener("click", function() {
         //    this.newShiftToggles()
@@ -74,6 +74,24 @@ class Shift {
         //this.noteDone.addEventListener("change", function(event) {
         //    this.getAndLoadShift(event);
         //}.bind(this));
+    }
+
+    wetDiaperSelect(){
+        let wetIcon = document.getElementById('wet-diaper-icon')
+        if (this.iconSelected(wetIcon)){
+            this.iconReset(wetIcon)
+        } else {
+            wetIcon.style.background = "#ffff0091"
+        }
+        
+    }
+
+    iconSelected(icon){
+        return !icon.style.background == ""
+    }
+
+    iconReset(icon){
+        icon.style.background = ""
     }
 
   }
