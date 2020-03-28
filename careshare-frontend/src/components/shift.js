@@ -3,14 +3,14 @@ class Shift {
     constructor(caregiver, date) {
         this.caregiver = caregiver;
         this.date = date;
-        this.wetIcon = document.getElementById('wet-diaper-icon')
-        this.soiledIcon = document.getElementById('soiled-diaper-icon')
-        this.napIcon = document.getElementById('nap-icon')
-        this.bedtimeIcon = document.getElementById('bedtime-icon')
-        this.snackIcon = document.getElementById('snack-icon')
-        this.breakfastIcon = document.getElementById('breakfast-icon')
-        this.lunchIcon = document.getElementById('lunch-icon')
-        this.dinnerIcon = document.getElementById('dinner-icon')
+        //this.wetIcon = document.getElementById('wet-diaper-icon')
+        //this.soiledIcon = document.getElementById('soiled-diaper-icon')
+        //this.napIcon = document.getElementById('nap-icon')
+        //this.bedtimeIcon = document.getElementById('bedtime-icon')
+        //this.snackIcon = document.getElementById('snack-icon')
+        //this.breakfastIcon = document.getElementById('breakfast-icon')
+        //this.lunchIcon = document.getElementById('lunch-icon')
+        //this.dinnerIcon = document.getElementById('dinner-icon')
         this.toggleColorPairs = {
             "#ffff0091": 'wet-diaper-icon',
             "#711e1e66": 'soiled-diaper-icon',
@@ -53,78 +53,8 @@ class Shift {
         return !!option
     }
 
-    //bindEventListeners(){
-    //    this.wetIcon.addEventListener("click", function() {
-    //        this.iconColorToggle(this.wetIcon, "#ffff0091")
-    //    }.bind(this));
-    //    this.soiledIcon.addEventListener("click", function() {
-    //        this.iconColorToggle(this.soiledIcon, "#711e1e66")
-    //    }.bind(this));
-    //    this.snackIcon.addEventListener("click", function() {
-    //        this.iconColorToggle(this.snackIcon, "#00a6ffc8")
-    //    }.bind(this));
-    //    this.breakfastIcon.addEventListener("click", function() {
-    //        this.iconColorToggle(this.breakfastIcon, "#ff9900fa")
-    //    }.bind(this));
-    //    this.lunchIcon.addEventListener("click", function() {
-    //        this.iconColorToggle(this.lunchIcon, "#00ff91db")
-    //    }.bind(this));
-    //    this.dinnerIcon.addEventListener("click", function() {
-    //        this.iconColorToggle(this.dinnerIcon, "#6200ffb8")
-    //    }.bind(this));
-    //    this.napIcon.addEventListener("click", function() {
-    //        this.iconColorToggle(this.napIcon, "#f55cd1cf")
-    //    }.bind(this));
-    //    this.bedtimeIcon.addEventListener("click", function() {
-    //        this.iconColorToggle(this.bedtimeIcon, "#5c87f5cf")
-    //    }.bind(this));
-        //this.diaperDone.addEventListener("change", function(event) {
-        //    this.getAndLoadShift(event);
-        //}.bind(this));
-        //this.foodDone.addEventListener("change", function(event) {
-        //    this.getAndLoadShift(event);
-        //}.bind(this));
-        //this.sleepDone.addEventListener("change", function(event) {
-        //    this.getAndLoadShift(event);
-        //}.bind(this));
-        //this.noteDone.addEventListener("change", function(event) {
-        //    this.getAndLoadShift(event);
-        //}.bind(this));
-    //}
 
-
-    wetDiaperSelect(){
-        this.iconColorToggle(this.wetIcon, "#ffff0091")
-    }
     
-    soiledDiaperSelect(){
-        this.iconColorToggle(this.soiledIcon, "#711e1e66")
-    }
-    
-    napSelect(){
-        this.iconColorToggle(this.napIcon, "#f55cd1cf")
-    }
-    
-    bedtimeSelect(){
-        this.iconColorToggle(this.bedtimeIcon, "#5c87f5cf")
-    }
-    
-    snackSelect(){
-        this.iconColorToggle(this.snackIcon, "#00a6ffc8")
-    }
-    
-    breakfastSelect(){
-        this.iconColorToggle(this.breakfastIcon, "#ff9900fa")
-    }
-    
-    lunchSelect(){
-        this.iconColorToggle(this.lunchIcon, "#00ff91db")
-    }
-    
-    dinnerSelect(){
-        this.iconColorToggle(this.dinnerIcon, "#6200ffb8")
-    }
-
     iconSelected(icon){
         return !icon.style.background == ""
     }
@@ -141,7 +71,7 @@ class Shift {
         }
     }
 
-    refactoredIconColorToggleandBind(){
+    buildIconEvents(){
         for (const color in this.toggleColorPairs){ 
             let el = document.getElementById(`${this.toggleColorPairs[color]}`);
             el.addEventListener("click", function() {
@@ -149,6 +79,10 @@ class Shift {
             }.bind(this));
             
         }
+    }
+
+    foodToggles(){
+        
     }
 
 

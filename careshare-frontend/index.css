@@ -16,6 +16,49 @@ body {
   
 
 /* || Action Panel styles */
+/* HIDE RADIO */
+[type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* IMAGE STYLES */
+  .icons label img{
+    background-color: "";
+    height: 3rem;
+    width: auto;
+    padding: 3px;
+    margin: 5px;
+  }
+
+  .icons p{
+      font-size: small;
+      color: #656167;
+  }
+  
+  .icons [type=radio] + img {
+    cursor: pointer;
+  }
+
+  
+  
+  /* CHECKED STYLES */
+
+
+  label:focus-within {
+    background-color: tomato;
+    
+  }
+
+  label:focus-within p{
+    color: white;
+  }
+
+  label:focus-within img{
+    filter: invert(100%)
+  }
 
 
 #wet-diaper-icon img, #soiled-diaper-icon img {
