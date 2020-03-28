@@ -38,34 +38,42 @@ class Shift {
         this.wetDiaperButton.addEventListener("click", function() {
             this.newShiftToggles()
         }.bind(this));
-        this.soiledDiaperButton.addEventListener("click", function() {
-            this.newShiftToggles()
-        }.bind(this));
-        this.diaperCompleteButton.addEventListener("click", function() {
-            this.previousShiftToggles()
-        }.bind(this));
-        this.snackButton.addEventListener("click", function() {
-            this.goBackToggles();
-        }.bind(this));
-        this.breakfastButton.addEventListener("click", function() {
-            this.goBackToggles();
-        }.bind(this));
-        this.lunchButton.addEventListener("click", function() {
-            this.goBackToggles();
-        }.bind(this));
-        this.dinnerButton.addEventListener("click", function() {
-            this.goBackToggles();
-        }.bind(this));
-        this.addShiftForm.addEventListener('submit', function(e) {
-            event.preventDefault();
-            this.addShiftFormToggles()
-            //this.grabDate();
-            this.addNewShift(e);
-            this.addShiftForm.reset();
-        }.bind(this));
-        this.shiftsDropDown.addEventListener("change", function(event) {
-            this.getAndLoadShift(event);
-        }.bind(this));
+        //this.soiledDiaperButton.addEventListener("click", function() {
+        //    this.newShiftToggles()
+        //}.bind(this));
+        //this.diaperCompleteButton.addEventListener("click", function() {
+        //    this.previousShiftToggles()
+        //}.bind(this));
+        //this.snackButton.addEventListener("click", function() {
+        //    this.goBackToggles();
+        //}.bind(this));
+        //this.breakfastButton.addEventListener("click", function() {
+        //    this.goBackToggles();
+        //}.bind(this));
+        //this.lunchButton.addEventListener("click", function() {
+        //    this.goBackToggles();
+        //}.bind(this));
+        //this.dinnerButton.addEventListener("click", function() {
+        //    this.goBackToggles();
+        //}.bind(this));
+        //this.napButton.addEventListener("click", function() {
+        //    this.goBackToggles();
+        //}.bind(this));
+        //this.bedtimeButton.addEventListener("click", function() {
+        //    this.goBackToggles();
+        //}.bind(this));
+        //this.diaperDone.addEventListener("change", function(event) {
+        //    this.getAndLoadShift(event);
+        //}.bind(this));
+        //this.foodDone.addEventListener("change", function(event) {
+        //    this.getAndLoadShift(event);
+        //}.bind(this));
+        //this.sleepDone.addEventListener("change", function(event) {
+        //    this.getAndLoadShift(event);
+        //}.bind(this));
+        //this.noteDone.addEventListener("change", function(event) {
+        //    this.getAndLoadShift(event);
+        //}.bind(this));
     }
 
   }
