@@ -27,7 +27,7 @@
             </select>
         </div>
          <button class="hidden" id="go-back" type="button" name="button">Go Back</button>
-  <div id = "action-wrapper" class = "hidden">
+  <div id = "action-wrapper" class = "">
    <div id = "action-container">
         <div class="item">
             <div id="wet-diaper-icon">
@@ -43,10 +43,10 @@
             <p>Soiled</p>
             </button>
             </div>
+            <p class="action-label-text">changed at:</p>
+            <input id="diaper-time" type="time" name="diaper-time" value="">
             
-            <input id="diaper-time" type="time" name="diaper-time" value="09:30">
-            
-            <button id="diaper-done">Did That<br>DIAPER!</button>
+            <button class="submit" id="diaper-done">Done!</button>
         </div>
         <div class="item">
             <div id="snack-closhe">
@@ -77,8 +77,10 @@
                 <p>Dinner</p>
                 </button>
             </div>
-            <input id="food-time" type="time" name="food-time" value="12:30">
-            <button id="food-done">Did That<br>FOOD!</button>
+            <p class="action-label-text">meal time:</p>
+            <input id="food-time" type="time" name="food-time">
+            <input id="food-description" type="text" name="food-description" placeholder="enter a description...">
+            <button class = "submit" id="food-done">Done!</button>
         </div>
         <div class="item">
             <div id="nap-icon">
@@ -95,9 +97,11 @@
                 <p>Bedtime</p>
                 </button>
             </div>
-            <input id="sleep-time" type="time" name="sleep-time" value="12:45">
-            <input id="wake-time" type="time" name="wake-time" value="15:00">
-            <button id="food-done">Did That<br>SLEEP!</button>
+            <p class="action-label-text">start time:</p>
+            <input id="sleep-time" type="time" name="sleep-time" value="" >
+            <p class="action-label-text">end time:</p>
+            <input id="wake-time" type="time" name="wake-time">
+            <button class = "submit" id="food-done">Done!</button>
         </div>
         <div class = "item">
             <textarea rows="2" cols="50" name="note" form="shift-notes">Sample</textarea>
