@@ -30,53 +30,42 @@
   <div id = "action-wrapper" class = "">
    <div id = "action-container">
         <div class="item">
-
-            
-            <label class = "icons">
-                <input type="radio" name="food" value="snack">
+            <label id = "snack-icon" class = "icons">
+                <input type="radio" name="food" value="snack" id = "snack">
                 <img src="https://www.shareicon.net/data/512x512/2016/01/08/699882_food_512x512.png">
                 <p>Snack</p>
             </label>
-              
-            <label class = "icons">
-                <input type="radio" name="food" value="breakfast">
+            <label id = "breakfast-icon" class = "icons">
+                <input type="radio" name="food" value="breakfast" id = "breakfast">
                 <img src="https://www.shareicon.net/data/512x512/2016/01/08/699882_food_512x512.png">
                 <p>Breakfast</p>
             </label>
-
-            <label class = "icons">
-                <input type="radio" name="food" value="dinner">
+            <label id = "lunch-icon" class = "icons">
+                <input type="radio" name="food" value="dinner" id = "lunch">
                 <img src="https://www.shareicon.net/data/512x512/2016/01/08/699882_food_512x512.png">
                 <p>Lunch</p>
             </label>
-              
-            <label class = "icons">
-                <input type="radio" name="food" value="dinner">
+            <label id = "dinner-icon" class = "icons">
+                <input type="radio" name="food" value="dinner" id = "dinner">
                 <img src="https://www.shareicon.net/data/512x512/2016/01/08/699882_food_512x512.png">
                 <p>Dinner</p>
             </label>
-
-            
             <p class="action-label-text">meal time:</p>
             <input id="food-time" type="time" name="food-time">
             <input id="food-description" type="text" name="food-description" placeholder="enter a description...">
             <button class = "submit" id="food-done">Done!</button>
         </div>
         <div class="item">
-            <div class = "icons">
-                <button id="nap-icon"><img src = "https://i.ya-webdesign.com/images/zzz-transparent-tired-18.png"
-                    alt="nap-icon"
-                    />
+            <label id = "nap-icon" class = "icons">
+                <input type="radio" name="sleep" value="nap">
+                <img src = "https://i.ya-webdesign.com/images/zzz-transparent-tired-18.png">
                 <p>Nap</p>
-                </button>
-            </div>
-            <div class = "icons">
-                <button id="bedtime-icon"><img src = "https://i.ya-webdesign.com/images/zzz-transparent-tired-18.png"
-                    alt="bedtime-icon"
-                    />
+            </label>
+            <label id = "bedtime-icon" class = "icons">
+                <input type="radio" name="sleep" value="bedtime">
+                <img src = "https://i.ya-webdesign.com/images/zzz-transparent-tired-18.png">
                 <p>Bedtime</p>
-                </button>
-            </div>
+            </label>
             <p class="action-label-text">start time:</p>
             <input id="sleep-time" type="time" name="sleep-time" value="" >
             <p class="action-label-text">end time:</p>

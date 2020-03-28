@@ -22,43 +22,58 @@ body {
     opacity: 0;
     width: 0;
     height: 0;
-  }
+}
   
   /* IMAGE STYLES */
-  .icons label img{
-    background-color: "";
-    height: 3rem;
-    width: auto;
-    padding: 3px;
-    margin: 5px;
-  }
+.icons label img{
+  background-color: "";
+  height: 3rem;
+  width: auto;
+  padding: 3px;
+  margin: 5px;
+}
+.icons p{
+    font-size: small;
+    color: #656167;
+}
 
-  .icons p{
-      font-size: small;
-      color: #656167;
-  }
-  
-  .icons [type=radio] + img {
-    cursor: pointer;
-  }
-
-  
-  
-  /* CHECKED STYLES */
+.icons [type=radio] + img {
+  cursor: pointer;
+}
 
 
-  label:focus-within {
-    background-color: tomato;
-    
-  }
+/* CHECKED STYLES */
+label#snack-icon:focus-within {
+  background-color: #00a6ffc8;
+}
 
-  label:focus-within p{
-    color: white;
-  }
 
-  label:focus-within img{
-    filter: invert(100%)
-  }
+label#breakfast-icon:focus-within {
+    background-color: #ff9900fa;
+}
+
+label#lunch-icon:focus-within {
+    background-color: #00ff91db;
+}
+
+label#dinner-icon:focus-within {
+    background-color: #6200ffb8;
+}
+
+label#nap-icon:focus-within {
+    background-color: #f55cd1cf;
+}
+
+label#bedtime-icon:focus-within {
+    background-color: #5c87f5cf;
+}
+
+label:focus-within p{
+  color: #ffffff;
+}
+label:focus-within img{
+  filter: invert(100%)
+}
 
 
 #wet-diaper-icon img, #soiled-diaper-icon img {
