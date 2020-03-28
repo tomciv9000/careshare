@@ -3,6 +3,15 @@ class Shift {
     constructor(caregiver, date) {
         this.caregiver = caregiver;
         this.date = date;
+        this.wetIcon = document.getElementById('wet-diaper-icon')
+        this.soiledIcon = document.getElementById('soiled-diaper-icon')
+        this.napIcon = document.getElementById('nap-icon')
+        this.bedtimeIcon = document.getElementById('bedtime-icon')
+        this.snackIcon = document.getElementById('snack-icon')
+        this.breakfastIcon = document.getElementById('breakfast-icon')
+        this.lunchIcon = document.getElementById('lunch-icon')
+        this.dinnerIcon = document.getElementById('dinner-icon')
+    
     }
 
     createShiftTimeline(shift){
@@ -35,33 +44,30 @@ class Shift {
     }
 
     bindEventListeners(){
-        this.wetDiaperButton.addEventListener("click", function() {
-            this.wetDiaperSelect()
+        this.wetIcon.addEventListener("click", function() {
+            this.iconColorToggle(this.wetIcon, "#ffff0091")
         }.bind(this));
-        //this.soiledDiaperButton.addEventListener("click", function() {
-        //    this.newShiftToggles()
-        //}.bind(this));
-        //this.diaperCompleteButton.addEventListener("click", function() {
-        //    this.previousShiftToggles()
-        //}.bind(this));
-        //this.snackButton.addEventListener("click", function() {
-        //    this.goBackToggles();
-        //}.bind(this));
-        //this.breakfastButton.addEventListener("click", function() {
-        //    this.goBackToggles();
-        //}.bind(this));
-        //this.lunchButton.addEventListener("click", function() {
-        //    this.goBackToggles();
-        //}.bind(this));
-        //this.dinnerButton.addEventListener("click", function() {
-        //    this.goBackToggles();
-        //}.bind(this));
-        //this.napButton.addEventListener("click", function() {
-        //    this.goBackToggles();
-        //}.bind(this));
-        //this.bedtimeButton.addEventListener("click", function() {
-        //    this.goBackToggles();
-        //}.bind(this));
+        this.soiledIcon.addEventListener("click", function() {
+            this.iconColorToggle(this.soiledIcon, "#711e1e66")
+        }.bind(this));
+        this.snackIcon.addEventListener("click", function() {
+            this.iconColorToggle(this.snackIcon, "#00a6ffc8")
+        }.bind(this));
+        this.breakfastIcon.addEventListener("click", function() {
+            this.iconColorToggle(this.breakfastIcon, "#ff9900fa")
+        }.bind(this));
+        this.lunchIcon.addEventListener("click", function() {
+            this.iconColorToggle(this.lunchIcon, "#00ff91db")
+        }.bind(this));
+        this.dinnerIcon.addEventListener("click", function() {
+            this.iconColorToggle(this.dinnerIcon, "#6200ffb8")
+        }.bind(this));
+        this.napIcon.addEventListener("click", function() {
+            this.iconColorToggle(this.napIcon, "#f55cd1cf")
+        }.bind(this));
+        this.bedtimeIcon.addEventListener("click", function() {
+            this.iconColorToggle(this.bedtimeIcon, "#5c87f5cf")
+        }.bind(this));
         //this.diaperDone.addEventListener("change", function(event) {
         //    this.getAndLoadShift(event);
         //}.bind(this));
@@ -77,13 +83,35 @@ class Shift {
     }
 
     wetDiaperSelect(){
-        let wetIcon = document.getElementById('wet-diaper-icon')
-        if (this.iconSelected(wetIcon)){
-            this.iconReset(wetIcon)
-        } else {
-            wetIcon.style.background = "#ffff0091"
-        }
-        
+        this.iconColorToggle(this.wetIcon, "#ffff0091")
+    }
+    
+    soiledDiaperSelect(){
+        this.iconColorToggle(this.soiledIcon, "#711e1e66")
+    }
+    
+    napSelect(){
+        this.iconColorToggle(this.napIcon, "#f55cd1cf")
+    }
+    
+    bedtimeSelect(){
+        this.iconColorToggle(this.bedtimeIcon, "#5c87f5cf")
+    }
+    
+    snackSelect(){
+        this.iconColorToggle(this.snackIcon, "#00a6ffc8")
+    }
+    
+    breakfastSelect(){
+        this.iconColorToggle(this.breakfastIcon, "#ff9900fa")
+    }
+    
+    lunchSelect(){
+        this.iconColorToggle(this.lunchIcon, "#00ff91db")
+    }
+    
+    dinnerSelect(){
+        this.iconColorToggle(this.dinnerIcon, "#6200ffb8")
     }
 
     iconSelected(icon){
@@ -92,6 +120,14 @@ class Shift {
 
     iconReset(icon){
         icon.style.background = ""
+    }
+
+    iconColorToggle(icon, color){
+        if (this.iconSelected(icon)){
+            this.iconReset(icon)
+        } else {
+            icon.style.background = color
+        }
     }
 
   }

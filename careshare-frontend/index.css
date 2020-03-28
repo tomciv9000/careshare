@@ -24,15 +24,16 @@ body {
     padding: 3px;
 }
 
-#wet-diaper-icon {
-    background-color: white;
-    
+.icons img{
+    background-color: "";
     margin: 5px;
+    height: 3rem;
+    width: auto;
+    padding: 3px;
 }
 
-#soiled-diaper-icon button {
-    background-color: rgba(113, 30, 30, 0.399);
-    margin: 5px;
+.icons button{
+    background-color: "";
 }
 
 input {
@@ -46,53 +47,6 @@ input {
     margin: 5px 1px;
 }
 
-#snack-closhe img, #breakfast-closhe img, #lunch-closhe img, #dinner-closhe img {
-    height: 3rem;
-    width: auto;
-    padding: 3px;
-}
-
-#snack-closhe button {
-    background-color: rgba(0, 166, 255, 0.783);
-    
-    margin: 5px;
-}
-
-#breakfast-closhe button {
-    background-color: rgba(255, 153, 0, 0.982);
-    
-    margin: 5px;
-}
-
-#lunch-closhe button {
-    background-color: rgba(0, 255, 145, 0.858);
-    
-    margin: 5px;
-}
-
-#dinner-closhe button {
-    background-color: rgba(98, 0, 255, 0.721);
-    
-    margin: 5px;
-}
-
-#nap-icon img, #bedtime-icon img {
-    height: 3rem;
-    width: auto;
-    padding: 3px;
-}
-
-#nap-icon button {
-    background-color: rgba(245, 92, 209, 0.81);
-    
-    margin: 5px;
-}
-
-#bedtime-icon button {
-    background-color: rgba(92, 135, 245, 0.81);
-    
-    margin: 5px;
-}
 
 
 #action-container {
