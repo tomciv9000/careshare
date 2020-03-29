@@ -137,7 +137,7 @@ class Shift {
             do {
                 if (targetElement == flyoutElement) {
                     // This is a click inside. Do nothing, just return.
-                    console.log('you clicked inside')
+                    
                     return
                 }
                 // Go up the DOM
