@@ -1,8 +1,9 @@
 class Shift {
     
-    constructor(caregiver, date) {
+    constructor(caregiver, date, id) {
         this.caregiver = caregiver;
         this.date = date;
+        this.id = id
         //this.wetIcon = document.getElementById('wet-diaper-icon')
         //this.soiledIcon = document.getElementById('soiled-diaper-icon')
         //this.napIcon = document.getElementById('nap-icon')
@@ -63,8 +64,8 @@ class Shift {
 
     colorizeIcon(icon, color){
         icon.style.background = color
-        icon.lastElementChild.style.color = "#ffffff"
-        icon.children[1].style.filter="invert(100%)"
+        icon.children[1].style.color = "#ffffff"
+        icon.children[0].style.filter="invert(100%)"
     }
 
     iconToggle(icon, color){
@@ -77,7 +78,7 @@ class Shift {
 
     buildDiaperIconEvents(){
         const diaperToggleColorPairs = {
-            "#ffff0091": 'wet-diaper-icon',
+            "#a09e3a": 'wet-diaper-icon',
             "#711e1e66": 'soiled-diaper-icon'
         }
         this.attachEventListeners(diaperToggleColorPairs, this.diaperIconArray)
@@ -96,7 +97,7 @@ class Shift {
         const toggleFoodPairs = {
             "#00a6ffc8": 'snack-icon',
             "#ff9900fa": 'breakfast-icon',
-            "#00ff91db": 'lunch-icon',
+            "#209e67bd": 'lunch-icon',
             "#6200ffb8": 'dinner-icon'
         }
         this.attachEventListeners(toggleFoodPairs, this.foodIconArray)
@@ -109,11 +110,8 @@ class Shift {
             el.addEventListener("click", function() {
                 if (iconSet != this.diaperIconArray){
                     this.resetIcons(iconSet)
-                    this.iconToggle(el, `${color}`)
-                } else {
-                    this.iconToggle(el, `${color}`)
-                }
-                
+                } 
+                this.iconToggle(el, `${color}`)
             }.bind(this));
         }
     }
@@ -125,8 +123,8 @@ class Shift {
             const element = toBeToggled[index];
             if (this.iconSelected(element)){
                 element.style.background = ""
-                element.lastElementChild.style.color = "#656167"
-                element.children[1].style.filter=""
+                element.children[1].style.color = "#656167"
+                element.children[0].style.filter=""
             }
         }
     }
@@ -152,6 +150,51 @@ class Shift {
             this.resetIcons(iconArray)
         });
     }
+
+    bindActionSubmits(){
+        const submitDiaper = document.getElementById('diaper-done')
+        const submitSleep = document.getElementById('sleep-done')
+        const submitFood = document.getElementById('food-done')
+
+        submitDiaper.addEventListener("click", function() {
+            createDiaperEvent()
+        }.bind(this));
+
+        submitSleep.addEventListener("click", function() {
+            createSleepEvent()
+        }.bind(this));
+
+        submitFood.addEventListener("click", function() {
+            createFoodEvent()
+        }.bind(this));
+    }
+
+    createDiaperEvent(){
+        
+    }
+
+
+    addNewShift(event){
+        let shiftInput = {
+            caregiver: event.target.caregiver.value,
+            date: this.today.toISOString().split('T')[0]
+          }
+        const shift = new Shift(shiftInput.caregiver, shiftInput.date)
+        const configurationObject = {
+            method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+              },
+              body: JSON.stringify(shiftInput)
+        };
+        this.adapter.postShiftToApi(configurationObject).then(function(json) {
+            shift.createShiftTimeline(json.data.attributes);
+            this.refreshDropDown()
+            this.addShiftEventListeners(json.data.attributes.id)
+        }.bind(this)) 
+    }
+
 
 
 }

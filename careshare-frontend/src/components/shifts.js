@@ -122,7 +122,7 @@ class Shifts {
             caregiver: event.target.caregiver.value,
             date: this.today.toISOString().split('T')[0]
           }
-        const shift = new Shift(shiftInput.caregiver, shiftInput.date)
+        //const shift = new Shift(shiftInput.caregiver, shiftInput.date)
         const configurationObject = {
             method: 'POST',
               headers: {
@@ -132,6 +132,9 @@ class Shifts {
               body: JSON.stringify(shiftInput)
         };
         this.adapter.postShiftToApi(configurationObject).then(function(json) {
+            let shift = new Shift(shiftInput.caregiver, shiftInput.date, json.data.attributes.id)
+            //logging to see what ID is passed
+            console.log(shift)
             shift.createShiftTimeline(json.data.attributes);
             this.refreshDropDown()
             this.addShiftEventListeners(json.data.attributes.id)

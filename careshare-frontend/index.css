@@ -66,7 +66,7 @@ input {
 }
 /* || Flex container styles */
 .item {
-    background: white;
+    background: #ffffff;
     
     margin-bottom: 2%; /* (100-32*3)/2 */
     border-style: solid;
