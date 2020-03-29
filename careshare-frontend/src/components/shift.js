@@ -3,31 +3,29 @@ class Shift {
     constructor(caregiver, date) {
         this.caregiver = caregiver;
         this.date = date;
-        this.wetIcon = document.getElementById('wet-diaper-icon')
-        this.soiledIcon = document.getElementById('soiled-diaper-icon')
-        this.napIcon = document.getElementById('nap-icon')
-        this.bedtimeIcon = document.getElementById('bedtime-icon')
-        this.snackIcon = document.getElementById('snack-icon')
-        this.breakfastIcon = document.getElementById('breakfast-icon')
-        this.lunchIcon = document.getElementById('lunch-icon')
-        this.dinnerIcon = document.getElementById('dinner-icon')
-        this.toggleSleepPairs = {
-            "#f55cd1cf": 'nap-icon',
-            "#5c87f5cf": 'bedtime-icon'
-        }
-        this.toggleFoodPairs = {
-            "#00a6ffc8": 'snack-icon',
-            "#ff9900fa": 'breakfast-icon',
-            "#00ff91db": 'lunch-icon',
-            "#6200ffb8": 'dinner-icon'
-        }
-        this.diaperToggleColorPairs = {
-            "#ffff0091": 'wet-diaper-icon',
-            "#711e1e66": 'soiled-diaper-icon'
-        }
+        //this.wetIcon = document.getElementById('wet-diaper-icon')
+        //this.soiledIcon = document.getElementById('soiled-diaper-icon')
+        //this.napIcon = document.getElementById('nap-icon')
+        //this.bedtimeIcon = document.getElementById('bedtime-icon')
+        //this.snackIcon = document.getElementById('snack-icon')
+        //this.breakfastIcon = document.getElementById('breakfast-icon')
+        //this.lunchIcon = document.getElementById('lunch-icon')
+        //this.dinnerIcon = document.getElementById('dinner-icon')
+        
+        this.foodPanel = document.getElementById('food-panel')
+        this.sleepPanel = document.getElementById('sleep-panel')
+        this.diaperPanel = document.getElementById('diaper-panel')
+
+        this.foodIconArray = [...document.getElementsByClassName('food-radio-icons')]
+        this.sleepIconArray = [...document.getElementsByClassName('sleep-radio-icons')]
+        this.diaperIconArray = [...document.getElementsByClassName('food-radio-icons')]
+        
         this.buildDiaperIconEvents()
         this.buildFoodIconEvents()
         this.buildSleepIconEvents()
+
+        this.clickingOutsideClears(this.foodPanel, this.foodIconArray)
+        this.clickingOutsideClears(this.sleepPanel, this.sleepIconArray)
     }
 
 
@@ -61,60 +59,61 @@ class Shift {
         return !icon.style.background == ""
     }
 
-    iconColorToggle(icon, color){
+    colorizeIcon(icon, color){
         icon.style.background = color
         icon.lastElementChild.style.color = "#ffffff"
         icon.children[1].style.filter="invert(100%)"
     }
 
-    iconMultiSelect(icon, color){
+    iconToggle(icon, color){
         if (this.iconSelected(icon)) {
             this.resetIcons(icon)
         } else {
-            this.iconColorToggle(icon, color)
+            this.colorizeIcon(icon, color)
         }
     }
 
     buildDiaperIconEvents(){
-        for (let color in this.diaperToggleColorPairs){ 
-            let el = document.getElementById(`${this.diaperToggleColorPairs[color]}`);
-            el.addEventListener("click", function() {
-                this.iconMultiSelect(el, `${color}`)
-            }.bind(this));
+        let diaperToggleColorPairs = {
+            "#ffff0091": 'wet-diaper-icon',
+            "#711e1e66": 'soiled-diaper-icon'
         }
+        this.attachEventListeners(diaperToggleColorPairs)
     }
 
     buildSleepIconEvents(){
-        const sleepIcons = [...document.getElementsByClassName('sleep-radio-icons')]
-        for (let color in this.toggleSleepPairs){ 
-            let el = document.getElementById(`${this.toggleSleepPairs[color]}`);
-            el.addEventListener("click", function() {
-                this.resetIcons(sleepIcons)
-                this.iconMultiSelect(el, `${color}`)
-            }.bind(this));
+        const toggleSleepPairs = {
+            "#f55cd1cf": 'nap-icon',
+            "#5c87f5cf": 'bedtime-icon'
         }
+        this.attachEventListeners(toggleSleepPairs, this.sleepIconArray, this.sleepPanel)
     }
 
 
     buildFoodIconEvents(){
-        const foodIcons = [...document.getElementsByClassName('food-radio-icons')]
-        for (let color in this.toggleFoodPairs){ 
-            let el = document.getElementById(`${this.toggleFoodPairs[color]}`);
+        const toggleFoodPairs = {
+            "#00a6ffc8": 'snack-icon',
+            "#ff9900fa": 'breakfast-icon',
+            "#00ff91db": 'lunch-icon',
+            "#6200ffb8": 'dinner-icon'
+        }
+        this.attachEventListeners(toggleFoodPairs, this.foodIconArray, this.foodPanel)
+        //this.clickingOutsideClears(this.foodPanel, this.foodIconArray)
+    }
+
+
+    attachEventListeners(toggleValues, iconSet = "", container){
+        for (let color in toggleValues){ 
+            let el = document.getElementById(`${toggleValues[color]}`);
             el.addEventListener("click", function() {
-                this.resetIcons(foodIcons)
-                this.iconMultiSelect(el, `${color}`)
+                if (!iconSet == ""){
+                    this.resetIcons(iconSet)
+                }
+                this.iconToggle(el, `${color}`)
             }.bind(this));
         }
-        //const sleepIcons = [...document.getElementsByClassName('sleep-radio-icons')]
-        //for (let color in this.toggleColorPairs){ 
-        //    let sleepEl = document.getElementById(`${this.toggleColorPairs[color]}`);
-        //    sleepEl.addEventListener("click", function() {
-        //        this.resetIcons(sleepIcons)
-        //        this.iconMultiSelect(sleepEl, `${color}`)
-        //    }.bind(this));
-        //}
-        
     }
+
 
     resetIcons(icons) {
         let toBeToggled = [].concat(icons || [])
@@ -128,9 +127,11 @@ class Shift {
         }
     }
 
-    clickingOutsideClears(){
+
+    //refactor this into a method than can be executed for multiple panels
+    clickingOutsideClears(container, iconArray){
         document.addEventListener("click", (evt) => {
-            const flyoutElement = document.getElementById("farts");
+            const flyoutElement = container;
             let targetElement = evt.target; // clicked element
         
             do {
@@ -144,8 +145,8 @@ class Shift {
             } while (targetElement);
         
             // This is a click outside.
-            let fartTest = [...document.getElementsByClassName('food-radio-icons')];
-            this.resetIcons(fartTest)
+            let fartTest = iconArray
+            shift.resetIcons(fartTest)
         });
     }
 
