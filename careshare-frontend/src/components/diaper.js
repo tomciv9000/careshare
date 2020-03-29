@@ -5,28 +5,25 @@ class Diaper {
         this.soiled = soiled;
         this.time = time;
         this.shift_id = shift_id;
+        this.counter = document.getElementById('diaper-count')
+        this.details = document.getElementById('diaper-details')
+        id="diaper-details">Wet: 0 Soiled:0
     }
 
     addToShiftTimeline(shift){
-        let timelineDiv = document.querySelector('#timeline');
+        //let timelineDiv = document.querySelector('#timeline');
         let closeBtn = document.createElement('button');
-        closeBtn.setAttribute('id', 'closeButton')
-        let deleteBtn = document.createElement('button');
-        deleteBtn.setAttribute('id', 'deleteButton')
-        shiftHeader.innerHTML = `Caregiver: ${shift.caregiver}` + "<br />" + `Date: ${DateDisplay.formatDate(shift.date)}`
-        //subHeader.innerText = `Caregiver: ${shift.caregiver}`
-        timelineDiv.append(shiftHeader);
-        //timelineDiv.append(subHeader);
-        if (this.shiftFound(shift.id)) {
-            closeBtn.innerText = 'Review Complete'
-            deleteBtn.innerText = 'Delete Shift'
-        } else {
-            closeBtn.innerText = 'Shift Complete'
-            deleteBtn.innerText = 'Cancel Shift'
-        }
+        
         timelineDiv.append(closeBtn)
         timelineDiv.append(deleteBtn)
     }
     
+    increaseDiaperCount(){
+        this.counter.innerHTML = parseInt(this.counter.innerHTML) + 1
+    }
+
+    decreaseDiaperCount(){
+        this.counter.innerHTML = parseInt(this.counter.innerHTML) - 1
+    }
 
   }
