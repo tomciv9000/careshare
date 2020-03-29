@@ -56,7 +56,7 @@ input {
 
 #action-container {
     padding-top: 15px;
-    background: rgb(193, 114, 250);
+    background: #c172fa;
     display: flex; 
     justify-content: space-around;
     align-items: center;
@@ -78,6 +78,10 @@ input {
   
 .item p{
     text-align: center;
+}
+
+label {
+  border: thin solid white;
 }
 
 .action-label-text{

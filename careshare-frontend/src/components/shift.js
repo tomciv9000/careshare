@@ -18,6 +18,7 @@ class Shift {
         this.buildFoodIconEvents()
         this.buildSleepIconEvents()
         this.buildDiaperIconEvents()
+        this.bindActionSubmits()
 
         this.clickingOutsideClears(this.foodPanel, this.foodIconArray)
         this.clickingOutsideClears(this.sleepPanel, this.sleepIconArray)
@@ -106,6 +107,12 @@ class Shift {
                 } 
                 this.iconToggle(el, `${color}`)
             }.bind(this));
+            el.addEventListener("mouseover", function(){
+                el.style.border = "thin solid #1cb523"
+            }.bind(this));
+            el.addEventListener("mouseout", function(){
+                el.style.border = ""
+            }.bind(this));
         }
     }
 
@@ -150,16 +157,17 @@ class Shift {
         const submitFood = document.getElementById('food-done')
 
         submitDiaper.addEventListener("click", function() {
-            createDiaperEvent()
+            this.createDiaperEvent()
+            this.resetIcons(this.diaperIconArray)
         }.bind(this));
 
-        submitSleep.addEventListener("click", function() {
-            createSleepEvent()
-        }.bind(this));
-
-        submitFood.addEventListener("click", function() {
-            createFoodEvent()
-        }.bind(this));
+        //submitSleep.addEventListener("click", function() {
+        //    createSleepEvent()
+        //}.bind(this));
+//
+        //submitFood.addEventListener("click", function() {
+        //    createFoodEvent()
+        //}.bind(this));
     }
 
     createDiaperEvent(){
@@ -184,6 +192,7 @@ class Shift {
         const diaper = new Diaper(diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id)
         this.diaperAdapter.postDiaperToApi(configurationObject).then(function(json) {
             console.log(json)
+            console.log(diaper)
             //diaper.updateTimeline(json.data.attributes);
             //this.refreshDropDown()
             //this.addShiftEventListeners(json.data.attributes.id)
