@@ -20,9 +20,10 @@ class Shift {
         this.sleepIconArray = [...document.getElementsByClassName('sleep-radio-icons')]
         this.diaperIconArray = [...document.getElementsByClassName('diaper-checkbox-icons')]
         
-        this.buildDiaperIconEvents()
+        
         this.buildFoodIconEvents()
         this.buildSleepIconEvents()
+        this.buildDiaperIconEvents()
 
         this.clickingOutsideClears(this.foodPanel, this.foodIconArray)
         this.clickingOutsideClears(this.sleepPanel, this.sleepIconArray)
@@ -106,10 +107,13 @@ class Shift {
         for (let color in toggleValues){ 
             let el = document.getElementById(`${toggleValues[color]}`);
             el.addEventListener("click", function() {
-                if (!iconSet == ""){
+                if (iconSet != this.diaperIconArray){
                     this.resetIcons(iconSet)
+                    this.iconToggle(el, `${color}`)
+                } else {
+                    this.iconToggle(el, `${color}`)
                 }
-                this.iconToggle(el, `${color}`)
+                
             }.bind(this));
         }
     }
