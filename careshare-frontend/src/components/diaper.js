@@ -1,8 +1,10 @@
 class Diaper {
     
     constructor(wet, soiled, time, shift_id) {
-        this.caregiver = caregiver;
-        this.date = date;
+        this.wet = wet;
+        this.soiled = soiled;
+        this.time = time;
+        this.shift_id = shift_id;
     }
 
     createShiftTimeline(shift){

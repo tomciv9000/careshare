@@ -4,14 +4,7 @@ class Shift {
         this.caregiver = caregiver;
         this.date = date;
         this.id = id
-        //this.wetIcon = document.getElementById('wet-diaper-icon')
-        //this.soiledIcon = document.getElementById('soiled-diaper-icon')
-        //this.napIcon = document.getElementById('nap-icon')
-        //this.bedtimeIcon = document.getElementById('bedtime-icon')
-        //this.snackIcon = document.getElementById('snack-icon')
-        //this.breakfastIcon = document.getElementById('breakfast-icon')
-        //this.lunchIcon = document.getElementById('lunch-icon')
-        //this.dinnerIcon = document.getElementById('dinner-icon')
+        this.diaperAdapter = new DiapersAdapter
         
         this.foodPanel = document.getElementById('food-panel')
         this.sleepPanel = document.getElementById('sleep-panel')
@@ -170,29 +163,33 @@ class Shift {
     }
 
     createDiaperEvent(){
+        const wetDiaperIcon = this.diaperIconArray[0]
+        const soiledDiaperIcon = this.diaperIconArray[1]
         
-    }
+        let diaperInput = {
+            wet: this.iconSelected(wetDiaperIcon),
+            soiled: this.iconSelected(soiledDiaperIcon),
+            time: document.getElementById('diaper-time').value,
+            shift_id: this.id
+        }
 
-
-    addNewShift(event){
-        let shiftInput = {
-            caregiver: event.target.caregiver.value,
-            date: this.today.toISOString().split('T')[0]
-          }
-        const shift = new Shift(shiftInput.caregiver, shiftInput.date)
         const configurationObject = {
             method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json'
               },
-              body: JSON.stringify(shiftInput)
+              body: JSON.stringify(diaperInput)
         };
-        this.adapter.postShiftToApi(configurationObject).then(function(json) {
-            shift.createShiftTimeline(json.data.attributes);
-            this.refreshDropDown()
-            this.addShiftEventListeners(json.data.attributes.id)
-        }.bind(this)) 
+        const diaper = new Diaper(diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id)
+        this.diaperAdapter.postDiaperToApi(configurationObject).then(function(json) {
+            console.log(json)
+            //diaper.updateTimeline(json.data.attributes);
+            //this.refreshDropDown()
+            //this.addShiftEventListeners(json.data.attributes.id)
+        }.bind(this))
+
+
     }
 
 
