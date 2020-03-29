@@ -102,7 +102,8 @@ class Shifts {
           let option = document.createElement("option")
           option.value = shift.attributes.id
           option.innerHTML = `${shift.attributes.caregiver} - ${DateDisplay.formatDate(shift.attributes.date)}` 
-          this.shiftsDropDown.appendChild(option)
+          //this.shiftsDropDown.appendChild(option)
+          this.shiftsDropDown.append(option)
         }
     }
 

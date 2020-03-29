@@ -6,24 +6,61 @@ class Diaper {
         this.time = time;
         this.shift_id = shift_id;
         this.counter = document.getElementById('diaper-count')
-        this.details = document.getElementById('diaper-details')
-        id="diaper-details">Wet: 0 Soiled:0
+        this.wetCount = document.getElementById('wet-count')
+        this.soiledCount = document.getElementById('soiled-count')
+        this.increaseDiaperCount()
+        this.addToShiftTimeline()
     }
 
-    addToShiftTimeline(shift){
-        //let timelineDiv = document.querySelector('#timeline');
-        let closeBtn = document.createElement('button');
-        
-        timelineDiv.append(closeBtn)
-        timelineDiv.append(deleteBtn)
+    addToShiftTimeline(){
+        const timeLineReport = document.getElementById('timeline-report')
+        let li = document.createElement('li')
+        let time = DateDisplay.convertTime(this.time)
+        li.innerHTML = `${time} - ${this.diaperStatusDisplay()} <button>x</button>`
+        timeLineReport.append(li)
+    }
+
+    diaperStatusDisplay(){
+        if (this.wet && this.soiled){
+            return "Changed a wet + soiled diaper"
+        }else 
+        if (this.wet){
+            return "Changed a wet diaper"
+        }else
+        if (this.soiled){
+            return "Changed a soiled diaper"
+        }
     }
     
     increaseDiaperCount(){
-        this.counter.innerHTML = parseInt(this.counter.innerHTML) + 1
+        this.increaseCounter(this.counter)
+        if (this.wet) {
+            this.increaseCounter(this.wetCount)
+        }
+        if (this.soiled){
+            this.increaseCounter(this.soiledCount)
+        }
+    }
+
+    increaseCounter(counters){
+        let toBeIncreased = [].concat(counters || [])
+        for (let index = 0; index < toBeIncreased.length; index++) {
+            const element = toBeIncreased[index];
+            element.innerHTML = parseInt(element.innerHTML) + 1
+        }
+    }
+
+    decreaseCounter(counters){
+        let toBeDecreased = [].concat(counters || [])
+        for (let index = 0; index < toBeDecreased.length; index++) {
+            const element = toBeDecreased[index];
+            element.innerHTML = parseInt(element.innerHTML) - 1
+        }
     }
 
     decreaseDiaperCount(){
         this.counter.innerHTML = parseInt(this.counter.innerHTML) - 1
     }
 
-  }
+
+}
