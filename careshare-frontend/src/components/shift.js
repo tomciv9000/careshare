@@ -102,7 +102,7 @@ class Shift {
     }
 
 
-    attachEventListeners(toggleValues, iconSet = "", container){
+    attachEventListeners(toggleValues, iconSet = ""){
         for (let color in toggleValues){ 
             let el = document.getElementById(`${toggleValues[color]}`);
             el.addEventListener("click", function() {
@@ -128,7 +128,7 @@ class Shift {
     }
 
 
-    //refactor this into a method than can be executed for multiple panels
+
     clickingOutsideClears(container, iconArray){
         document.addEventListener("click", (evt) => {
             const flyoutElement = container;
@@ -145,8 +145,8 @@ class Shift {
             } while (targetElement);
         
             // This is a click outside.
-            let fartTest = iconArray
-            shift.resetIcons(fartTest)
+            //let fartTest = iconArray
+            shift.resetIcons(iconArray)
         });
     }
 
