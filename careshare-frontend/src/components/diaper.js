@@ -1,6 +1,7 @@
 class Diaper {
     
-    constructor(wet, soiled, time, shift_id) {
+    constructor(id, wet, soiled, time, shift_id) {
+        this.id = id
         this.wet = wet;
         this.soiled = soiled;
         this.time = time;
@@ -15,6 +16,7 @@ class Diaper {
     addToShiftTimeline(){
         const timeLineReport = document.getElementById('timeline-report')
         let li = document.createElement('li')
+        li.setAttribute('id', `${this.id}`);
         let deleteButton = document.createElement('button')
         deleteButton.innerHTML = "delete"
         let time = DateDisplay.convertTime(this.time)

@@ -190,8 +190,9 @@ class Shift {
               },
               body: JSON.stringify(diaperInput)
         };
-        const diaper = new Diaper(diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id)
+        //const diaper = new Diaper(diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id)
         this.diaperAdapter.postDiaperToApi(configurationObject).then(function(json) {
+            const diaper = new Diaper(json.data.id, diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id)
             console.log(json)
             console.log(diaper)
             //diaper.updateTimeline(json.data.attributes);
