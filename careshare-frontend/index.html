@@ -73,19 +73,16 @@
             <button class = "submit" id="food-done">Done!</button>
         </div>
         <div class="item" id = "diaper-panel">
-            <div class = "icons">
-            <button id="wet-diaper-icon"><img src = "https://www.svgrepo.com/show/115810/diaper.svg"
-                alt="wet-diaper-icon"
-                />
-            <p>Wet</p>
-            </button>
-            </div>
-            <div class = "icons">
-            <button id="soiled-diaper-icon"><img src = "https://www.svgrepo.com/show/115810/diaper.svg"
-            alt="soiled-diaper-icon"/>
-            <p>Soiled</p>
-            </button>
-            </div>
+            <label id = "wet-diaper-icon" class = "diaper-checkbox-icons">
+              <input type="checkbox" name="diaper" value="wet">
+              <img src = "https://www.svgrepo.com/show/115810/diaper.svg">
+              <p>Wet</p>
+            </label>
+            <label id = "soiled-diaper-icon" class = "diaper-checkbox-icons">
+              <input type="checkbox" name="diaper" value="soiled">
+              <img src = "https://www.svgrepo.com/show/115810/diaper.svg">
+              <p>Soiled</p>
+            </label>
             <p class="action-label-text">changed at:</p>
             <input id="diaper-time" type="time" name="diaper-time" value="">
             

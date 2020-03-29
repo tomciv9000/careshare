@@ -18,7 +18,7 @@ class Shift {
 
         this.foodIconArray = [...document.getElementsByClassName('food-radio-icons')]
         this.sleepIconArray = [...document.getElementsByClassName('sleep-radio-icons')]
-        this.diaperIconArray = [...document.getElementsByClassName('food-radio-icons')]
+        this.diaperIconArray = [...document.getElementsByClassName('diaper-checkbox-icons')]
         
         this.buildDiaperIconEvents()
         this.buildFoodIconEvents()
@@ -26,6 +26,7 @@ class Shift {
 
         this.clickingOutsideClears(this.foodPanel, this.foodIconArray)
         this.clickingOutsideClears(this.sleepPanel, this.sleepIconArray)
+        this.clickingOutsideClears(this.diaperPanel, this.diaperIconArray)
     }
 
 
@@ -74,11 +75,11 @@ class Shift {
     }
 
     buildDiaperIconEvents(){
-        let diaperToggleColorPairs = {
+        const diaperToggleColorPairs = {
             "#ffff0091": 'wet-diaper-icon',
             "#711e1e66": 'soiled-diaper-icon'
         }
-        this.attachEventListeners(diaperToggleColorPairs)
+        this.attachEventListeners(diaperToggleColorPairs, this.diaperIconArray)
     }
 
     buildSleepIconEvents(){
@@ -86,7 +87,7 @@ class Shift {
             "#f55cd1cf": 'nap-icon',
             "#5c87f5cf": 'bedtime-icon'
         }
-        this.attachEventListeners(toggleSleepPairs, this.sleepIconArray, this.sleepPanel)
+        this.attachEventListeners(toggleSleepPairs, this.sleepIconArray)
     }
 
 
@@ -97,12 +98,11 @@ class Shift {
             "#00ff91db": 'lunch-icon',
             "#6200ffb8": 'dinner-icon'
         }
-        this.attachEventListeners(toggleFoodPairs, this.foodIconArray, this.foodPanel)
-        //this.clickingOutsideClears(this.foodPanel, this.foodIconArray)
+        this.attachEventListeners(toggleFoodPairs, this.foodIconArray)
     }
 
 
-    attachEventListeners(toggleValues, iconSet = ""){
+    attachEventListeners(toggleValues, iconSet){
         for (let color in toggleValues){ 
             let el = document.getElementById(`${toggleValues[color]}`);
             el.addEventListener("click", function() {
@@ -145,8 +145,7 @@ class Shift {
             } while (targetElement);
         
             // This is a click outside.
-            //let fartTest = iconArray
-            shift.resetIcons(iconArray)
+            this.resetIcons(iconArray)
         });
     }
 
