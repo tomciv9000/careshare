@@ -7,9 +7,7 @@ class Diaper {
         this.shift_id = shift_id;
     }
 
-    createShiftTimeline(shift){
-        let shiftHeader = document.createElement('h4');
-        //let subHeader = document.createElement('h5')
+    addToShiftTimeline(shift){
         let timelineDiv = document.querySelector('#timeline');
         let closeBtn = document.createElement('button');
         closeBtn.setAttribute('id', 'closeButton')

@@ -159,6 +159,7 @@ class Shift {
         submitDiaper.addEventListener("click", function() {
             this.createDiaperEvent()
             this.resetIcons(this.diaperIconArray)
+            document.getElementById('diaper-time').value = ""
         }.bind(this));
 
         //submitSleep.addEventListener("click", function() {
