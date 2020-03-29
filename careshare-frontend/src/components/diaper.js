@@ -15,20 +15,27 @@ class Diaper {
     addToShiftTimeline(){
         const timeLineReport = document.getElementById('timeline-report')
         let li = document.createElement('li')
+        let deleteButton = document.createElement('button')
+        deleteButton.innerHTML = "delete"
         let time = DateDisplay.convertTime(this.time)
-        li.innerHTML = `${time} - ${this.diaperStatusDisplay()} <button>x</button>`
+        li.innerHTML = `${time} - ${this.diaperStatusDisplay()}`
         timeLineReport.append(li)
+        li.append(deleteButton)
+        deleteButton.addEventListener("click", (evt) => {
+            let target = evt.target
+            target.parentElement.remove()
+        })
     }
 
     diaperStatusDisplay(){
         if (this.wet && this.soiled){
-            return "Changed a wet + soiled diaper"
+            return "Changed a wet + soiled diaper   "
         }else 
         if (this.wet){
-            return "Changed a wet diaper"
+            return "Changed a wet diaper   "
         }else
         if (this.soiled){
-            return "Changed a soiled diaper"
+            return "Changed a soiled diaper   "
         }
     }
     
