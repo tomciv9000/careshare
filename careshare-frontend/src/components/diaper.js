@@ -1,6 +1,8 @@
 class Diaper {
     
     constructor(id, wet, soiled, time, shift_id) {
+        
+        //do i need ID - am I passing this value into anything or can I just use this instance
         this.id = id
         this.wet = wet;
         this.soiled = soiled;
@@ -26,6 +28,7 @@ class Diaper {
         deleteButton.addEventListener("click", (evt) => {
             let target = evt.target
             target.parentElement.remove()
+            this.deleteDiaper()
         })
     }
 
@@ -68,8 +71,26 @@ class Diaper {
     }
 
     decreaseDiaperCount(){
-        this.counter.innerHTML = parseInt(this.counter.innerHTML) - 1
+        this.decreaseCounter(this.counter)
+        if (this.wet) {
+            this.decreaseCounter(this.wetCount)
+        }
+        if (this.soiled){
+            this.decreaseCounter(this.soiledCount)
+        }
     }
+
+    
+    
+    deleteDiaper() {
+        //this.exitShiftToggles() 
+        const configurationObject = {
+            method: 'DELETE',
+        };
+        this.adapter.deleteDiaperFromApi(configurationObject, this.id).then(() => this.decreaseDiaperCount())
+    }
+
+
 
 
 }
