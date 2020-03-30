@@ -164,7 +164,7 @@ class Shift {
         }.bind(this));
 
         submitSleep.addEventListener("click", function() {
-            createSleepEvent()
+            this.createSleepEvent()
             this.resetIcons(this.sleepIconArray)
             document.getElementById('start-time').value = ""
             document.getElementById('end-time').value = ""
