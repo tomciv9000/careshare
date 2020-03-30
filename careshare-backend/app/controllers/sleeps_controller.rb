@@ -15,7 +15,8 @@ class SleepsController < ApplicationController
     # POST /sleeps
     def create
       @sleep = Sleep.new(sleep_params)
-  
+      #calculate sleep duration on the backend and make available to front
+        @sleep.duration = (@sleep.end = @sleep.start) / 3600
       if @sleep.save
         render json: SleepSerializer.new(@sleep)
 
