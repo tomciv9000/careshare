@@ -5,6 +5,7 @@ class Shift {
         this.date = date;
         this.id = id
         this.diaperAdapter = new DiapersAdapter
+        this.sleepAdapter = new SleepsAdapter
         
         this.foodPanel = document.getElementById('food-panel')
         this.sleepPanel = document.getElementById('sleep-panel')
@@ -162,9 +163,12 @@ class Shift {
             document.getElementById('diaper-time').value = ""
         }.bind(this));
 
-        //submitSleep.addEventListener("click", function() {
-        //    createSleepEvent()
-        //}.bind(this));
+        submitSleep.addEventListener("click", function() {
+            createSleepEvent()
+            this.resetIcons(this.sleepIconArray)
+            document.getElementById('start-time').value = ""
+            document.getElementById('end-time').value = ""
+        }.bind(this));
 //
         //submitFood.addEventListener("click", function() {
         //    createFoodEvent()
@@ -174,14 +178,12 @@ class Shift {
     createDiaperEvent(){
         const wetDiaperIcon = this.diaperIconArray[0]
         const soiledDiaperIcon = this.diaperIconArray[1]
-        
         let diaperInput = {
             wet: this.iconSelected(wetDiaperIcon),
             soiled: this.iconSelected(soiledDiaperIcon),
             time: document.getElementById('diaper-time').value,
             shift_id: this.id
         }
-
         const configurationObject = {
             method: 'POST',
               headers: {
@@ -190,14 +192,44 @@ class Shift {
               },
               body: JSON.stringify(diaperInput)
         };
-        //const diaper = new Diaper(diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id)
         this.diaperAdapter.postDiaperToApi(configurationObject).then(function(json) {
             const diaper = new Diaper(json.data.id, diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id)
             console.log(json)
             console.log(diaper)
-            //diaper.updateTimeline(json.data.attributes);
-            //this.refreshDropDown()
-            //this.addShiftEventListeners(json.data.attributes.id)
+        }.bind(this))
+
+
+    }
+
+    createSleepEvent(){
+        const napIcon = this.sleepIconArray[0]
+        const bedtimeIcon = this.sleepIconArray[1]
+        let sleepInput = {
+            nap: this.iconSelected(napIcon),
+            bedtime: this.iconSelected(bedtimeIcon),
+            start: document.getElementById('start-time').value,
+            end: document.getElementById('end-time').value,
+            shift_id: this.id
+        }
+        const configurationObject = {
+            method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+              },
+              body: JSON.stringify(sleepInput)
+        };
+        this.sleepAdapter.postSleepToApi(configurationObject).then(function(json) {
+            const sleep = new Sleep(
+                json.data.id, 
+                sleepInput.nap, 
+                sleepInput.bedtime, 
+                sleepInput.start, 
+                sleepInput.end, 
+                sleepInput.duration, 
+                sleepInput.shift_id)
+            console.log(json)
+            console.log(sleep)
         }.bind(this))
 
 
