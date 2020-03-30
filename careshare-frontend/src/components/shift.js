@@ -226,7 +226,7 @@ class Shift {
                 sleepInput.bedtime, 
                 sleepInput.start, 
                 sleepInput.end, 
-                sleepInput.duration, 
+                json.data.attributes.duration, 
                 sleepInput.shift_id)
             console.log(json)
             console.log(sleep)
