@@ -13,6 +13,7 @@ class Diaper {
         this.soiledCount = document.getElementById('soiled-count')
         this.increaseDiaperCount()
         this.addToShiftTimeline()
+        this.adapter = new DiapersAdapter
     }
 
     addToShiftTimeline(){
