@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_161147) do
     t.boolean "bedtime"
     t.time "start"
     t.time "end"
-    t.time "duration"
+    t.float "duration"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["shift_id"], name: "index_sleeps_on_shift_id"

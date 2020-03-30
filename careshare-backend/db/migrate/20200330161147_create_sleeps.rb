@@ -6,7 +6,7 @@ class CreateSleeps < ActiveRecord::Migration[6.0]
       t.boolean :bedtime
       t.time :start
       t.time :end
-      t.time :duration
+      t.float :duration
       t.timestamps
     end
   end
