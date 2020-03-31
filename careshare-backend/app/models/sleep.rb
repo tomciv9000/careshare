@@ -8,7 +8,7 @@ class Sleep < ApplicationRecord
     if sleep_duration < 0
       sleep_duration = 24 + sleep_duration
     end 
-    self.duration = sleep_duration.round(2)
+    self.duration = sleep_duration.round(1)
   end
 
 end

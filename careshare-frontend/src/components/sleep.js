@@ -24,7 +24,7 @@ class Sleep {
        //li.setAttribute('id', `${this.id}`);
        let deleteButton = document.createElement('button')
        deleteButton.innerHTML = "delete"
-       li.innerHTML = `Down for ${this.sleepStatusDisplay()} at ${this.start}, woke at ${this.end}`
+       li.innerHTML = this.sleepStatusDisplay()
        timeLineReport.append(li)
        li.append(deleteButton)
        deleteButton.addEventListener("click", (evt) => {
@@ -34,8 +34,10 @@ class Sleep {
        })
    }
    sleepStatusDisplay(){
-       let restType = this.nap ? 'nap' : 'bedtime'
-       return restType
+       let restType = this.nap ? 'Nap' : 'Bedtime'
+       let downAt = `${DateDisplay.convertTime(this.start)}`
+       let upAt = `${DateDisplay.convertTime(this.end)}`
+       return `${resttype} from ${downAt} to ${upAt}`
    }
    
    increaseSleepCount(){
