@@ -52,14 +52,14 @@ class Sleep {
    }
 
    //why does this need to have an array ever passed into it?  Maybe not useful anymore
+   //parsefloat floating arithmetic issues is a good write up topic
    increaseCounter(counter){
-       counter.innerHTML = parseFloat(counter.innerHTML) + this.duration
-       
+       counter.innerHTML = (parseFloat(counter.innerHTML)*10 + this.duration * 10)/10
    }
 
 
    decreaseCounter(counter){
-      counter.innerHTML = parseFloat(counter.innerHTML) - this.duration
+      counter.innerHTML = (parseFloat(counter.innerHTML)*10 - this.duration * 10)/10
    }
 
 
