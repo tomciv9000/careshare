@@ -14,7 +14,7 @@ class SleepsAdapter {
         .catch(error => console.log("Error: " + error))
     }
 
-    deleteSleepFromApi(configurationObject,id) {
+    deleteSleepFromApi(configurationObject, id) {
       return fetch(this.baseURL + `/${id}`, configurationObject)
         .then(response => response.json())
         .catch(error => console.log("Error: " + error))
