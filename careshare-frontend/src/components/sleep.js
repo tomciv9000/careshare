@@ -9,89 +9,76 @@ class Sleep {
         this.start = start;
         this.end = end;
         this.duration = duration
-        this.wetCount = document.getElementById('wet-count')
-        this.soiledCount = document.getElementById('soiled-count')
-        //this.increaseDiaperCount()
-        //this.addToShiftTimeline()
-        //this.adapter = new DiapersAdapter
+        this.napDuration = document.getElementById('nap-duration')
+        this.bedtimeDuration = document.getElementById('bedtime-duration')
+        this.sleepTotal = document.getElementById('total-sleep')
+        this.increaseSleepCount()
+        this.addToShiftTimeline()
+        this.adapter = new DiapersAdapter
     }
 
-   // addToShiftTimeline(){
-   //     const timeLineReport = document.getElementById('timeline-report')
-   //     let li = document.createElement('li')
-   //     li.setAttribute('id', `${this.id}`);
-   //     let deleteButton = document.createElement('button')
-   //     deleteButton.innerHTML = "delete"
-   //     let time = DateDisplay.convertTime(this.time)
-   //     li.innerHTML = `${time} - ${this.diaperStatusDisplay()}`
-   //     timeLineReport.append(li)
-   //     li.append(deleteButton)
-   //     deleteButton.addEventListener("click", (evt) => {
-   //         let target = evt.target
-   //         target.parentElement.remove()
-   //         this.deleteDiaper()
-   //     })
-   // }
-//
-   // diaperStatusDisplay(){
-   //     if (this.wet && this.soiled){
-   //         return "Changed a wet + soiled diaper   "
-   //     }else 
-   //     if (this.wet){
-   //         return "Changed a wet diaper   "
-   //     }else
-   //     if (this.soiled){
-   //         return "Changed a soiled diaper   "
-   //     }
-   // }
-   // 
-   // increaseDiaperCount(){
-   //     this.increaseCounter(this.counter)
-   //     if (this.wet) {
-   //         this.increaseCounter(this.wetCount)
-   //     }
-   //     if (this.soiled){
-   //         this.increaseCounter(this.soiledCount)
-   //     }
-   // }
-//
-   // increaseCounter(counters){
-   //     let toBeIncreased = [].concat(counters || [])
-   //     for (let index = 0; index < toBeIncreased.length; index++) {
-   //         const element = toBeIncreased[index];
-   //         element.innerHTML = parseInt(element.innerHTML) + 1
-   //     }
-   // }
-//
-   // decreaseCounter(counters){
-   //     let toBeDecreased = [].concat(counters || [])
-   //     for (let index = 0; index < toBeDecreased.length; index++) {
-   //         const element = toBeDecreased[index];
-   //         element.innerHTML = parseInt(element.innerHTML) - 1
-   //     }
-   // }
-//
-   // decreaseDiaperCount(){
-   //     this.decreaseCounter(this.counter)
-   //     if (this.wet) {
-   //         this.decreaseCounter(this.wetCount)
-   //     }
-   //     if (this.soiled){
-   //         this.decreaseCounter(this.soiledCount)
-   //     }
-   // }
-//
-   // 
-   // 
-   // deleteDiaper() {
-   //     //this.exitShiftToggles() 
-   //     const configurationObject = {
-   //         method: 'DELETE',
-   //     };
-   //     this.adapter.deleteDiaperFromApi(configurationObject, this.id).then(() => this.decreaseDiaperCount())
-   // }
-//
-//
-//
+   addToShiftTimeline(){
+       const timeLineReport = document.getElementById('timeline-report')
+       let li = document.createElement('li')
+       //look for other examples of setting id on attribute, possibly remove them
+       //li.setAttribute('id', `${this.id}`);
+       let deleteButton = document.createElement('button')
+       deleteButton.innerHTML = "delete"
+       li.innerHTML = `Down for ${this.sleepStatusDisplay()} at ${this.start}, woke at ${this.end}`
+       timeLineReport.append(li)
+       li.append(deleteButton)
+       deleteButton.addEventListener("click", (evt) => {
+           let target = evt.target
+           target.parentElement.remove()
+           this.deleteSleep()
+       })
+   }
+   sleepStatusDisplay(){
+       let restType = this.nap ? 'nap' : 'bedtime'
+       return restType
+   }
+   
+   increaseSleepCount(){
+       //this.increaseCounter(this.counter)
+       if (this.nap) {
+           this.increaseCounter(this.napDuration)
+       }
+       if (this.bedtime){
+           this.increaseCounter(this.bedtimeDuration)
+       }
+       this.increaseCounter(this.sleepTotal)
+   }
+
+   //why does this need to have an array ever passed into it?  Maybe not useful anymore
+   increaseCounter(counter){
+       counter.innerHTML = parseInt(counter.innerHTML) + this.duration
+       
+   }
+
+
+   decreaseCounter(counter){
+      counter.innerHTML = parseInt(counter.innerHTML) - this.duration
+   }
+
+
+   //try and refactor methods like this into ternary operators
+   decreaseSleepCount(){
+      if (this.nap) {
+         this.decreaseCounter(this.napDuration)
+      }
+      if (this.bedtime){
+         this.decreaseCounter(this.bedtimeDuration)
+      }
+     this.decreaseCounter(this.sleepTotal)
+   }
+   
+   
+   deleteSleep() {
+       //this.exitShiftToggles() 
+       const configurationObject = {
+           method: 'DELETE',
+       };
+       this.adapter.deleteSleepFromApi(configurationObject, this.id).then(() => this.decreaseDiaperCount())
+   }
 
 }
