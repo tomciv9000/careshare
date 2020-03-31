@@ -4,8 +4,8 @@ class Shift {
         this.caregiver = caregiver;
         this.date = date;
         this.id = id
-        this.diaperAdapter = new DiapersAdapter
-        this.sleepAdapter = new SleepsAdapter
+        this.diaperAdapter = new DiapersAdapter()
+        this.sleepAdapter = new SleepsAdapter()
         
         this.foodPanel = document.getElementById('food-panel')
         this.sleepPanel = document.getElementById('sleep-panel')

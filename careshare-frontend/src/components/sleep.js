@@ -14,7 +14,7 @@ class Sleep {
         this.sleepTotal = document.getElementById('total-sleep')
         this.increaseSleepCount()
         this.addToShiftTimeline()
-        this.adapter = new DiapersAdapter
+        this.adapter = new SleepsAdapter()
     }
 
    addToShiftTimeline(){
@@ -76,11 +76,10 @@ class Sleep {
    
    
    deleteSleep() {
-       //this.exitShiftToggles() 
        const configurationObject = {
            method: 'DELETE',
        };
-       this.adapter.deleteSleepFromApi(configurationObject, this.id).then(() => this.decreaseDiaperCount())
+       this.adapter.deleteSleepFromApi(configurationObject, this.id).then(() => this.decreaseSleepCount())
    }
 
 }
