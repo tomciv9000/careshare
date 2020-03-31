@@ -53,13 +53,13 @@ class Sleep {
 
    //why does this need to have an array ever passed into it?  Maybe not useful anymore
    increaseCounter(counter){
-       counter.innerHTML = parseInt(counter.innerHTML) + this.duration
+       counter.innerHTML = parseFloat(counter.innerHTML) + this.duration
        
    }
 
 
    decreaseCounter(counter){
-      counter.innerHTML = parseInt(counter.innerHTML) - this.duration
+      counter.innerHTML = parseFloat(counter.innerHTML) - this.duration
    }
 
 
