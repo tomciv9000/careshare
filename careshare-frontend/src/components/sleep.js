@@ -34,10 +34,10 @@ class Sleep {
        })
    }
    sleepStatusDisplay(){
-       let restType = this.nap ? 'Nap' : 'Bedtime'
+       let restType = this.nap ? 'Took a nap' : 'Went to bed'
        let downAt = `${DateDisplay.convertTime(this.start)}`
        let upAt = `${DateDisplay.convertTime(this.end)}`
-       return `${resttype} from ${downAt} to ${upAt}`
+       return `${downAt} - ${restType}, woke up at ${upAt}   `
    }
    
    increaseSleepCount(){
