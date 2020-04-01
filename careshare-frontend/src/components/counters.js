@@ -15,6 +15,22 @@ class Counters {
             this.increaseCounter([counter, soiledCount])
         }
     }
+//I need to build a sleep increase counter method to accurately reflect the number of hours, also need to pass this value in
+    static increaseSleepCount(label, hours){
+        const counter = document.getElementById('diaper-count')
+        const wetCount = document.getElementById('wet-count')
+        const soiledCount = document.getElementById('soiled-count')
+        const wetSoiledCount = document.getElementById('wet-soiled-count')
+        if (label == 'wet-soiled'){
+            this.increaseCounter([counter, wetSoiledCount])
+        } else
+        if (label == 'wet') {
+            this.increaseCounter([counter, wetCount])
+        } else
+        if (label == 'soiled') {
+            this.increaseCounter([counter, soiledCount])
+        }
+    }
 
     static increaseCounter(counters){
         let toBeIncreased = [].concat(counters || [])
@@ -46,5 +62,17 @@ class Counters {
         if (classLabel == 'soiled-diaper-delete') {
             this.decreaseCounter([counter, soiledCount])
         }
+    }
+
+    static decreaseSleepCount(classLabel){
+        const napCount = document.getElementById('nap-duration')
+        const bedtimeCount = document.getElementById('bedtime-duration')
+        const totalSleepCount = document.getElementById('total-sleep')
+        if (classLabel == 'nap-delete'){
+            this.decreaseCounter([napCount, totalSleepCount])
+        } else
+        if (classLabel == 'bedtime-delete') {
+            this.decreaseCounter([bedtimeCount, totalSleepCount])
+        } 
     }
 }

@@ -35,8 +35,7 @@ class Diaper {
         deleteButton.innerHTML = "delete"
         deleteButton.setAttribute('id', `${this.id}`);
         deleteButton.setAttribute('class', `${this.diaperLabel()}-diaper-delete`)
-        let time = DateDisplay.convertTime(this.time)
-        li.innerHTML = `${time} - ${this.diaperStatusDisplay()}`
+        li.innerHTML = `${this.diaperStatusDisplay()}`
         timeLineReport.append(li)
         li.append(deleteButton)
         //deleteButton.addEventListener("click", (evt) => {
@@ -48,14 +47,15 @@ class Diaper {
     }
 
     diaperStatusDisplay(){
+        let time = DateDisplay.convertTime(this.time)
         if (this.wet && this.soiled){
-            return "Changed a wet + soiled diaper   "
+            return `${time} - Changed a wet + soiled diaper   `
         }else 
         if (this.wet){
-            return "Changed a wet diaper   "
+            return `${time} - Changed a wet diaper   `
         }else
         if (this.soiled){
-            return "Changed a soiled diaper   "
+            return `${time} - Changed a soiled diaper   `
         }
     }
     

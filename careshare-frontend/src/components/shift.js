@@ -1,11 +1,7 @@
 class Shift {
     
     constructor(caregiver, date, id) {
-        //this.diapers = []
-        //this.sleeps = []
-        //this.food = []
         this.eventLog = []
-        
         
         this.caregiver = caregiver;
         this.date = date;
@@ -296,26 +292,19 @@ class Shift {
             || button.classList.contains('wet-diaper-delete')
             || button.classList.contains('soiled-diaper-delete')){
             Diaper.deleteDiaper(button.classList.value, button.id)
+            console.log(button)
         } else 
-        if (button.classList.contains('sleep-delete')){
-            this.deleteSleep(configurationObject, button.id)
+        if (button.classList.contains('nap-delete') 
+            || button.classList.contains('sleep-delete')){
+            Sleep.deleteSleep(button.classList.value, button.id)
         } else
         if (button.classList.contains('food-delete')){
             this.deleteFood(configurationObject, button.id)
         }
         else {
-            console.log("button")
+            console.log(button)
         }
     }
 
-    //static deleteDiaper(classLabel, id) {
-    //    const configurationObject = {
-    //        method: 'DELETE',
-    //    };
-    //    adapter = new DiapersAdapter()
-    //    this.diaperAdapter.deleteDiaperFromApi(configurationObject, id).then(() => Counters.decreaseDiaperCount(classLabel))
-    //}
-
-    
 
 }

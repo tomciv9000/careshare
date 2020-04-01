@@ -12,29 +12,36 @@ class Sleep {
         this.napDuration = document.getElementById('nap-duration')
         this.bedtimeDuration = document.getElementById('bedtime-duration')
         this.sleepTotal = document.getElementById('total-sleep')
-        this.increaseSleepCount()
+        //this.increaseSleepCount()
         this.addToShiftTimeline()
-        this.adapter = new SleepsAdapter()
+        Counters.increaseSleepCount(this.diaperLabel(), this.duration)
+        //this.adapter = new SleepsAdapter()
     }
 
    addToShiftTimeline(){
        const timeLineReport = document.getElementById('timeline-report')
        let li = document.createElement('li')
-       //look for other examples of setting id on attribute, possibly remove them
-       //li.setAttribute('id', `${this.id}`);
        let deleteButton = document.createElement('button')
        deleteButton.innerHTML = "delete"
        deleteButton.setAttribute('id', `${this.id}`);
-       deleteButton.setAttribute('class', 'sleep-delete')
+       deleteButton.setAttribute('class', `${this.sleepLabel()}-delete`)
        li.innerHTML = this.sleepStatusDisplay()
        timeLineReport.append(li)
        li.append(deleteButton)
-       deleteButton.addEventListener("click", (evt) => {
-           let target = evt.target
-           target.parentElement.remove()
-           this.deleteSleep()
-       })
+       //deleteButton.addEventListener("click", (evt) => {
+       //    let target = evt.target
+       //    target.parentElement.remove()
+       //    this.deleteSleep()
+       //})
+       Shift.orderTimeline()
    }
+  
+   sleepLabel(){
+        let label = this.nap ? 'nap' : 'bedtime'
+        return label
+    }
+
+   
    sleepStatusDisplay(){
        let restType = this.nap ? 'Took a nap' : 'Went to bed'
        let downAt = `${DateDisplay.convertTime(this.start)}`
@@ -77,11 +84,12 @@ class Sleep {
    }
    
    
-   deleteSleep() {
+   static deleteSleep(classLabel, id) {
        const configurationObject = {
            method: 'DELETE',
        };
-       this.adapter.deleteSleepFromApi(configurationObject, this.id).then(() => this.decreaseSleepCount())
+       const adapter = new SleepsAdapter()
+       adapter.deleteSleepFromApi(configurationObject, id).then(() => Counters.decreaseSleepCount(classLabel))
    }
 
 }
