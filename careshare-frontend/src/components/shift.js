@@ -1,6 +1,12 @@
 class Shift {
     
     constructor(caregiver, date, id) {
+        //this.diapers = []
+        //this.sleeps = []
+        //this.food = []
+        this.eventLog = []
+        
+        
         this.caregiver = caregiver;
         this.date = date;
         this.id = id
@@ -15,7 +21,7 @@ class Shift {
         this.sleepIconArray = [...document.getElementsByClassName('sleep-radio-icons')]
         this.diaperIconArray = [...document.getElementsByClassName('diaper-checkbox-icons')]
         
-        
+        //this control panel type stuff should be moved to shifts.js to be able to create a shift without building the panel
         this.buildFoodIconEvents()
         this.buildSleepIconEvents()
         this.buildDiaperIconEvents()
@@ -231,10 +237,55 @@ class Shift {
             console.log(json)
             console.log(sleep)
         }.bind(this))
-
-
     }
 
+    sortedTimelineArray(){
+        let timelineItems = document.querySelectorAll('li')
+        let timelineArray = []
+        for(let i=0; i<timelineItems.length; i++){
+            timelineArray.push(timelineItems[i].innerText);  
+        }
+        let mapped = timelineArray.map(function(el, i) {
+            return {index: i, value: DateDisplay.convertTime12to24(el.split(' - ')[0]).replace(":", "")
+            }
+        })
+        mapped.sort((a,b) => a.value - b.value)
+        let result = mapped.map(function(el){
+            return timelineArray[el.index];
+        })
+        return result
+        //maybe keep the below as a seperate function
+        //this.addToShiftTimeline(result)
+    }
 
+    addArchievedToShiftTimeline(array){
+        //for this function i need to split off the button html since it won't be needed for archived shifts(not an ability)
+        const timeLineReport = document.getElementById('timeline-report')
+        timeLineReport.innerHTML = '';
+        for(let i=0; i<array.length; i++){
+            let li = document.createElement('li')
+            li.innerText = array[i]
+            timeLineReport.append(li)
+        }
+    }
+
+    sortCurrentTimeline(array){
+        const timeLineReport = document.getElementById('timeline-report')
+        timeLineReport.innerHTML = ''
+        for(let i=0; i<array.length; i++){
+            let li = document.createElement('li')
+            li.innerHTML = array[i]
+            let deleteButton = document.createElement('button')
+            deleteButton.innerHTML = "delete"
+            timeLineReport.append(li)
+            li.append(deleteButton)
+            deleteButton.addEventListener("click", (evt) => {
+                let target = evt.target
+                target.parentElement.remove()
+                this.deleteDiaper()
+            })
+        }        
+        
+    }
 
 }
