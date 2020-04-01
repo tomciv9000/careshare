@@ -16,14 +16,23 @@ class Diaper {
         this.adapter = new DiapersAdapter()
     }
 
+    diaperLabel(){
+        if (this.wet && this.soiled){
+            return "wet-soiled"
+        } else if (this.wet){
+            return "wet"
+        } else if (this.soiled){
+            return "soiled"
+        }
+    }
+
     addToShiftTimeline(){
         const timeLineReport = document.getElementById('timeline-report')
         let li = document.createElement('li')
-        
         let deleteButton = document.createElement('button')
         deleteButton.innerHTML = "delete"
         deleteButton.setAttribute('id', `${this.id}`);
-        deleteButton.setAttribute('class', 'diaper-delete')
+        deleteButton.setAttribute('class', `${this.diaperLabel()}-diaper-delete`)
         let time = DateDisplay.convertTime(this.time)
         li.innerHTML = `${time} - ${this.diaperStatusDisplay()}`
         timeLineReport.append(li)
@@ -84,7 +93,7 @@ class Diaper {
     }
 
     
-    
+    //maybe redundant
     deleteDiaper() {
         //this.exitShiftToggles() 
         const configurationObject = {

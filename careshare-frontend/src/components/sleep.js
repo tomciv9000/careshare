@@ -24,6 +24,8 @@ class Sleep {
        //li.setAttribute('id', `${this.id}`);
        let deleteButton = document.createElement('button')
        deleteButton.innerHTML = "delete"
+       deleteButton.setAttribute('id', `${this.id}`);
+       deleteButton.setAttribute('class', 'sleep-delete')
        li.innerHTML = this.sleepStatusDisplay()
        timeLineReport.append(li)
        li.append(deleteButton)

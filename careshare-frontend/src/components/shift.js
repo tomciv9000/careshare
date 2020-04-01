@@ -243,7 +243,7 @@ class Shift {
         let timelineItems = document.querySelectorAll('li')
         let timelineArray = []
         for(let i=0; i<timelineItems.length; i++){
-            timelineArray.push(timelineItems[i].innerText);  
+            timelineArray.push(timelineItems[i].innerHTML);  
         }
         let mapped = timelineArray.map(function(el, i) {
             return {index: i, value: DateDisplay.convertTime12to24(el.split(' - ')[0]).replace(":", "")
@@ -254,7 +254,8 @@ class Shift {
             return timelineArray[el.index];
         })
         return result
-        //maybe keep the below as a seperate function
+        //this returns an HTML string array that includes the button information
+        //ie ["3:33 AM - Changed a wet diaper   <button id="1" class="diaper-delete">delete</button>"]
         //this.addToShiftTimeline(result)
     }
 
@@ -275,17 +276,37 @@ class Shift {
         for(let i=0; i<array.length; i++){
             let li = document.createElement('li')
             li.innerHTML = array[i]
-            let deleteButton = document.createElement('button')
-            deleteButton.innerHTML = "delete"
+
             timeLineReport.append(li)
-            li.append(deleteButton)
-            deleteButton.addEventListener("click", (evt) => {
+            let button = li.querySelector('button')
+            button.addEventListener("click", (evt) => {
                 let target = evt.target
                 target.parentElement.remove()
-                this.deleteDiaper()
+                this.deleteFromTimeline(evt)
             })
         }        
-        
     }
+
+    deleteFromTimeline(event){
+        let button = event.target
+        if (button.classList.contains('wet-soiled-diaper-delete' || 'wet-diaper-delete' || 'soiled-diaper-delete')){
+            this.deleteDiaper(button.classList.value, button.id)
+        } else 
+        if (button.classList.contains('sleep-delete')){
+            this.deleteSleep(configurationObject, button.id)
+        } else
+        if (button.classList.contains('food-delete')){
+            this.deleteFood(configurationObject, button.id)
+        }
+    }
+
+    deleteDiaper(classLabel, id) {
+        const configurationObject = {
+            method: 'DELETE',
+        };
+        this.diaperAdapter.deleteDiaperFromApi(configurationObject, id).then(() => Counters.decreaseDiaperCount(classLabel))
+    }
+
+    
 
 }
