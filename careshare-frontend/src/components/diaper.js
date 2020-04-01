@@ -42,6 +42,7 @@ class Diaper {
             target.parentElement.remove()
             this.deleteDiaper()
         })
+        Shift.orderTimeline();
     }
 
     diaperStatusDisplay(){

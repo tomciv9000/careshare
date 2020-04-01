@@ -203,8 +203,6 @@ class Shift {
             console.log(json)
             console.log(diaper)
         }.bind(this))
-
-
     }
 
     createSleepEvent(){
@@ -239,7 +237,12 @@ class Shift {
         }.bind(this))
     }
 
-    sortedTimelineArray(){
+    static orderTimeline(){
+        let orderedArray = this.sortedTimelineArray();
+        this.sortCurrentTimeline(orderedArray)
+    }
+
+    static sortedTimelineArray(){
         let timelineItems = document.querySelectorAll('li')
         let timelineArray = []
         for(let i=0; i<timelineItems.length; i++){
@@ -259,24 +262,24 @@ class Shift {
         //this.addToShiftTimeline(result)
     }
 
-    addArchievedToShiftTimeline(array){
+    static addArchievedToShiftTimeline(array){
         //for this function i need to split off the button html since it won't be needed for archived shifts(not an ability)
         const timeLineReport = document.getElementById('timeline-report')
         timeLineReport.innerHTML = '';
         for(let i=0; i<array.length; i++){
             let li = document.createElement('li')
-            li.innerText = array[i]
+            let description = array[i].innerHTML.split('  ')[0]
+            li.innerText = description
             timeLineReport.append(li)
         }
     }
 
-    sortCurrentTimeline(array){
+    static sortCurrentTimeline(array){
         const timeLineReport = document.getElementById('timeline-report')
         timeLineReport.innerHTML = ''
         for(let i=0; i<array.length; i++){
             let li = document.createElement('li')
             li.innerHTML = array[i]
-
             timeLineReport.append(li)
             let button = li.querySelector('button')
             button.addEventListener("click", (evt) => {
