@@ -1,16 +1,18 @@
 class Counters {
 
-    //this.counter = document.getElementById('diaper-count')
-    //this.wetCount = document.getElementById('wet-count')
-    //this.soiledCount = document.getElementById('soiled-count')
-
-    static increaseDiaperCount(){
-        this.increaseCounter(this.counter)
-        if (this.wet) {
-            this.increaseCounter(this.wetCount)
-        }
-        if (this.soiled){
-            this.increaseCounter(this.soiledCount)
+    static increaseDiaperCount(label){
+        const counter = document.getElementById('diaper-count')
+        const wetCount = document.getElementById('wet-count')
+        const soiledCount = document.getElementById('soiled-count')
+        const wetSoiledCount = document.getElementById('wet-soiled-count')
+        if (label == 'wet-soiled'){
+            this.increaseCounter([counter, wetSoiledCount])
+        } else
+        if (label == 'wet') {
+            this.increaseCounter([counter, wetCount])
+        } else
+        if (label == 'soiled') {
+            this.increaseCounter([counter, soiledCount])
         }
     }
 
@@ -34,14 +36,15 @@ class Counters {
         const counter = document.getElementById('diaper-count')
         const wetCount = document.getElementById('wet-count')
         const soiledCount = document.getElementById('soiled-count')
+        const wetSoiledCount = document.getElementById('wet-soiled-count')
         if (classLabel == 'wet-soiled-diaper-delete'){
-            Counters.decreaseCounter([counter, wetCount, soiledCount])
+            this.decreaseCounter([counter, wetSoiledCount])
         } else
         if (classLabel == 'wet-diaper-delete') {
-            Counters.decreaseCounter([counter, wetCount])
+            this.decreaseCounter([counter, wetCount])
         } else
         if (classLabel == 'soiled-diaper-delete') {
-            Counters.decreaseCounter([counter, soiledCount])
+            this.decreaseCounter([counter, soiledCount])
         }
     }
 }

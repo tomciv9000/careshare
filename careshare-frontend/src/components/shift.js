@@ -285,15 +285,17 @@ class Shift {
             button.addEventListener("click", (evt) => {
                 let target = evt.target
                 target.parentElement.remove()
-                this.deleteFromTimeline(evt)
+                Shift.deleteFromTimeline(evt)
             })
         }        
     }
 
-    deleteFromTimeline(event){
+    static deleteFromTimeline(event){
         let button = event.target
-        if (button.classList.contains('wet-soiled-diaper-delete' || 'wet-diaper-delete' || 'soiled-diaper-delete')){
-            this.deleteDiaper(button.classList.value, button.id)
+        if (button.classList.contains('wet-soiled-diaper-delete') 
+            || button.classList.contains('wet-diaper-delete')
+            || button.classList.contains('soiled-diaper-delete')){
+            Diaper.deleteDiaper(button.classList.value, button.id)
         } else 
         if (button.classList.contains('sleep-delete')){
             this.deleteSleep(configurationObject, button.id)
@@ -301,14 +303,18 @@ class Shift {
         if (button.classList.contains('food-delete')){
             this.deleteFood(configurationObject, button.id)
         }
+        else {
+            console.log("button")
+        }
     }
 
-    deleteDiaper(classLabel, id) {
-        const configurationObject = {
-            method: 'DELETE',
-        };
-        this.diaperAdapter.deleteDiaperFromApi(configurationObject, id).then(() => Counters.decreaseDiaperCount(classLabel))
-    }
+    //static deleteDiaper(classLabel, id) {
+    //    const configurationObject = {
+    //        method: 'DELETE',
+    //    };
+    //    adapter = new DiapersAdapter()
+    //    this.diaperAdapter.deleteDiaperFromApi(configurationObject, id).then(() => Counters.decreaseDiaperCount(classLabel))
+    //}
 
     
 

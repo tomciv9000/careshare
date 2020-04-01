@@ -14,7 +14,7 @@ class DiapersAdapter {
         .catch(error => console.log("Error: " + error))
     }
 
-    deleteDiaperFromApi(configurationObject,id) {
+    deleteDiaperFromApi(configurationObject, id) {
       return fetch(this.baseURL + `/${id}`, configurationObject)
         .then(response => response.json())
         .catch(error => console.log("Error: " + error))

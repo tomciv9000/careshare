@@ -11,9 +11,11 @@ class Diaper {
         this.counter = document.getElementById('diaper-count')
         this.wetCount = document.getElementById('wet-count')
         this.soiledCount = document.getElementById('soiled-count')
-        this.increaseDiaperCount()
+        
+        
         this.addToShiftTimeline()
-        this.adapter = new DiapersAdapter()
+        Counters.increaseDiaperCount(this.diaperLabel())
+        //this.adapter = new DiapersAdapter()
     }
 
     diaperLabel(){
@@ -37,11 +39,11 @@ class Diaper {
         li.innerHTML = `${time} - ${this.diaperStatusDisplay()}`
         timeLineReport.append(li)
         li.append(deleteButton)
-        deleteButton.addEventListener("click", (evt) => {
-            let target = evt.target
-            target.parentElement.remove()
-            this.deleteDiaper()
-        })
+        //deleteButton.addEventListener("click", (evt) => {
+        //    let target = evt.target
+        //    target.parentElement.remove()
+        //    Diaper.deleteDiaper(this.diaperLabel, this.id)
+        //})
         Shift.orderTimeline();
     }
 
@@ -83,24 +85,24 @@ class Diaper {
         }
     }
 
-    decreaseDiaperCount(){
-        this.decreaseCounter(this.counter)
-        if (this.wet) {
-            this.decreaseCounter(this.wetCount)
-        }
-        if (this.soiled){
-            this.decreaseCounter(this.soiledCount)
-        }
-    }
+    //decreaseDiaperCount(){
+    //    this.decreaseCounter(this.counter)
+    //    if (this.wet) {
+    //        this.decreaseCounter(this.wetCount)
+    //    }
+    //    if (this.soiled){
+    //        this.decreaseCounter(this.soiledCount)
+    //    }
+    //}
 
     
-    //maybe redundant
-    deleteDiaper() {
-        //this.exitShiftToggles() 
+    //maybe 
+    static deleteDiaper(classLabel, id) {
         const configurationObject = {
             method: 'DELETE',
         };
-        this.adapter.deleteDiaperFromApi(configurationObject, this.id).then(() => this.decreaseDiaperCount())
+        const adapter = new DiapersAdapter()
+        adapter.deleteDiaperFromApi(configurationObject, id).then(() => Counters.decreaseDiaperCount(classLabel))
     }
 
 
