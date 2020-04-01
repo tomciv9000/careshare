@@ -19,9 +19,11 @@ class Diaper {
     addToShiftTimeline(){
         const timeLineReport = document.getElementById('timeline-report')
         let li = document.createElement('li')
-        //li.setAttribute('id', `${this.id}`);
+        
         let deleteButton = document.createElement('button')
         deleteButton.innerHTML = "delete"
+        deleteButton.setAttribute('id', `${this.id}`);
+        deleteButton.setAttribute('class', 'diaper-delete')
         let time = DateDisplay.convertTime(this.time)
         li.innerHTML = `${time} - ${this.diaperStatusDisplay()}`
         timeLineReport.append(li)
