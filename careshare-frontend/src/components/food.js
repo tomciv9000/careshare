@@ -57,7 +57,7 @@ class Food {
             return `${time} - Breakfast: ${this.description}   `
         } else if (this.lunch){
             return `${time} - Lunch: ${this.description}   `
-        } else if (this.lunch){
+        } else if (this.dinner){
             return `${time} - Dinner: ${this.description}   `
         }
     }

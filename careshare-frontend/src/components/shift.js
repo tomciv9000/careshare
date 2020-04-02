@@ -314,8 +314,11 @@ class Shift {
             || button.classList.contains('bedtime-delete')){
             Sleep.deleteSleep(button.classList.value, button.id)
         } else
-        if (button.classList.contains('food-delete')){
-            this.deleteFood(configurationObject, button.id)
+        if (button.classList.contains('snack-food-delete')
+            || button.classList.contains('breakfast-food-delete')
+            || button.classList.contains('lunch-food-delete')
+            || button.classList.contains('dinner-food-delete')){
+            Food.deleteFood(button.classList.value, button.id)
         }
         else {
             console.log(button)
