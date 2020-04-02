@@ -177,6 +177,7 @@ class Shift {
             this.createFoodEvent()
             this.resetIcons(this.foodIconArray)
             document.getElementById('food-time').value = ""
+            document.getElementById('food-description').value = ""
         }.bind(this));
     }
 
