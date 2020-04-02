@@ -19,7 +19,7 @@ class Food {
         //this.adapter = new DiapersAdapter()
     }
 
-    diaperLabel(){
+    foodLabel(){
         if (this.snack){
             return "snack"
         } else if (this.breakfast){

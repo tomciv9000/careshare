@@ -16,7 +16,7 @@ class Shift {
 
         this.foodIconArray = [...document.getElementsByClassName('food-radio-icons')]
         this.sleepIconArray = [...document.getElementsByClassName('sleep-radio-icons')]
-        this.diaperIconArray = [...document.getElementsByClassName('diaper-checkbox-icons')]
+        this.foodIconArray = [...document.getElementsByClassName('diaper-checkbox-icons')]
         
         //this control panel type stuff should be moved to shifts.js to be able to create a shift without building the panel
         this.buildFoodIconEvents()
@@ -26,7 +26,7 @@ class Shift {
 
         this.clickingOutsideClears(this.foodPanel, this.foodIconArray)
         this.clickingOutsideClears(this.sleepPanel, this.sleepIconArray)
-        this.clickingOutsideClears(this.diaperPanel, this.diaperIconArray)
+        this.clickingOutsideClears(this.diaperPanel, this.foodIconArray)
     }
 
 
@@ -79,7 +79,7 @@ class Shift {
             "#a09e3a": 'wet-diaper-icon',
             "#711e1e66": 'soiled-diaper-icon'
         }
-        this.attachEventListeners(diaperToggleColorPairs, this.diaperIconArray)
+        this.attachEventListeners(diaperToggleColorPairs, this.foodIconArray)
     }
 
     buildSleepIconEvents(){
@@ -106,7 +106,7 @@ class Shift {
         for (let color in toggleValues){ 
             let el = document.getElementById(`${toggleValues[color]}`);
             el.addEventListener("click", function() {
-                if (iconSet != this.diaperIconArray){
+                if (iconSet != this.foodIconArray){
                     this.resetIcons(iconSet)
                 } 
                 this.iconToggle(el, `${color}`)
@@ -162,7 +162,7 @@ class Shift {
 
         submitDiaper.addEventListener("click", function() {
             this.createDiaperEvent()
-            this.resetIcons(this.diaperIconArray)
+            this.resetIcons(this.foodIconArray)
             document.getElementById('diaper-time').value = ""
         }.bind(this));
 
@@ -175,16 +175,23 @@ class Shift {
 //
         submitFood.addEventListener("click", function() {
             this.createFoodEvent()
+            this.resetIcons(this.foodIconArray)
+            document.getElementById('food-time').value = ""
         }.bind(this));
     }
 
-    createDiaperEvent(){
-        const wetDiaperIcon = this.diaperIconArray[0]
-        const soiledDiaperIcon = this.diaperIconArray[1]
-        let diaperInput = {
-            wet: this.iconSelected(wetDiaperIcon),
-            soiled: this.iconSelected(soiledDiaperIcon),
-            time: document.getElementById('diaper-time').value,
+    createFoodEvent(){
+        const snackIcon = this.foodIconArray[0]
+        const breakfastIcon = this.foodIconArray[1]
+        const lunchIcon = this.foodIconArray[2]
+        const dinnerIcon = this.foodIconArray[3]
+        let foodInput = {
+            snack: this.iconSelected(snackIcon),
+            breakfast: this.iconSelected(breakfastIcon),
+            lunch: this.iconSelected(lunchIcon),
+            dinner: this.iconSelected(dinnerIcon),
+            description: document.getElementById('food-description').value,
+            time: document.getElementById('food-time').value,
             shift_id: this.id
         }
         const configurationObject = {
@@ -193,12 +200,19 @@ class Shift {
                 'Content-Type': 'application/json',
                 Accept: 'application/json'
               },
-              body: JSON.stringify(diaperInput)
+              body: JSON.stringify(foodInput)
         };
-        this.diaperAdapter.postDiaperToApi(configurationObject).then(function(json) {
-            const diaper = new Diaper(json.data.id, diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id)
+        this.foodAdapter.postFoodToApi(configurationObject).then(function(json) {
+            const food = new Food(json.data.id, 
+                foodInput.snack, 
+                foodInput.breakfast, 
+                foodInput.lunch, 
+                foodInput.dinner, 
+                foodInput.description, 
+                foodInput.time, 
+                foodInput.shift_id)
             console.log(json)
-            console.log(diaper)
+            console.log(food)
         }.bind(this))
     }
 
