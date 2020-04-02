@@ -1,4 +1,5 @@
-class NotessAdapter {
+class NotesAdapter {
+    
     constructor() {
       this.baseURL = "http://localhost:3000/notes"
     }
@@ -23,4 +24,4 @@ class NotessAdapter {
     loadDiaper(noteID) {
       return fetch(this.baseURL + `/${noteID}`).then(response => response.json())
     }
-  }
+}

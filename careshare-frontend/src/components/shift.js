@@ -9,6 +9,7 @@ class Shift {
         this.diaperAdapter = new DiapersAdapter()
         this.sleepAdapter = new SleepsAdapter()
         this.foodAdapter = new FoodsAdapter()
+        this.noteAdapter = new NotesAdapter()
         
         this.foodPanel = document.getElementById('food-panel')
         this.sleepPanel = document.getElementById('sleep-panel')
@@ -159,7 +160,7 @@ class Shift {
         const submitDiaper = document.getElementById('diaper-done')
         const submitSleep = document.getElementById('sleep-done')
         const submitFood = document.getElementById('food-done')
-        const submitNote = document.getElementById('note-submit')
+        const submitNote = document.getElementById('shift-notes')
 
         submitDiaper.addEventListener("click", function() {
             this.createDiaperEvent()
@@ -181,10 +182,10 @@ class Shift {
             document.getElementById('food-description').value = ""
         }.bind(this));
 
-        submitNote.addEventListener('submit', e => {
-            e.preventDefault();
+        submitNote.addEventListener('submit', function(event) {
+            event.preventDefault();
             this.createNoteEvent()
-        }).bind(this)    
+        }.bind(this));  
     }   
 
     createDiaperEvent(){
@@ -276,6 +277,31 @@ class Shift {
                 sleepInput.shift_id)
             console.log(json)
             console.log(sleep)
+        }.bind(this))
+    }
+
+    createNoteEvent(){
+        const noteContent = document.getElementById('note-content').value
+        //const bedtimeIcon = this.sleepIconArray[1]
+        let noteInput = {
+            content: noteContent,
+            shift_id: this.id
+        }
+        const configurationObject = {
+            method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+              },
+              body: JSON.stringify(noteInput)
+        };
+        this.noteAdapter.postNoteToApi(configurationObject).then(function(json) {
+            const note = new Note(
+                json.data.id, 
+                noteInput.content, 
+                noteInput.shift_id)
+            console.log(json)
+            console.log(note)
         }.bind(this))
     }
 
