@@ -164,6 +164,11 @@ label {
   #food-names {
     color: #7b716345
   }
+
+  #timeline-notes li{
+    list-style: none;
+    font-style: italic;
+  }
   
   
   

@@ -15,24 +15,23 @@ class Note {
     }
 
     addToShiftTimeline(){
-        const timeLineReport = document.getElementById('timeline-report')
+        const timeLineNotes = document.getElementById('timeline-notes')
         let li = document.createElement('li')
         let deleteButton = document.createElement('button')
         deleteButton.innerHTML = "delete"
         deleteButton.setAttribute('id', `${this.id}`);
         deleteButton.setAttribute('class', 'note-delete')
-        li.innerHTML = `${this.content}`
-        timeLineReport.append(li)
+        li.innerHTML = `Note: ${this.content}  `
+        timeLineNotes.append(li)
         li.append(deleteButton)
-        //deleteButton.addEventListener("click", (evt) => {
-        //    let target = evt.target
-        //    target.parentElement.remove()
-        //    Diaper.deleteDiaper(this.diaperLabel, this.id)
-        //})
-        Shift.orderTimeline();
+        deleteButton.addEventListener("click", (evt) => {
+            let target = evt.target
+            target.parentElement.remove()
+            Note.deleteNote(this.id)
+        })
     }
   
-    static deleteNote(classLabel, id) {
+    static deleteNote(id) {
         const configurationObject = {
             method: 'DELETE',
         };

@@ -184,7 +184,8 @@ class Shift {
 
         submitNote.addEventListener('submit', function(event) {
             event.preventDefault();
-            this.createNoteEvent()
+            this.createNoteEvent();
+            submitNote.reset()
         }.bind(this));  
     }   
 
