@@ -16,7 +16,7 @@ class Shift {
 
         this.foodIconArray = [...document.getElementsByClassName('food-radio-icons')]
         this.sleepIconArray = [...document.getElementsByClassName('sleep-radio-icons')]
-        this.foodIconArray = [...document.getElementsByClassName('diaper-checkbox-icons')]
+        this.diaperIconArray = [...document.getElementsByClassName('diaper-checkbox-icons')]
         
         //this control panel type stuff should be moved to shifts.js to be able to create a shift without building the panel
         this.buildFoodIconEvents()
@@ -26,7 +26,7 @@ class Shift {
 
         this.clickingOutsideClears(this.foodPanel, this.foodIconArray)
         this.clickingOutsideClears(this.sleepPanel, this.sleepIconArray)
-        this.clickingOutsideClears(this.diaperPanel, this.foodIconArray)
+        this.clickingOutsideClears(this.diaperPanel, this.diaperIconArray)
     }
 
 
@@ -79,7 +79,7 @@ class Shift {
             "#a09e3a": 'wet-diaper-icon',
             "#711e1e66": 'soiled-diaper-icon'
         }
-        this.attachEventListeners(diaperToggleColorPairs, this.foodIconArray)
+        this.attachEventListeners(diaperToggleColorPairs, this.diaperIconArray)
     }
 
     buildSleepIconEvents(){
@@ -106,7 +106,7 @@ class Shift {
         for (let color in toggleValues){ 
             let el = document.getElementById(`${toggleValues[color]}`);
             el.addEventListener("click", function() {
-                if (iconSet != this.foodIconArray){
+                if (iconSet != this.diaperIconArray){
                     this.resetIcons(iconSet)
                 } 
                 this.iconToggle(el, `${color}`)
@@ -162,7 +162,7 @@ class Shift {
 
         submitDiaper.addEventListener("click", function() {
             this.createDiaperEvent()
-            this.resetIcons(this.foodIconArray)
+            this.resetIcons(this.diaperIconArray)
             document.getElementById('diaper-time').value = ""
         }.bind(this));
 
