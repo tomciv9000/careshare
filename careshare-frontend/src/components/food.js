@@ -52,13 +52,13 @@ class Food {
     foodStatusDisplay(){
         let time = DateDisplay.convertTime(this.time)
         if (this.snack){
-            return `${time} - Snack   `
+            return `${time} - Snack: ${this.description}   `
         } else if (this.breakfast){
-            return `${time} - Breakfast   `
+            return `${time} - Breakfast: ${this.description}   `
         } else if (this.lunch){
-            return `${time} - Lunch   `
+            return `${time} - Lunch: ${this.description}   `
         } else if (this.lunch){
-            return `${time} - Dinner   `
+            return `${time} - Dinner: ${this.description}   `
         }
     }
     
