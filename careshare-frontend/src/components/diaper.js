@@ -59,32 +59,32 @@ class Diaper {
         }
     }
     
-    increaseDiaperCount(){
-        this.increaseCounter(this.counter)
-        if (this.wet) {
-            this.increaseCounter(this.wetCount)
-        }
-        if (this.soiled){
-            this.increaseCounter(this.soiledCount)
-        }
-    }
-
-    increaseCounter(counters){
-        let toBeIncreased = [].concat(counters || [])
-        for (let index = 0; index < toBeIncreased.length; index++) {
-            const element = toBeIncreased[index];
-            element.innerHTML = parseInt(element.innerHTML) + 1
-        }
-    }
-
-    decreaseCounter(counters){
-        let toBeDecreased = [].concat(counters || [])
-        for (let index = 0; index < toBeDecreased.length; index++) {
-            const element = toBeDecreased[index];
-            element.innerHTML = parseInt(element.innerHTML) - 1
-        }
-    }
-
+  //  increaseDiaperCount(){
+  //      this.increaseCounter(this.counter)
+  //      if (this.wet) {
+  //          this.increaseCounter(this.wetCount)
+  //      }
+  //      if (this.soiled){
+  //          this.increaseCounter(this.soiledCount)
+  //      }
+  //  }
+//
+  //  increaseCounter(counters){
+  //      let toBeIncreased = [].concat(counters || [])
+  //      for (let index = 0; index < toBeIncreased.length; index++) {
+  //          const element = toBeIncreased[index];
+  //          element.innerHTML = parseInt(element.innerHTML) + 1
+  //      }
+  //  }
+//
+  //  decreaseCounter(counters){
+  //      let toBeDecreased = [].concat(counters || [])
+  //      for (let index = 0; index < toBeDecreased.length; index++) {
+  //          const element = toBeDecreased[index];
+  //          element.innerHTML = parseInt(element.innerHTML) - 1
+  //      }
+  //  }
+//
     //decreaseDiaperCount(){
     //    this.decreaseCounter(this.counter)
     //    if (this.wet) {

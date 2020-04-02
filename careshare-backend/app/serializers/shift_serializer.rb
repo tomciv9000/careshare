@@ -1,5 +1,5 @@
 class ShiftSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :caregiver, :date, :diapers, :sleeps, :foods
+  attributes :id, :caregiver, :date, :diapers, :sleeps, :foods, :notes
   
 end

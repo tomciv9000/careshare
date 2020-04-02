@@ -2,7 +2,7 @@ class Shift {
     
     constructor(caregiver, date, id) {
         this.eventLog = []
-        
+        this.notes = []
         this.caregiver = caregiver;
         this.date = date;
         this.id = id
@@ -159,6 +159,7 @@ class Shift {
         const submitDiaper = document.getElementById('diaper-done')
         const submitSleep = document.getElementById('sleep-done')
         const submitFood = document.getElementById('food-done')
+        const submitNote = document.getElementById('note-submit')
 
         submitDiaper.addEventListener("click", function() {
             this.createDiaperEvent()
@@ -179,8 +180,37 @@ class Shift {
             document.getElementById('food-time').value = ""
             document.getElementById('food-description').value = ""
         }.bind(this));
-    }
 
+        submitNote.addEventListener('submit', e => {
+            e.preventDefault();
+            this.createNoteEvent()
+        }).bind(this)    
+    }   
+
+    createDiaperEvent(){
+        const wetDiaperIcon = this.diaperIconArray[0]
+        const soiledDiaperIcon = this.diaperIconArray[1]
+        let diaperInput = {
+            wet: this.iconSelected(wetDiaperIcon),
+            soiled: this.iconSelected(soiledDiaperIcon),
+            time: document.getElementById('diaper-time').value,
+            shift_id: this.id
+        }
+        const configurationObject = {
+            method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+              },
+              body: JSON.stringify(diaperInput)
+        };
+        this.diaperAdapter.postDiaperToApi(configurationObject).then(function(json) {
+            const diaper = new Diaper(json.data.id, diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id)
+            console.log(json)
+            console.log(diaper)
+        }.bind(this))
+    }
+    
     createFoodEvent(){
         const snackIcon = this.foodIconArray[0]
         const breakfastIcon = this.foodIconArray[1]
