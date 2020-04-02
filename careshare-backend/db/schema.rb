@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2020_04_02_011102) do
     t.boolean "breakfast"
     t.boolean "lunch"
     t.boolean "dinner"
+    t.string "description"
+    t.time "time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["shift_id"], name: "index_foods_on_shift_id"

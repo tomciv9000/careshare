@@ -6,6 +6,8 @@ class CreateFoods < ActiveRecord::Migration[6.0]
       t.boolean :breakfast
       t.boolean :lunch
       t.boolean :dinner
+      t.string :description
+      t.time :time
       t.timestamps
     end
   end
