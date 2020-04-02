@@ -41,16 +41,6 @@ class Counters {
         console.log(meal)
     }
 
-    static decreaseFoodCount(label){
-        const food = document.getElementById(label)
-        if (food.innerText == "snack" && food.innerText.includes("+")){
-            food.innerText = food.innerText.substring(0, food.innerText.length - 1)
-        } else
-        if (!food.innerText.includes("+")){
-            this.toggleFoodName(food)
-        }
-    }
-
     static toggleFoodName(food){
         
         if(food.style.color = "#9700d3"){
@@ -114,15 +104,20 @@ class Counters {
         } 
     }
 
-    static decreaseFoodCount(classLabel, hours){
-        const napCount = document.getElementById('nap-duration')
-        const bedtimeCount = document.getElementById('bedtime-duration')
-        const totalSleepCount = document.getElementById('total-sleep')
-        if (classLabel == 'nap-delete'){
-            this.decreaseCounter([napCount, totalSleepCount], hours)
-        } else
-        if (classLabel == 'bedtime-delete') {
-            this.decreaseCounter([bedtimeCount, totalSleepCount], hours)
+    static decreaseFoodCount(classLabel){
+        let meal = classLabel.split('-')[0]
+        let reportLabel = document.getElementById(meal)
+        //const snack = document.getElementById('snack')
+        //const breakfast = document.getElementById('breakfast')
+        //const lunch = document.getElementById('lunch')
+        //const dinner = document.getElementById('dinner')
+        console.log(reportLabel)
+        if (meal == 'snack' && reportLabel.innerText.includes("+")){
+            reportLabel.innerText = reportLabel.innerText.substring(0, reportLabel.innerText.length - 1)
         } 
+        if (!reportLabel.innerText.includes("+")){
+            this.toggleFoodName(reportLabel)
+        }
     }
+
 }

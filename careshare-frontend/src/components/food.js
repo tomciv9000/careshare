@@ -15,12 +15,8 @@ class Food {
         //this.wetCount = document.getElementById('wet-count')
         //this.soiledCount = document.getElementById('soiled-count')
         this.addToShiftTimeline()
-        this.increaseFood();
-        //this.adapter = new DiapersAdapter()
-    }
-
-    increaseFood() {
         Counters.increaseFoodCount(this.foodLabel());
+        //this.adapter = new DiapersAdapter()
     }
 
     foodLabel(){
