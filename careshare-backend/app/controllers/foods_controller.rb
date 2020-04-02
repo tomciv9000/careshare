@@ -46,12 +46,12 @@ class FoodsController < ApplicationController
   
     private
       # Use callbacks to share common setup or constraints between actions.
-      def set_diaper
-        @food = Diaper.find(params[:id])
+      def set_food
+        @food = Food.find(params[:id])
       end
   
       # Only allow a trusted parameter "white list" through.
       def food_params
-        params.require(:diaper).permit(:wet, :soiled, :time, :shift_id)
+        params.require(:food).permit(:snack, :breakfast, :lunch, :dinner, :time, :shift_id)
       end
 end
