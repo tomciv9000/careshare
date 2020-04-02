@@ -14,7 +14,7 @@ class Sleep {
         this.sleepTotal = document.getElementById('total-sleep')
         //this.increaseSleepCount()
         this.addToShiftTimeline()
-        Counters.increaseSleepCount(this.diaperLabel(), this.duration)
+        Counters.increaseSleepCount(this.sleepLabel(), this.duration)
         //this.adapter = new SleepsAdapter()
     }
 
@@ -62,26 +62,26 @@ class Sleep {
 
    //why does this need to have an array ever passed into it?  Maybe not useful anymore
    //parsefloat floating arithmetic issues is a good write up topic
-   increaseCounter(counter){
-       counter.innerHTML = (parseFloat(counter.innerHTML)*10 + this.duration * 10)/10
-   }
-
-
-   decreaseCounter(counter){
-      counter.innerHTML = (parseFloat(counter.innerHTML)*10 - this.duration * 10)/10
-   }
+   //increaseCounter(counter){
+   //    counter.innerHTML = (parseFloat(counter.innerHTML)*10 + this.duration * 10)/10
+   //}
+//
+//
+   //decreaseCounter(counter){
+   //   counter.innerHTML = (parseFloat(counter.innerHTML)*10 - this.duration * 10)/10
+   //}
 
 
    //try and refactor methods like this into ternary operators
-   decreaseSleepCount(){
-      if (this.nap) {
-         this.decreaseCounter(this.napDuration)
-      }
-      if (this.bedtime){
-         this.decreaseCounter(this.bedtimeDuration)
-      }
-     this.decreaseCounter(this.sleepTotal)
-   }
+   //decreaseSleepCount(){
+   //   if (this.nap) {
+   //      this.decreaseCounter(this.napDuration)
+   //   }
+   //   if (this.bedtime){
+   //      this.decreaseCounter(this.bedtimeDuration)
+   //   }
+   //  this.decreaseCounter(this.sleepTotal)
+   //}
    
    
    static deleteSleep(classLabel, id) {
@@ -89,7 +89,8 @@ class Sleep {
            method: 'DELETE',
        };
        const adapter = new SleepsAdapter()
-       adapter.deleteSleepFromApi(configurationObject, id).then(() => Counters.decreaseSleepCount(classLabel))
+       adapter.deleteSleepFromApi(configurationObject, id).then((json) => Counters.decreaseSleepCount(classLabel, json.duration))
+   
    }
 
 }

@@ -295,7 +295,7 @@ class Shift {
             console.log(button)
         } else 
         if (button.classList.contains('nap-delete') 
-            || button.classList.contains('sleep-delete')){
+            || button.classList.contains('bedtime-delete')){
             Sleep.deleteSleep(button.classList.value, button.id)
         } else
         if (button.classList.contains('food-delete')){
