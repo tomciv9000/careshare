@@ -15,8 +15,12 @@ class Food {
         //this.wetCount = document.getElementById('wet-count')
         //this.soiledCount = document.getElementById('soiled-count')
         this.addToShiftTimeline()
-        //Counters.increaseDiaperCount(this.diaperLabel())
+        this.increaseFood();
         //this.adapter = new DiapersAdapter()
+    }
+
+    increaseFood() {
+        Counters.increaseFoodCount(this.foodLabel());
     }
 
     foodLabel(){
@@ -26,7 +30,7 @@ class Food {
             return "breakfast"
         } else if (this.lunch){
             return "lunch"
-        } else if (this.lunch){
+        } else if (this.dinner){
             return "dinner"
         }
     }

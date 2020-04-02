@@ -28,6 +28,38 @@ class Counters {
         } 
     }
 
+    static increaseFoodCount(label){
+        let meal = document.getElementById(label)
+        const snack = document.getElementById('snack')
+        const breakfast = document.getElementById('breakfast')
+        const lunch = document.getElementById('lunch')
+        const dinner = document.getElementById('dinner')
+        if (label == "snack"){
+            snack.innerText += " +"
+        } 
+        meal.style.color = "#9700d3"
+        console.log(meal)
+    }
+
+    static decreaseFoodCount(label){
+        const food = document.getElementById(label)
+        if (food.innerText == "snack" && food.innerText.includes("+")){
+            food.innerText = food.innerText.substring(0, food.innerText.length - 1)
+        } else
+        if (!food.innerText.includes("+")){
+            this.toggleFoodName(food)
+        }
+    }
+
+    static toggleFoodName(food){
+        
+        if(food.style.color = "#9700d3"){
+            food.style.color = "#7b716345"
+        } else {
+            food.style.color = "#9700d3"
+        }
+    }
+
     static increaseCounter(counters, increment=1){
         let toBeIncreased = [].concat(counters || [])
         for (let index = 0; index < toBeIncreased.length; index++) {
@@ -71,6 +103,18 @@ class Counters {
     }
 
     static decreaseSleepCount(classLabel, hours){
+        const napCount = document.getElementById('nap-duration')
+        const bedtimeCount = document.getElementById('bedtime-duration')
+        const totalSleepCount = document.getElementById('total-sleep')
+        if (classLabel == 'nap-delete'){
+            this.decreaseCounter([napCount, totalSleepCount], hours)
+        } else
+        if (classLabel == 'bedtime-delete') {
+            this.decreaseCounter([bedtimeCount, totalSleepCount], hours)
+        } 
+    }
+
+    static decreaseFoodCount(classLabel, hours){
         const napCount = document.getElementById('nap-duration')
         const bedtimeCount = document.getElementById('bedtime-duration')
         const totalSleepCount = document.getElementById('total-sleep')
