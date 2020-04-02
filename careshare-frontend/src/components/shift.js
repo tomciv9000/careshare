@@ -8,6 +8,7 @@ class Shift {
         this.id = id
         this.diaperAdapter = new DiapersAdapter()
         this.sleepAdapter = new SleepsAdapter()
+        this.foodAdapter = new FoodsAdapter()
         
         this.foodPanel = document.getElementById('food-panel')
         this.sleepPanel = document.getElementById('sleep-panel')
@@ -172,9 +173,9 @@ class Shift {
             document.getElementById('end-time').value = ""
         }.bind(this));
 //
-        //submitFood.addEventListener("click", function() {
-        //    createFoodEvent()
-        //}.bind(this));
+        submitFood.addEventListener("click", function() {
+            this.createFoodEvent()
+        }.bind(this));
     }
 
     createDiaperEvent(){
