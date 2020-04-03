@@ -1,3 +1,9 @@
+//I need to build functions that take in the loadprevious shift data and repopulate the timeline.
+
+
+
+
+
 class Shifts {
     constructor() {
         this.today = new Date()

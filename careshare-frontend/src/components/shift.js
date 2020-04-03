@@ -305,7 +305,8 @@ class Shift {
     }
 
     static sortedTimelineArray(){
-        let timelineItems = document.querySelectorAll('li')
+        let timelineItems = document.querySelectorAll('#timeline-report')[0].children
+
         let timelineArray = []
         for(let i=0; i<timelineItems.length; i++){
             timelineArray.push(timelineItems[i].innerHTML);  
