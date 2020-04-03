@@ -146,10 +146,12 @@ class Shifts {
             let shift = new Shift(shiftInput.caregiver, shiftInput.date, json.data.attributes.id)
             //logging to see what ID is passed
             console.log(shift)
-            shift.createShiftTimeline(json.data.attributes);
+            this.toggle(this.timelineDiv)
             this.refreshDropDown()
             //the below method should be moved into shift.js
+            this.loadShiftReviewButtons(json.data.attributes.id)
             this.addShiftEventListeners(json.data.attributes.id)
+            shift.createShiftTimeline(json.data.attributes)
         }.bind(this)) 
     }
 
