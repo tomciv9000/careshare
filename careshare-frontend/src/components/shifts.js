@@ -12,6 +12,8 @@ class Shifts {
         this.goBackButton = document.getElementById('go-back');
         this.actionWrapper = document.getElementById('action-wrapper');
         this.timelineDiv = document.getElementById('timeline')
+        this.headerDiv = document.getElementById('timeline-info-header')
+        this.timelineButtons = document.querySelector('#timeline-buttons');
         this.bindEventListeners();
         //this.fetchAndPopulateDropDown();
     }
@@ -46,11 +48,12 @@ class Shifts {
     selectShiftToggles(){
         if (!this.elementHidden(this.goBackButton)) {
             this.toggle(this.goBackButton)
+        }
+        if (this.elementHidden(this.timelineDiv)) {
             this.toggle(this.timelineDiv)
         }
-        
-        
     }
+
     exitShiftToggles(){
         this.shiftsDropDown.selectedIndex = 0
         this.toggle(this.formButtons)
@@ -60,6 +63,7 @@ class Shifts {
             this.toggle(this.dropDownDiv)
         } 
         this.clearTimeLine()
+
     }
 
     goBackToggles(){
@@ -76,7 +80,8 @@ class Shifts {
             this.newShiftToggles()
         }.bind(this));
         this.previousShiftsButton.addEventListener("click", function() {
-            this.fetchAndPopulateDropDown()
+            //dropdown needs to be cleared every time I do this.
+            this.refreshDropDown()
             this.previousShiftToggles()
         }.bind(this));
         this.goBackButton.addEventListener("click", function() {
@@ -99,6 +104,7 @@ class Shifts {
     }
     
     populateShiftsDropDown(shiftData) {
+        //i need to clear the dropdown before populating it 
         let shifts = [].concat(shiftData || [])
         shifts.sort((a, b) => (a.attributes.date < b.attributes.date) ? 1 : -1)
         for (let shift of shifts) {
@@ -141,8 +147,23 @@ class Shifts {
             console.log(shift)
             shift.createShiftTimeline(json.data.attributes);
             this.refreshDropDown()
+            //the below method should be moved into shift.js
             this.addShiftEventListeners(json.data.attributes.id)
         }.bind(this)) 
+    }
+
+
+    addShiftEventListeners(id){
+        let closeButton = document.querySelector('.closeButton')
+        let deleteButton = document.querySelector('.deleteButton')
+        closeButton.addEventListener('click', function() {
+            console.log('close button was clicked')
+            this.exitShiftToggles()
+        }.bind(this))
+        deleteButton.addEventListener('click', function() {
+            console.log('delete button was clicked')
+            this.deleteShift(id)
+        }.bind(this))
     }
 
     refreshDropDown(){
@@ -158,16 +179,6 @@ class Shifts {
         this.shiftsDropDown.selectedIndex = 0
     }
 
-    addShiftEventListeners(id){
-        let closeButton = document.getElementById('closeButton')
-        let deleteButton = document.getElementById('deleteButton')
-        closeButton.addEventListener('click', function() {
-            this.exitShiftToggles()
-        }.bind(this))
-        deleteButton.addEventListener('click', function() {
-            this.deleteShift(id)
-        }.bind(this))
-    }
     
     deleteShift(id) {
         this.exitShiftToggles() 
@@ -178,7 +189,9 @@ class Shifts {
     }
 
     clearTimeLine(){
-        this.timelineDiv.innerHTML = ""
+        this.toggle(this.timelineDiv)
+        this.headerDiv.innerHTML = ""
+        this.timelineButtons.innerHTML = ""
     }
 
     getAndLoadShift(event) {
@@ -188,13 +201,37 @@ class Shifts {
     }
 
     viewPreviousShift(shift) {
-        let headerDiv = document.getElementById('timeline-info-header')
+        console.log(shift)
         let footerButtons = document.getElementById('timeline-buttons')
-        headerDiv.innerHTML = ""
+        this.headerDiv.innerHTML = ""
         footerButtons.innerHTML = ""
-        const previous = new Shift(shift.caregiver, shift.date)
+        this.loadShiftReviewButtons(shift.id)
+        const previous = new Shift(shift.caregiver, shift.date)        
         //i can hide the panel possibly to avoid the build of it?
         previous.createShiftTimeline(shift);
+        this.addShiftEventListeners(shift.id)
+    }
+
+    loadShiftReviewButtons(id){
+        let closeBtn = document.createElement('button');
+        closeBtn.setAttribute('class', 'closeButton')
+        let deleteBtn = document.createElement('button');
+        deleteBtn.setAttribute('class', 'deleteButton')
+        if (this.shiftFound(id)) {
+            closeBtn.innerText = 'Review Complete'
+            deleteBtn.innerText = 'Delete Shift'
+        } else {
+            closeBtn.innerText = 'Shift Complete'
+            deleteBtn.innerText = 'Cancel Shift'
+        }
+        this.timelineButtons.append(closeBtn)
+        this.timelineButtons.append(deleteBtn)
+    }
+
+    shiftFound(id){
+        let shiftsDropDown = document.getElementById("shifts-dropdown");
+        let option = shiftsDropDown.querySelector('[value="' + id + '"]');
+        return !!option
     }
       
     

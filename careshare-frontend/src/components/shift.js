@@ -33,30 +33,22 @@ class Shift {
 
     createShiftTimeline(shift){
         let shiftHeader = document.createElement('h4');
-        let headerDiv = document.getElementById('timeline-info-header');
-        let timelineButtons = document.querySelector('#timeline-buttons');
-        let closeBtn = document.createElement('button');
-        closeBtn.setAttribute('id', 'closeButton')
-        let deleteBtn = document.createElement('button');
-        deleteBtn.setAttribute('id', 'deleteButton')
+        shiftHeader.setAttribute('id', 'shift-header')
+        const headerDiv = document.getElementById('timeline-info-header');
+        const closeButton = document.querySelector('.closeButton')
+        const deleteButton = document.querySelector('.deleteButton')
+        closeButton.setAttribute('id', `close-${shift.id}`)
+        deleteButton.setAttribute('id', `delete-${shift.id}`)
         shiftHeader.innerHTML = `Caregiver: ${shift.caregiver}` + "<br />" + `Date: ${DateDisplay.formatDate(shift.date)}`
         headerDiv.append(shiftHeader);
-        if (this.shiftFound(shift.id)) {
-            closeBtn.innerText = 'Review Complete'
-            deleteBtn.innerText = 'Delete Shift'
-        } else {
-            closeBtn.innerText = 'Shift Complete'
-            deleteBtn.innerText = 'Cancel Shift'
-        }
-        timelineButtons.append(closeBtn)
-        timelineButtons.append(deleteBtn)
+        
     }
+
     
-    shiftFound(id){
-        let shiftsDropDown = document.getElementById("shifts-dropdown");
-        let option = shiftsDropDown.querySelector('[value="' + id + '"]');
-        return !!option
-    }
+
+    
+    
+    
     
     iconSelected(icon){
         return !icon.style.background == ""
