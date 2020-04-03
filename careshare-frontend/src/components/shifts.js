@@ -52,6 +52,7 @@ class Shifts {
         if (this.elementHidden(this.timelineDiv)) {
             this.toggle(this.timelineDiv)
         }
+        
     }
 
     exitShiftToggles(){
