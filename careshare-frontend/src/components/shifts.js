@@ -13,7 +13,7 @@ class Shifts {
         this.actionWrapper = document.getElementById('action-wrapper');
         this.timelineDiv = document.getElementById('timeline')
         this.bindEventListeners();
-        this.fetchAndPopulateDropDown();
+        //this.fetchAndPopulateDropDown();
     }
 
     elementHidden(element){
@@ -46,8 +46,10 @@ class Shifts {
     selectShiftToggles(){
         if (!this.elementHidden(this.goBackButton)) {
             this.toggle(this.goBackButton)
+            this.toggle(this.timelineDiv)
         }
-        this.clearTimeLine()
+        
+        
     }
     exitShiftToggles(){
         this.shiftsDropDown.selectedIndex = 0
@@ -74,6 +76,7 @@ class Shifts {
             this.newShiftToggles()
         }.bind(this));
         this.previousShiftsButton.addEventListener("click", function() {
+            this.fetchAndPopulateDropDown()
             this.previousShiftToggles()
         }.bind(this));
         this.goBackButton.addEventListener("click", function() {
@@ -185,45 +188,15 @@ class Shifts {
     }
 
     viewPreviousShift(shift) {
+        let headerDiv = document.getElementById('timeline-info-header')
+        let footerButtons = document.getElementById('timeline-buttons')
+        headerDiv.innerHTML = ""
+        footerButtons.innerHTML = ""
         const previous = new Shift(shift.caregiver, shift.date)
         //i can hide the panel possibly to avoid the build of it?
         previous.createShiftTimeline(shift);
-        this.addShiftEventListeners(shift.id)
-
-
-//start attempt
-
-        //if I create a new shift from the id, i could call a method from that instance
-        //like const prev
-
-      }
+    }
       
     
 }
 
-
-// load a shift and for every diaper object in the array of diapers i need to biold
-
-    //i can hide the panel possibly to avoid the build of it?
- 
-    //printReport would be a function that iterates through the API data and makes the appropriate 
-    //adjustments to the DOM based on that data.
-    //you have to build all the timeline notes
-
-    //FUCK IT do it on the backend, can't i just compile different data from the API?
-
-
-//how agout when you hit "shift complte" i grab all the values in the DOM timeline and somehow 
-//save them to snapshot object that can be accessed localStorage
-//like 
-
-//snapshot {
- //   for every li in the timeline (queryselector array) save its inner text in an array
-//}
-
-
-//or even better, as events are created, push them into the new timeline array of events
-
-  //  previous.createShiftTimeline(shift);
-    //this.addShiftEventListeners(shift.id)
-//}
