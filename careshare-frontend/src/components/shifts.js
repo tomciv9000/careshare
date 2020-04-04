@@ -177,7 +177,7 @@ class Shifts {
             ///THIS IS WHAT HAPPENES WHEN SOMEONE CLICKS THE CLOSE SHIFT BUTTON
         }.bind(this))
         deleteButton.addEventListener('click', function() {
-            console.log('delete button was clicked')
+            console.log(`delete button was clicked with ${id}`)
             this.deleteShift(id)
         }.bind(this))
     }
