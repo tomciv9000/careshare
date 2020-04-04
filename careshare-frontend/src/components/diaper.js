@@ -1,13 +1,12 @@
 class Diaper {
     
-    constructor(id, wet, soiled, time, shift_id) {
+    constructor(id, wet, soiled, time) {
         
         //do i need ID - am I passing this value into anything or can I just use this instance
         this.id = id
         this.wet = wet;
         this.soiled = soiled;
-        this.time = time;
-        this.shift_id = shift_id;
+        this.time = DateDisplay.convertTime(time);
         this.counter = document.getElementById('diaper-count')
         this.wetCount = document.getElementById('wet-count')
         this.soiledCount = document.getElementById('soiled-count')
@@ -47,15 +46,14 @@ class Diaper {
     }
 
     diaperStatusDisplay(){
-        let time = DateDisplay.convertTime(this.time)
         if (this.wet && this.soiled){
-            return `${time} - Changed a wet + soiled diaper   `
+            return `${this.time} - Changed a wet + soiled diaper   `
         }else 
         if (this.wet){
-            return `${time} - Changed a wet diaper   `
+            return `${this.time} - Changed a wet diaper   `
         }else
         if (this.soiled){
-            return `${time} - Changed a soiled diaper   `
+            return `${this.time} - Changed a soiled diaper   `
         }
     }
     

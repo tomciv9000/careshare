@@ -1,13 +1,13 @@
 class Sleep {
     
-    constructor(id, nap, bedtime, start, end, duration, shift_id) {
+    constructor(id, nap, bedtime, start, end, duration) {
         
         //do i need ID - am I passing this value into anything or can I just use this instance
         this.id = id
         this.nap = nap;
         this.bedtime = bedtime;
-        this.start = start;
-        this.end = end;
+        this.start = DateDisplay.convertTime(start);
+        this.end = DateDisplay.convertTime(end);
         this.duration = duration
         this.napDuration = document.getElementById('nap-duration')
         this.bedtimeDuration = document.getElementById('bedtime-duration')

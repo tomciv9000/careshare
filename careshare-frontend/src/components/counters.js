@@ -118,6 +118,25 @@ class Counters {
         if (!reportLabel.innerText.includes("+")){
             this.toggleFoodName(reportLabel)
         }
+        
+    }
+
+    static resetCounters(){
+        const counter = document.getElementById('diaper-count')
+        const wetCount = document.getElementById('wet-count')
+        const soiledCount = document.getElementById('soiled-count')
+        counter.innerHTML = "0"
+        wetCount.innerHTML = "0"
+        soiledCount.innerHTML = "0"
+        document.getElementById('nap-duration').innerHTML = "0"
+        document.getElementById('bedtime-duration').innerHTML = "0"
+        document.getElementById('total-sleep').innerHTML = "0"
+        document.getElementById('snack').style.color = "#7b716345"
+        document.getElementById('snack').innerHTML = "Snack"
+        document.getElementById('breakfast').style.color = "#7b716345"
+        document.getElementById('lunch').style.color = "#7b716345"
+        document.getElementById('dinner').style.color = "#7b716345"
+
     }
 
 }

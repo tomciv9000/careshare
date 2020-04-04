@@ -24,3 +24,6 @@ class ShiftsAdapter {
       return fetch(this.baseURL + `/${shiftID}`).then(response => response.json())
     }
   }
+
+
+  

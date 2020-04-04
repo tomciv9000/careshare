@@ -20,7 +20,9 @@ class Shifts {
         this.timelineDiv = document.getElementById('timeline')
         this.headerDiv = document.getElementById('timeline-info-header')
         this.timelineButtons = document.querySelector('#timeline-buttons');
+        
         this.bindEventListeners();
+        this.actionpanel = new ActionPanel()
         //this.fetchAndPopulateDropDown();
     }
 
@@ -161,6 +163,10 @@ class Shifts {
         }.bind(this)) 
     }
 
+    createShiftReference(id){
+        document.getElementById('shiftID').innerText = id
+    }
+
 
     addShiftEventListeners(id){
         let closeButton = document.querySelector('.closeButton')
@@ -168,6 +174,7 @@ class Shifts {
         closeButton.addEventListener('click', function() {
             console.log('close button was clicked')
             this.exitShiftToggles()
+            ///THIS IS WHAT HAPPENES WHEN SOMEONE CLICKS THE CLOSE SHIFT BUTTON
         }.bind(this))
         deleteButton.addEventListener('click', function() {
             console.log('delete button was clicked')
@@ -201,6 +208,9 @@ class Shifts {
         this.toggle(this.timelineDiv)
         this.headerDiv.innerHTML = ""
         this.timelineButtons.innerHTML = ""
+        document.getElementById('timeline-report').innerHTML = ""
+        document.getElementById('timeline-notes').innerHTML = ""
+        Counters.resetCounters()
     }
 
     getAndLoadShift(event) {
@@ -208,6 +218,13 @@ class Shifts {
         const shiftID = event.target.value
         this.adapter.loadPreviousShift(shiftID).then(json => this.viewPreviousShift(json.data.attributes))
     }
+
+    //testing something out - can i get a food array loaded into a js shift object
+    
+
+
+
+
 
     viewPreviousShift(shift) {
         console.log(shift)

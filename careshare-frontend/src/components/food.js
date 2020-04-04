@@ -1,6 +1,6 @@
 class Food {
     
-    constructor(id, snack, breakfast, lunch, dinner, description, time, shift_id) {
+    constructor(id, snack, breakfast, lunch, dinner, description, time) {
         
         //do i need ID - am I passing this value into anything or can I just use this instance
         this.id = id
@@ -9,8 +9,8 @@ class Food {
         this.lunch = lunch;
         this.dinner = dinner;
         this.description = description;
-        this.time = time;
-        this.shift_id = shift_id;
+        this.time = DateDisplay.convertTime(time);
+        //this.shift_id = shift_id;
         //this.counter = document.getElementById('diaper-count')
         //this.wetCount = document.getElementById('wet-count')
         //this.soiledCount = document.getElementById('soiled-count')
@@ -50,15 +50,14 @@ class Food {
     }
 
     foodStatusDisplay(){
-        let time = DateDisplay.convertTime(this.time)
         if (this.snack){
-            return `${time} - Snack: ${this.description}   `
+            return `${this.time} - Snack: ${this.description}   `
         } else if (this.breakfast){
-            return `${time} - Breakfast: ${this.description}   `
+            return `${this.time} - Breakfast: ${this.description}   `
         } else if (this.lunch){
-            return `${time} - Lunch: ${this.description}   `
+            return `${this.time} - Lunch: ${this.description}   `
         } else if (this.dinner){
-            return `${time} - Dinner: ${this.description}   `
+            return `${this.time} - Dinner: ${this.description}   `
         }
     }
     

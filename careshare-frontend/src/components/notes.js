@@ -1,12 +1,12 @@
 class Note {
     
-    constructor(id, content, shift_id) {
+    constructor(id, content) {
         
         //do i need ID - am I passing this value into anything or can I just use this instance
         this.id = id
         this.content = content;
         
-        this.shift_id = shift_id;
+        //this.shift_id = shift_id;
         
         
         this.addToShiftTimeline()
