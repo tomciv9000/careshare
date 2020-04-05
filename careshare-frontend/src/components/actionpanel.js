@@ -14,16 +14,13 @@ class ActionPanel {
         this.foodAdapter = new FoodsAdapter()
         this.noteAdapter = new NotesAdapter()
         
-        //this control panel type stuff should be moved to shifts.js to be able to create a shift without building the panel
         this.buildFoodIconEvents()
         this.buildSleepIconEvents()
         this.buildDiaperIconEvents()
 
-
         this.clickingOutsideClears(this.foodPanel, this.foodIconArray)
         this.clickingOutsideClears(this.sleepPanel, this.sleepIconArray)
         this.clickingOutsideClears(this.diaperPanel, this.diaperIconArray)
-        //this.adapter = new DiapersAdapter()
 
         this.bindActionSubmits()
     }
@@ -76,17 +73,14 @@ class ActionPanel {
         document.addEventListener("click", (evt) => {
             const flyoutElement = container;
             let targetElement = evt.target; // clicked element
-        
             do {
                 if (targetElement == flyoutElement) {
-                    // This is a click inside. Do nothing, just return.
-                    
+                    // This is a click inside. Do nothing, just return          
                     return
                 }
                 // Go up the DOM
                 targetElement = targetElement.parentNode;
             } while (targetElement);
-        
             // This is a click outside.
             this.resetIcons(iconArray)
         });
@@ -165,8 +159,7 @@ class ActionPanel {
     createDiaperEvent(){
         const wetDiaperIcon = this.diaperIconArray[0]
         const soiledDiaperIcon = this.diaperIconArray[1]
-        //const closeButton = document.querySelector('.closeButton')
-        //let shiftTag = closeButton.id.split('-')[1]
+
         let diaperInput = {
             wet: this.iconSelected(wetDiaperIcon),
             soiled: this.iconSelected(soiledDiaperIcon),
@@ -257,7 +250,7 @@ class ActionPanel {
 
     createNoteEvent(){
         const noteContent = document.getElementById('note-content').value
-        //const bedtimeIcon = this.sleepIconArray[1]
+
         let noteInput = {
             content: noteContent,
             shift_id: this.grabShiftTag()

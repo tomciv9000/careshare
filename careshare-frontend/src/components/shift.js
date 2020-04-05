@@ -1,7 +1,3 @@
-//I think I need to make sure I am clearing the timeline upon exit of a shift so that the undefined doesn't appear
-//if that doesn't work, I need to go back to an old version and just make it a simple diaper wet or soiled instead of select both which is breaking it
-
-
 class Shift {
     
     constructor(caregiver, date, id) {
@@ -19,23 +15,11 @@ class Shift {
         this.foodAdapter = new FoodsAdapter()
         this.noteAdapter = new NotesAdapter()
         
-        //this.foodPanel = document.getElementById('food-panel')
-        //this.sleepPanel = document.getElementById('sleep-panel')
-        //this.diaperPanel = document.getElementById('diaper-panel')
-
         this.foodIconArray = [...document.getElementsByClassName('food-radio-icons')]
         this.sleepIconArray = [...document.getElementsByClassName('sleep-radio-icons')]
         this.diaperIconArray = [...document.getElementsByClassName('diaper-checkbox-icons')]
         
-        //this control panel type stuff should be moved to shifts.js to be able to create a shift without building the panel
-       // this.buildFoodIconEvents()
-       // this.buildSleepIconEvents()
-       // this.buildDiaperIconEvents()
-        //this.bindActionSubmits()
 
-        //this.clickingOutsideClears(this.foodPanel, this.foodIconArray)
-        //this.clickingOutsideClears(this.sleepPanel, this.sleepIconArray)
-        //this.clickingOutsideClears(this.diaperPanel, this.diaperIconArray)
     }
 
 
@@ -91,39 +75,6 @@ class Shift {
         }
     }
 
-    //bindActionSubmits(){
-    //    const submitDiaper = document.getElementById('diaper-done')
-    //    const submitSleep = document.getElementById('sleep-done')
-    //    const submitFood = document.getElementById('food-done')
-    //    const submitNote = document.getElementById('shift-notes')
-//
-    //    submitDiaper.addEventListener("click", function() {
-    //        this.createDiaperEvent()
-    //        this.resetIcons(this.diaperIconArray)
-    //        document.getElementById('diaper-time').value = ""
-    //    }.bind(this));
-//
-    //    submitSleep.addEventListener("click", function() {
-    //        this.createSleepEvent()
-    //        this.resetIcons(this.sleepIconArray)
-    //        document.getElementById('start-time').value = ""
-    //        document.getElementById('end-time').value = ""
-    //    }.bind(this));
-////
-    //    submitFood.addEventListener("click", function() {
-    //        this.createFoodEvent()
-    //        this.resetIcons(this.foodIconArray)
-    //        document.getElementById('food-time').value = ""
-    //        document.getElementById('food-description').value = ""
-    //    }.bind(this));
-//
-    //    submitNote.addEventListener('submit', function(event) {
-    //        event.preventDefault();
-    //        this.createNoteEvent();
-    //        submitNote.reset()
-    //    }.bind(this));  
-    //}   
-
     iconSelected(icon){
         return !icon.style.background == ""
     }
@@ -139,122 +90,6 @@ class Shift {
             }
         }
     }
-    
-    //createDiaperEvent(){
-    //    const wetDiaperIcon = this.diaperIconArray[0]
-    //    const soiledDiaperIcon = this.diaperIconArray[1]
-    //    let diaperInput = {
-    //        wet: this.iconSelected(wetDiaperIcon),
-    //        soiled: this.iconSelected(soiledDiaperIcon),
-    //        time: document.getElementById('diaper-time').value,
-    //        shift_id: this.id
-    //    }
-    //    const configurationObject = {
-    //        method: 'POST',
-    //          headers: {
-    //            'Content-Type': 'application/json',
-    //            Accept: 'application/json'
-    //          },
-    //          body: JSON.stringify(diaperInput)
-    //    };
-    //    this.diaperAdapter.postDiaperToApi(configurationObject).then(function(json) {
-    //        const diaper = new Diaper(json.data.id, diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id)
-    //        console.log(json)
-    //        console.log(diaper)
-    //    }.bind(this))
-    //}
-    
-   // createFoodEvent(){
-   //     const snackIcon = this.foodIconArray[0]
-   //     const breakfastIcon = this.foodIconArray[1]
-   //     const lunchIcon = this.foodIconArray[2]
-   //     const dinnerIcon = this.foodIconArray[3]
-   //     let foodInput = {
-   //         snack: this.iconSelected(snackIcon),
-   //         breakfast: this.iconSelected(breakfastIcon),
-   //         lunch: this.iconSelected(lunchIcon),
-   //         dinner: this.iconSelected(dinnerIcon),
-   //         description: document.getElementById('food-description').value,
-   //         time: document.getElementById('food-time').value,
-   //         shift_id: this.id
-   //     }
-   //     const configurationObject = {
-   //         method: 'POST',
-   //           headers: {
-   //             'Content-Type': 'application/json',
-   //             Accept: 'application/json'
-   //           },
-   //           body: JSON.stringify(foodInput)
-   //     };
-   //     this.foodAdapter.postFoodToApi(configurationObject).then(function(json) {
-   //         const food = new Food(json.data.id, 
-   //             foodInput.snack, 
-   //             foodInput.breakfast, 
-   //             foodInput.lunch, 
-   //             foodInput.dinner, 
-   //             foodInput.description, 
-   //             foodInput.time, 
-   //             foodInput.shift_id)
-   //         console.log(json)
-   //         console.log(food)
-   //     }.bind(this))
-   // }
-//
-   // createSleepEvent(){
-   //     const napIcon = this.sleepIconArray[0]
-   //     const bedtimeIcon = this.sleepIconArray[1]
-   //     let sleepInput = {
-   //         nap: this.iconSelected(napIcon),
-   //         bedtime: this.iconSelected(bedtimeIcon),
-   //         start: document.getElementById('start-time').value,
-   //         end: document.getElementById('end-time').value,
-   //         shift_id: this.id
-   //     }
-   //     const configurationObject = {
-   //         method: 'POST',
-   //           headers: {
-   //             'Content-Type': 'application/json',
-   //             Accept: 'application/json'
-   //           },
-   //           body: JSON.stringify(sleepInput)
-   //     };
-   //     this.sleepAdapter.postSleepToApi(configurationObject).then(function(json) {
-   //         const sleep = new Sleep(
-   //             json.data.id, 
-   //             sleepInput.nap, 
-   //             sleepInput.bedtime, 
-   //             sleepInput.start, 
-   //             sleepInput.end, 
-   //             json.data.attributes.duration)
-   //         console.log(json)
-   //         console.log(sleep)
-   //     }.bind(this))
-   // }
-//
-   // createNoteEvent(){
-   //     const noteContent = document.getElementById('note-content').value
-   //     //const bedtimeIcon = this.sleepIconArray[1]
-   //     let noteInput = {
-   //         content: noteContent,
-   //         shift_id: this.id
-   //     }
-   //     const configurationObject = {
-   //         method: 'POST',
-   //           headers: {
-   //             'Content-Type': 'application/json',
-   //             Accept: 'application/json'
-   //           },
-   //           body: JSON.stringify(noteInput)
-   //     };
-   //     this.noteAdapter.postNoteToApi(configurationObject).then(function(json) {
-   //         const note = new Note(
-   //             json.data.id, 
-   //             noteInput.content, 
-   //             noteInput.shift_id)
-   //         console.log(json)
-   //         console.log(note)
-   //     }.bind(this))
-   // }
 
     static orderTimeline(){
         let orderedArray = this.sortedTimelineArray();
@@ -279,7 +114,6 @@ class Shift {
         return result
         //this returns an HTML string array that includes the button information
         //ie ["3:33 AM - Changed a wet diaper   <button id="1" class="diaper-delete">delete</button>"]
-        //this.addToShiftTimeline(result)
     }
 
     static addArchievedToShiftTimeline(array){

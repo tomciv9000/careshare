@@ -15,7 +15,7 @@ class Counters {
             this.increaseCounter([counter, soiledCount])
         }
     }
-//I need to build a sleep increase counter method to accurately reflect the number of hours, also need to pass this value in
+
     static increaseSleepCount(label, hours){
         const napCount = document.getElementById('nap-duration')
         const bedtimeCount = document.getElementById('bedtime-duration')
@@ -31,9 +31,7 @@ class Counters {
     static increaseFoodCount(label){
         let meal = document.getElementById(label)
         const snack = document.getElementById('snack')
-        const breakfast = document.getElementById('breakfast')
-        const lunch = document.getElementById('lunch')
-        const dinner = document.getElementById('dinner')
+
         if (label == "snack"){
             snack.innerText += " +"
         } 
@@ -41,8 +39,7 @@ class Counters {
         console.log(meal)
     }
 
-    static toggleFoodName(food){
-        
+    static toggleFoodName(food){  
         if(food.style.color = "#9700d3"){
             food.style.color = "#7b716345"
         } else {
@@ -107,10 +104,7 @@ class Counters {
     static decreaseFoodCount(classLabel){
         let meal = classLabel.split('-')[0]
         let reportLabel = document.getElementById(meal)
-        //const snack = document.getElementById('snack')
-        //const breakfast = document.getElementById('breakfast')
-        //const lunch = document.getElementById('lunch')
-        //const dinner = document.getElementById('dinner')
+
         console.log(reportLabel)
         if (meal == 'snack' && reportLabel.innerText.includes("+")){
             reportLabel.innerText = reportLabel.innerText.substring(0, reportLabel.innerText.length - 1)
@@ -128,6 +122,7 @@ class Counters {
         counter.innerHTML = "0"
         wetCount.innerHTML = "0"
         soiledCount.innerHTML = "0"
+        //change the below into it's own method
         document.getElementById('nap-duration').innerHTML = "0"
         document.getElementById('bedtime-duration').innerHTML = "0"
         document.getElementById('total-sleep').innerHTML = "0"
