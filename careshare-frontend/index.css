@@ -5,6 +5,14 @@ body {
     padding: 20px;
 }
 
+#review-header {
+  text-transform: uppercase;
+  color: #741f8a;;
+}
+
+select {
+  font-size: 16px;
+}
 
 #careshare-header {
   display: flex;
@@ -119,7 +127,7 @@ label {
   transition: all 0.4s ease 0s;
   }
 
-  #new-shift:hover, #select-shift:hover{
+  #new-shift:hover, #select-shift:hover, .closeButton:hover{
     color: #ffffff !important;
     background: #a82fc9;
     border-color: #a82fc9 !important;
@@ -158,6 +166,26 @@ label {
   transition: all 0.4s ease 0s;
 }
 
+.closeButton, .deleteButton {
+  color: #000000 !important;
+  font-size: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #ffffff;
+  padding: 5px;
+  border: 1px solid #000000 !important;
+  transition: all 0.4s ease 0s;
+}
+
+.closeButton:hover {
+  color: #ffffff !important;
+  background: #a82fc9;
+  border-color: #a82fc9 !important;
+  transition: all 0.4s ease 0s;
+  }
+
 #go-back{
   color: #000000 !important;
   font-size: 10px;
@@ -171,7 +199,7 @@ label {
   transition: all 0.4s ease 0s;
 }
 
-#go-back:hover {
+#go-back:hover, .deleteButton:hover {
   color: #ffffff !important;
   background: #b08426;
   border-color: #b08426 !important;
@@ -205,7 +233,7 @@ label {
   height: 50px;
   text-align: center;
   color: #601285;
-  font-size: 25px;
+  font-size: 20px;
   
   
 }
@@ -253,7 +281,7 @@ label {
     margin: 0 0 20px 0;
   }
   .col {
-    background: salmon;
+    background: #9ed893;
     padding: 20px;
   }
 

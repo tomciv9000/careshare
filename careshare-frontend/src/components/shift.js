@@ -87,7 +87,7 @@ class Shift {
 
     createNotes(notes){
         for (let note of notes) {
-          this.notes.push(new Notes(note.id, note.content))
+          this.notes.push(new Note(note.id, note.content))
         }
     }
 
