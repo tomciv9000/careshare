@@ -97,7 +97,7 @@ class ActionPanel {
             let el = document.getElementById(`${toggleValues[color]}`);
             
             el.addEventListener("click", function() {
-                if (iconSet == this.IconArray || iconSet == this.foodIconArray){
+                if (iconSet == this.sleepIconArray || iconSet == this.foodIconArray){
                     this.resetIcons(iconSet)
                 } 
                 this.iconToggle(el, `${color}`)
