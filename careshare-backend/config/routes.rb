@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :notes
-  resources :foods
-  resources :sleeps
-  resources :diapers
-  resources :shifts
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :notes, only: [:show, :create, :destroy]
+  resources :foods, only: [:show, :create, :destroy]
+  resources :sleeps, only: [:show, :create, :destroy]
+  resources :diapers, only: [:show, :create, :destroy]
+  resources :shifts, only: [:index, :show, :create, :destroy]
+
 end
