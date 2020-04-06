@@ -1,4 +1,4 @@
-/* || General styles */
+
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -30,18 +30,8 @@ select {
 #shifts-dropdown {
   margin-bottom: 15px;
 }
-  
+ 
 
-/* || Action Panel styles */
-/* HIDE RADIO */
-[type=radio], [type=checkbox] { 
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-  
-  /* IMAGE STYLES */
 .diaper-checkbox-icons img, .food-radio-icons img, .sleep-radio-icons img{
     background-color: "";
     margin: 5px;
@@ -55,15 +45,11 @@ select {
     color: #656167;
 }
 
-
-
-
 input {
     
     align-content: center;
     border: 0px;
 }
-
 
 #diaper-done, #food-done {
     margin: 5px 1px;
@@ -72,7 +58,6 @@ input {
 #add-shift-form {
   padding: 10px;
 }
-
 
 #action-container {
     padding-top: 15px;
@@ -273,8 +258,6 @@ label {
     list-style: none;
     font-style: italic;
   }
-  
-  
   
   * {
     box-sizing: border-box;
