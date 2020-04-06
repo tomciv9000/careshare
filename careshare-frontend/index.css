@@ -26,6 +26,10 @@ select {
   max-width: 50%;
   height: auto;
 }
+
+#shifts-dropdown {
+  margin-bottom: 15px;
+}
   
 
 /* || Action Panel styles */

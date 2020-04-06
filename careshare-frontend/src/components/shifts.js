@@ -52,6 +52,7 @@ class Shifts {
         if (this.elementHidden(this.timelineDiv)) {
             this.toggle(this.timelineDiv);
         }
+        this.clearTimeLine();
     }
 
     exitShiftToggles(){
@@ -62,6 +63,7 @@ class Shifts {
         } else {
             this.toggle(this.dropDownDiv);
         } 
+        this.toggle(this.timelineDiv);
         this.clearTimeLine();
     }
 
@@ -185,7 +187,7 @@ class Shifts {
     }
 
     clearTimeLine(){
-        this.toggle(this.timelineDiv);
+        
         this.headerDiv.innerHTML = "";
         this.timelineButtons.innerHTML = "";
         document.getElementById('timeline-report').innerHTML = "";
