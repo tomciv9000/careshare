@@ -1,18 +1,16 @@
 class ShiftsController < ApplicationController
     before_action :set_shift, only: [:show, :update, :destroy]
   
-    # GET /shifts
+  
     def index
       @shifts = Shift.all
       render json: ShiftSerializer.new(@shifts)
     end
   
-    # GET /shifts/1
     def show
       render json: ShiftSerializer.new(@shift)
     end
   
-    # POST /shifts
     def create
       @shift = Shift.new(shift_params)
   
@@ -24,7 +22,6 @@ class ShiftsController < ApplicationController
       end
     end
   
-    # PATCH/PUT /shifts/1
     def update
       if @shift.update(shift_params)
         render json: @shift
@@ -33,7 +30,6 @@ class ShiftsController < ApplicationController
       end
     end
   
-    # DELETE /shifts/1
     def destroy
       unless @shift.nil?
         @shift.destroy
@@ -45,12 +41,12 @@ class ShiftsController < ApplicationController
 
   
     private
-      # Use callbacks to share common setup or constraints between actions.
+  
       def set_shift
         @shift = Shift.find(params[:id])
       end
   
-      # Only allow a trusted parameter "white list" through.
+    
       def shift_params
         params.require(:shift).permit(:caregiver, :date)
       end
