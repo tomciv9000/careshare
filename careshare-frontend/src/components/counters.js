@@ -48,7 +48,7 @@ class Counters {
     }
 
     static increaseCounter(counters, increment=1){
-        let toBeIncreased = [].concat(counters || [])
+        let toBeIncreased = [].concat(counters)
         for (let index = 0; index < toBeIncreased.length; index++) {
             const element = toBeIncreased[index];
             if (increment == 1){
@@ -61,7 +61,7 @@ class Counters {
     }
 
     static decreaseCounter(counters, increment=1){
-        let toBeDecreased = [].concat(counters || []);
+        let toBeDecreased = [].concat(counters);
         for (let index = 0; index < toBeDecreased.length; index++) {
             const element = toBeDecreased[index];
             if (increment == 1){

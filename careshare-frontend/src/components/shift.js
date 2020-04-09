@@ -72,7 +72,7 @@ class Shift {
     }
 
     resetIcons(icons) {
-        let toBeToggled = [].concat(icons || []);
+        let toBeToggled = [].concat(icons);
         for (let index = 0; index < toBeToggled.length; index++) {
             const element = toBeToggled[index];
             if (this.iconSelected(element)){

@@ -1,7 +1,5 @@
 class Shifts {
     constructor() {
-        this.today = new Date();
-        this.adapter = new ResourceAdapter('shifts');
         this.addShiftForm = document.querySelector('#add-shift-form');
         this.actionPanel = document.querySelector(".action-container");
         this.dropDownDiv = document.querySelector('#all-shifts-dropdown');
@@ -12,8 +10,10 @@ class Shifts {
         this.goBackButton = document.getElementById('go-back');
         this.actionWrapper = document.getElementById('action-wrapper');
         this.timelineDiv = document.getElementById('timeline');
-        this.headerDiv = document.getElementById('timeline-info-header')
+        this.headerDiv = document.getElementById('timeline-info-header');
         this.timelineButtons = document.querySelector('#timeline-buttons');
+        this.today = new Date();
+        this.adapter = new ResourceAdapter('shifts');
         this.bindEventListeners();
         this.actionpanel = new ActionPanel();
     }
@@ -23,7 +23,7 @@ class Shifts {
     }
     
     toggle(elements) {
-        let toBeToggled = [].concat(elements || []);  
+        let toBeToggled = [].concat(elements);  
         for (var i = 0; i < toBeToggled.length; i++){
             if (this.elementHidden(this.toBeToggled[i])) {
                 toBeToggled[i].classList.remove('hidden');
@@ -103,7 +103,7 @@ class Shifts {
     }
     
     populateShiftsDropDown(shiftData) {
-        let shifts = [].concat(shiftData || []);
+        let shifts = [].concat(shiftData);
         shifts.sort((a, b) => (a.attributes.date < b.attributes.date) ? 1 : -1);
         for (let shift of shifts) {
           let option = document.createElement('option');
@@ -114,7 +114,7 @@ class Shifts {
     }
 
     toggle(elements) {
-        let toBeToggled = [].concat(elements || []);  
+        let toBeToggled = [].concat(elements);  
         for (var i = 0; i < toBeToggled.length; i++){
             if (this.elementHidden(toBeToggled[i])) {
                 toBeToggled[i].classList.remove('hidden');
