@@ -12,10 +12,15 @@ class Shifts {
         this.timelineDiv = document.getElementById('timeline');
         this.headerDiv = document.getElementById('timeline-info-header');
         this.timelineButtons = document.querySelector('#timeline-buttons');
+        //for Beth review
+        //this.filterSelect = document.getElementById('filter-select')
+        //this.filterInput = document.getElementById('filter-input')
+        //
         this.today = new Date();
         this.adapter = new ResourceAdapter('shifts');
         this.bindEventListeners();
         this.actionpanel = new ActionPanel();
+        
     }
 
     elementHidden(element){
@@ -96,12 +101,37 @@ class Shifts {
         this.shiftsDropDown.addEventListener('change', function(event) {
             this.getAndLoadShift(event);
         }.bind(this));
+        // added for Beth review
+        //this.filterSelect.addEventListener('click', function() {
+        //    this.resetDropDown()
+        //    this.fetchandFilterDropDown()
+        //}.bind(this));
     }
     
     fetchAndPopulateDropDown() {
         this.adapter.getResources().then(shifts => this.populateShiftsDropDown(shifts));
     }
-    
+    /// bookmark
+
+    //fetchandFilterDropDown(){
+    //    this.adapter.getResources().then(shifts => this.filterShiftsDropDown(shifts));
+    //}
+
+    //filterShiftsDropDown(shiftData) {
+    //    let shifts = [].concat(shiftData);
+    //    shifts.sort((a, b) => (a.attributes.date < b.attributes.date) ? 1 : -1);
+    //    let filtered = shifts.filter(shift => shift.attributes.caregiver == this.filterInput.value)
+    //    console.log(filtered)
+    //    for (let shift of filtered) {
+    //      let option = document.createElement('option');
+    //      option.value = shift.attributes.id;
+    //      option.innerHTML = `${shift.attributes.caregiver} - ${DateDisplay.formatDate(shift.attributes.date)}` ;
+    //      this.shiftsDropDown.append(option);
+    //    }
+    //}
+
+
+
     populateShiftsDropDown(shiftData) {
         let shifts = [].concat(shiftData);
         shifts.sort((a, b) => (a.attributes.date < b.attributes.date) ? 1 : -1);

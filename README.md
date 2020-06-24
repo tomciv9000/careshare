@@ -26,7 +26,7 @@ To get started using this app do the following:
   - ```rails db:seed```
 - Start your rails server
   - ```rails s```
-- Open index.html in your browser
+- Open index.html in browser
 
 - Take care of those kids!
 
