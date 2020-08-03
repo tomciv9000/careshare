@@ -2,7 +2,7 @@
 
 CareShare allows a user to track the important caregiving events and routines for a baby or toddler. The daily diapers, naps, meals, bedtimes, and more are easily updated and monitored for every caregiving shift.  Instead of relying on memory or hastily written notes, CareShare makes it easy to know "Who Did What When?"
 
-This Single-Page Application uses a Rails API back-end and PostgreSQL database with a Javascript front-end.
+This Single-Page Application uses a Rails API back-end and PostgreSQL database with a Javascript front-end.  
 
 
 ### Getting Started
