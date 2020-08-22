@@ -3,7 +3,7 @@ class DateDisplay {
     let split = date.split('-');
     return split[1] + "/" + split[2] + "/" + split[0] ;
   }
-
+// There has to be a better way to convert time
   static convertTime(time) {
     time = time.toString().match(/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
     if (time.length > 1) { 
