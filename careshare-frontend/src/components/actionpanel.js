@@ -163,8 +163,7 @@ class ActionPanel {
         };
         this.diaperAdapter.postResourceToApi(configurationObject).then(function(json) {
             const diaper = new Diaper(json.data.id, diaperInput.wet, diaperInput.soiled, diaperInput.time, diaperInput.shift_id);
-            console.log(json);
-            console.log(diaper);
+            
         }.bind(this))
     }
 
@@ -199,8 +198,7 @@ class ActionPanel {
                 foodInput.description, 
                 foodInput.time, 
                 foodInput.shift_id)
-            console.log(json);
-            console.log(food);
+           
         }.bind(this))
     }
 
@@ -230,8 +228,7 @@ class ActionPanel {
                 sleepInput.start, 
                 sleepInput.end, 
                 json.data.attributes.duration)
-            console.log(json);
-            console.log(sleep);
+        
         }.bind(this))
     }
 
@@ -254,8 +251,7 @@ class ActionPanel {
                 json.data.id, 
                 noteInput.content, 
                 noteInput.shift_id)
-            console.log(json);
-            console.log(note);
+            
         }.bind(this))
     }
 
