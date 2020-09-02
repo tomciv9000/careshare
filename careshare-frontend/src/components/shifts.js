@@ -111,25 +111,7 @@ class Shifts {
     fetchAndPopulateDropDown() {
         this.adapter.getResources().then(shifts => this.populateShiftsDropDown(shifts));
     }
-    /// bookmark
-
-    //fetchandFilterDropDown(){
-    //    this.adapter.getResources().then(shifts => this.filterShiftsDropDown(shifts));
-    //}
-
-    //filterShiftsDropDown(shiftData) {
-    //    let shifts = [].concat(shiftData);
-    //    shifts.sort((a, b) => (a.attributes.date < b.attributes.date) ? 1 : -1);
-    //    let filtered = shifts.filter(shift => shift.attributes.caregiver == this.filterInput.value)
-    //    console.log(filtered)
-    //    for (let shift of filtered) {
-    //      let option = document.createElement('option');
-    //      option.value = shift.attributes.id;
-    //      option.innerHTML = `${shift.attributes.caregiver} - ${DateDisplay.formatDate(shift.attributes.date)}` ;
-    //      this.shiftsDropDown.append(option);
-    //    }
-    //}
-
+    
 
 
     populateShiftsDropDown(shiftData) {
