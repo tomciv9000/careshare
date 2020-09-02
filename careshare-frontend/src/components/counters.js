@@ -36,7 +36,7 @@ class Counters {
             snack.innerText += " +";
         } 
         meal.style.color = "#9700d3";
-        console.log(meal);
+        
     }
 
     static toggleFoodName(food){  
@@ -104,7 +104,7 @@ class Counters {
     static decreaseFoodCount(classLabel){
         let meal = classLabel.split('-')[0];
         let reportLabel = document.getElementById(meal);
-        console.log(reportLabel);
+        
         if (meal == 'snack' && reportLabel.innerText.includes("+")){
             reportLabel.innerText = reportLabel.innerText.substring(0, reportLabel.innerText.length - 1);
         } 
