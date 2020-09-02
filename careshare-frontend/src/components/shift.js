@@ -126,7 +126,7 @@ class Shift {
             || button.classList.contains('wet-diaper-delete')
             || button.classList.contains('soiled-diaper-delete')){
             Diaper.deleteDiaper(button.classList.value, button.id);
-            console.log(button);
+            
         } else 
         if (button.classList.contains('nap-delete') 
             || button.classList.contains('bedtime-delete')){
@@ -138,9 +138,7 @@ class Shift {
             || button.classList.contains('dinner-food-delete')){
             Food.deleteFood(button.classList.value, button.id);
         }
-        else {
-            console.log(button);
-        }
+        
     }
 
 
